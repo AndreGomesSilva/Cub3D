@@ -5,10 +5,10 @@ RM = rm -f
 INC = -I ./include
 
 SRCS_DIR = src/
-
 OBJS_DIR = obj/
 SRC_DIR_LIB = ./src/lib
-LIBFT_DIR = ./libft/libft.a
+LIBFT_DIR = ./lib/libft/
+LIBFT = $(LIBFT_DIR)/libft.a
 LIBMLX_DIR = ./lib/MLX42
 LIBMLX = $(LIBMLX_DIR)/build/libmlx42.a -ldl -lglfw -pthread -lm
 HEADER = ./include
@@ -18,14 +18,30 @@ FILE = \
 
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILE)))
 
-all: libmlx $(NAME)
+all: $(NAME)
 
 libmlx:
-	@cmake $(LIBMLX_DIR) -B $(LIBMLX_DIR)/build && make -C $(LIBMLX_DIR)/build -j4
+	@if [ ! -f $(LIBMLX_DIR)/build/libmlx42.a ]; then \
+		echo "MLX42 building..."; \
+		cmake $(LIBMLX_DIR) -B $(LIBMLX_DIR)/build && make -C $(LIBMLX_DIR)/build -j4; \
+	else \
+		echo "MLX42 already built"; \
+	fi
 
+libft:
+	@if [ ! -f $(LIBFT) ]; then \
+		echo "Libft building..."; \
+		make -C $(LIBFT_DIR) -j4; \
+	else \
+		echo "Libft already built"; \
+	fi
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBMLX) -o $(NAME)
+$(NAME): libmlx libft $(OBJS)
+	@if [ ! -f ./$(NAME) ]; then \
+		$(CC) $(CFLAGS) $(OBJS) $(LIBMLX) -o $(NAME); \
+	else \
+		echo "Cub3D already built"; \
+	fi
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c | $(OBJS_DIR)
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
@@ -35,10 +51,13 @@ $(OBJS_DIR):
 
 clean:
 	$(RM) $(OBJS)
-	$(RM) -r $(LIBMLX_DIR)/build
-
+	@make -C $(LIBFT_DIR) clean
+	$(RM) -r $(OBJS_DIR)
+	
 fclean: clean
 	$(RM) $(NAME)
+	@make -C $(LIBFT_DIR) fclean
+	$(RM) -r $(LIBMLX_DIR)/build
 
 re: fclean all
 

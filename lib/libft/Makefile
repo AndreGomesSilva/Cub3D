@@ -6,7 +6,7 @@
 #    By: angomes- <angomes-@student.42sp.org.br     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/01 19:52:35 by angomes-          #+#    #+#              #
-#    Updated: 2024/04/30 17:31:57 by angomes-         ###   ########.fr        #
+#    Updated: 2024/04/30 18:11:27 by angomes-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,10 +70,11 @@ OBJS = $(addprefix $(OBJS_DIR)/, $(addsuffix .o, $(FILES)))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(AR) $(NAME) $@
+	$(AR) $(NAME) $(OBJS)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIR)
 	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
+
 
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)

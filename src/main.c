@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/04/18 14:45:35 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/04/30 18:13:35 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	main(void)
 {
-  printf("Hello, World!\n");
+  printf("Hello, World!\n"); 
+  printf("%d\n",  (int)ft_strlen("Hello, World!"));
   return (0);
 }
 

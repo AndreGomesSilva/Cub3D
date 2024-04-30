@@ -38,7 +38,7 @@ libft:
 
 $(NAME): libmlx libft $(OBJS)
 	@if [ ! -f ./$(NAME) ]; then \
-		$(CC) $(CFLAGS) $(OBJS) $(LIBMLX) -o $(NAME); \
+		$(CC) $(CFLAGS) $(OBJS) $(INC) $(LIBFT) $(LIBMLX) -o $(NAME); \
 	else \
 		echo "Cub3D already built"; \
 	fi

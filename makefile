@@ -13,12 +13,16 @@ OBJS_DIR = obj/
 SRC_DIR_LIB = ./src/lib
 INPUT_DIR = input/
 DRAW_DIR = draw/
+MAP_DIR = map/
+INIT_DIR = init/
 
 
 FILE = \
 			 main \
-			 $(INPUT_DIR)keymap \
+			 $(INIT_DIR)init_game $(INIT_DIR)set_data \
+			 $(INPUT_DIR)handle_keymaps \
 			 $(DRAW_DIR)draw_rect \
+			 $(MAP_DIR)get_map \
 
 
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILE)))
@@ -53,11 +57,13 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c | $(OBJS_DIR)
 
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
-	mkdir -p $(OBJS_DIR)input
-	mkdir -p $(OBJS_DIR)draw
+	mkdir -p $(OBJS_DIR)$(INIT_DIR)
+	mkdir -p $(OBJS_DIR)$(INPUT_DIR)
+	mkdir -p $(OBJS_DIR)$(DRAW_DIR)
+	mkdir -p $(OBJS_DIR)$(MAP_DIR)
 
 play:
-	@make 
+	@make re 
 	./$(NAME)
 
 clean:

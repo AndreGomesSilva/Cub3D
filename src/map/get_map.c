@@ -1,25 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 14:37:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/03 17:04:18 by angomes-         ###   ########.fr       */
+/*   Created: 2024/05/03 14:04:01 by angomes-          #+#    #+#             */
+/*   Updated: 2024/05/03 14:43:53 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
-
-int	main(void)
-{
-  t_game *game;
-  game = ft_calloc(1, sizeof(t_game));
-  printf("Init game\n");
-  if (!init_game(game))
-    return (1);
-  printf("Finish game\n");
-  return (0);
-}
+// #include "../../include/cub3d.h"
+//
+// void get_map()
 

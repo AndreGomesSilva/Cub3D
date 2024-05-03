@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   set_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 14:37:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/03 17:04:18 by angomes-         ###   ########.fr       */
+/*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
+/*   Updated: 2024/05/03 18:31:36 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
-int	main(void)
+int	set_data(t_game *game)
 {
-  t_game *game;
-  game = ft_calloc(1, sizeof(t_game));
-  printf("Init game\n");
-  if (!init_game(game))
-    return (1);
-  printf("Finish game\n");
-  return (0);
-}
+  t_player *player;
+  t_window *window;
 
+  window = ft_calloc(1, sizeof(t_window));
+  player = ft_calloc(1, sizeof(t_player));
+  player->pos.x = 10;
+  player->pos.y = 10;
+  window->size.w = 800;
+  window->size.h = 600;
+  game->win = window;
+  game->player = player;
+  return (TRUE);
+}

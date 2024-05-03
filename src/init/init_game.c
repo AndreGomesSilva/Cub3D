@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 14:37:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/03 17:04:18 by angomes-         ###   ########.fr       */
+/*   Created: 2024/05/03 16:56:46 by angomes-          #+#    #+#             */
+/*   Updated: 2024/05/03 18:39:59 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
+#include <stdio.h>
 
-int	main(void)
+int init_game(t_game *game)
 {
-  t_game *game;
-  game = ft_calloc(1, sizeof(t_game));
-  printf("Init game\n");
-  if (!init_game(game))
+  if (!set_data(game))  
     return (1);
-  printf("Finish game\n");
-  return (0);
+  printf("Start game\n");
+  game->win->mlx = mlx_init(game->win->size.w, game->win->size.h, "Cub3D", TRUE);
+  if (!game->win->mlx)
+    return (FALSE);
+  mlx_loop_hook(game->win->mlx, &hook_close_window, game->win);
+  mlx_loop(game->win->mlx);
+  mlx_terminate(game->win->mlx);
+  printf("End game\n");
+  return (TRUE);
 }
-

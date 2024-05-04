@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/04 03:36:39 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/04 14:54:06 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static t_walls	*create_walls_default_values()
 			walls->color.b, walls->color.a);
   walls->size.w = 32;
   walls->size.h = 32;
+  walls->sprite.path = WALL;
 	return (walls);
 }
 

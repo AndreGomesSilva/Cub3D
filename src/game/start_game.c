@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   start_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 14:37:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/03 21:23:47 by angomes-         ###   ########.fr       */
+/*   Created: 2024/05/03 16:56:46 by angomes-          #+#    #+#             */
+/*   Updated: 2024/05/03 21:23:07 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
-int	main(void)
+int	start_game(t_game *game)
 {
-  t_game *game;
-  game = ft_calloc(1, sizeof(t_game));
-  printf("Init game\n");
-  if (!start_game(game))
-    return (1);
-  printf("Finish game\n");
-  return (0);
+	printf("Start game\n");
+	if (!init_data(game))
+		return (E_FAIL);
+	if (!game_loop(game))
+    return (E_FAIL);
+	end_game(game);
+  printf("End game\n");
+	return (E_SUCCESS);
 }
-

@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   handle_free.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 14:37:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/03 21:23:47 by angomes-         ###   ########.fr       */
+/*   Created: 2024/05/03 19:25:39 by angomes-          #+#    #+#             */
+/*   Updated: 2024/05/03 21:54:11 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../../include/cub3d.h"
 
-int	main(void)
+void handle_free(t_game *game)
 {
-  t_game *game;
-  game = ft_calloc(1, sizeof(t_game));
-  printf("Init game\n");
-  if (!start_game(game))
-    return (1);
-  printf("Finish game\n");
-  return (0);
+  if (game->win)
+    free(game->win);
+  if (game->map)
+    free(game->map);
+  if (game->player)
+    free(game->player);
+  if (game->walls)
+    free(game->walls);
+  if (game)
+    free(game);
 }
-

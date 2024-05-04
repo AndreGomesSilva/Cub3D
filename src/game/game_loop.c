@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_game.c                                        :+:      :+:    :+:   */
+/*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 16:56:46 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/03 18:39:59 by angomes-         ###   ########.fr       */
+/*   Created: 2024/05/03 21:04:11 by angomes-          #+#    #+#             */
+/*   Updated: 2024/05/03 22:07:32 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-#include <stdio.h>
 
-int init_game(t_game *game)
+int	game_loop(t_game *game)
 {
-  if (!set_data(game))  
-    return (1);
-  printf("Start game\n");
-  game->win->mlx = mlx_init(game->win->size.w, game->win->size.h, "Cub3D", TRUE);
-  if (!game->win->mlx)
-    return (FALSE);
-  mlx_loop_hook(game->win->mlx, &hook_close_window, game->win);
-  mlx_loop(game->win->mlx);
-  mlx_terminate(game->win->mlx);
-  printf("End game\n");
-  return (TRUE);
+	game->walls->sprite.img = mlx_new_image(game->win->mlx, game->walls->size.w,
+			game->walls->size.h);
+	mlx_put_pixel(game->walls->sprite.img, game->walls->size.w,
+			game->walls->size.h, game->walls->color.hex);
+  mlx_image_to_window(game->win->mlx, game->walls->sprite.img, 0, 0);
+		mlx_loop_hook(game->win->mlx, &hook_close_window, game->win);
+	mlx_loop(game->win->mlx);
+	return (E_SUCCESS);
 }

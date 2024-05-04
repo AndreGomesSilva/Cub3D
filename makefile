@@ -1,12 +1,15 @@
+# Basic variables
 NAME = Cub3D
 CC = cc -g
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
-INC = -I ./include
-LIBFT_DIR = ./lib/libft/
-LIBFT = $(LIBFT_DIR)/libft.a
+
+# Valgrind with suppressions for MLX42_lib and send the output to leaks.sup file.
+LEAKS = valgrind --leak-check=full --show-leak-kinds=all --gen-suppressions=all --track-origins=yes --log-file=leaks.sup --suppressions=./suppress.sup
+
+# Directorys
 LIBMLX_DIR = ./lib/MLX42
-LIBMLX = $(LIBMLX_DIR)/build/libmlx42.a -ldl -lglfw -pthread -lm
+LIBFT_DIR = ./lib/libft/
 HEADER = ./include
 SRCS_DIR = src/
 OBJS_DIR = obj/
@@ -14,16 +17,22 @@ SRC_DIR_LIB = ./src/lib
 INPUT_DIR = input/
 DRAW_DIR = draw/
 MAP_DIR = map/
-INIT_DIR = init/
+GAME_DIR = game/
+FREE_DIR = free/
 
+#Libraries
+INC = -I ./include
+LIBFT = $(LIBFT_DIR)/libft.a
+LIBMLX = $(LIBMLX_DIR)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
+# Files to compile
 FILE = \
 			 main \
-			 $(INIT_DIR)init_game $(INIT_DIR)set_data \
+			 $(GAME_DIR)start_game $(GAME_DIR)init_data $(GAME_DIR)game_loop $(GAME_DIR)end_game \
 			 $(INPUT_DIR)handle_keymaps \
-			 $(DRAW_DIR)draw_rect \
+			 $(DRAW_DIR)draw_rect $(DRAW_DIR)color \
 			 $(MAP_DIR)get_map \
-
+			 $(FREE_DIR)handle_free \
 
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILE)))
 
@@ -57,14 +66,17 @@ $(OBJS_DIR)%.o: $(SRCS_DIR)%.c | $(OBJS_DIR)
 
 $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
-	mkdir -p $(OBJS_DIR)$(INIT_DIR)
+	mkdir -p $(OBJS_DIR)$(GAME_DIR)
 	mkdir -p $(OBJS_DIR)$(INPUT_DIR)
 	mkdir -p $(OBJS_DIR)$(DRAW_DIR)
 	mkdir -p $(OBJS_DIR)$(MAP_DIR)
+	mkdir -p $(OBJS_DIR)$(FREE_DIR)
 
-play:
-	@make re 
+play: all
 	./$(NAME)
+
+val: all
+	@$(LEAKS) ./$(NAME)
 
 clean:
 	$(RM) $(OBJS)

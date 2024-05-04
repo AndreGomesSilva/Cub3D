@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/03 21:50:32 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/04 03:20:09 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef enum e_bool
 typedef enum e_err
 {
 	E_FAIL = -1,
-	E_SUCCESS = 0
+	E_OK = 0
 }					t_err;
 
 /*                            COMPONENT                           */

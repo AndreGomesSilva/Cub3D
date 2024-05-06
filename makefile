@@ -19,11 +19,15 @@ DRAW_DIR = draw/
 MAP_DIR = map/
 GAME_DIR = game/
 FREE_DIR = free/
+MINIMAP_DIR = minimap/
 
 #Libraries
 INC = -I ./include
 LIBFT = $(LIBFT_DIR)/libft.a
 LIBMLX = $(LIBMLX_DIR)/build/libmlx42.a -ldl -lglfw -pthread -lm
+
+# Path to the game map
+MAP = maps/map.cub
 
 # Files to compile
 FILE = \
@@ -31,6 +35,7 @@ FILE = \
 			 $(GAME_DIR)start_game $(GAME_DIR)init_data $(GAME_DIR)game_loop $(GAME_DIR)end_game \
 			 $(INPUT_DIR)handle_keymaps \
 			 $(DRAW_DIR)draw_rect $(DRAW_DIR)color \
+			 $(MINIMAP_DIR)render_minimap \
 			 $(MAP_DIR)get_map \
 			 $(FREE_DIR)handle_free \
 
@@ -71,9 +76,10 @@ $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)$(DRAW_DIR)
 	mkdir -p $(OBJS_DIR)$(MAP_DIR)
 	mkdir -p $(OBJS_DIR)$(FREE_DIR)
+	mkdir -p $(OBJS_DIR)$(MINIMAP_DIR)
 
 play: all
-	./$(NAME)
+	./$(NAME) $(MAP)
 
 val: all
 	@$(LEAKS) ./$(NAME)

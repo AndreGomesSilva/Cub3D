@@ -6,11 +6,11 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/04 10:47:58 by angomes-          #+#    #+#             */
-/*   Updated: 2023/06/22 19:39:07 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/06 18:32:23 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/libft.h"
+#include "../include/libft.h"
 
 t_list	*ft_lstnew(void *content)
 {
@@ -44,7 +44,7 @@ int	ft_lstsize(t_list *lst)
 	return (count);
 }
 
-void	ft_lstclear(t_list **lst)
+void	ft_lsterase(t_list **lst)
 {
 	t_list	*temp_node;
 	t_list	*next;
@@ -72,7 +72,7 @@ int	ft_check_end_line(t_list *lst, int bytes_read, t_list *rest_node)
 	else if (bytes_read == -1)
 	{
 		if (rest_node->content)
-			ft_lstclear(&rest_node);
+			ft_lsterase(&rest_node);
 		return (-1);
 	}
 	else

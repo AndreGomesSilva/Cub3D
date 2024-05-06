@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/04 16:34:48 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/06 18:50:39 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,12 +157,13 @@ typedef struct s_window
 /** system map
  * struct that holds the map
  *
- * @param map -> matrix of the map
+ * @param mtx -> matrix of the map
  * @param size -> size of the map
  */
 typedef struct s_map
 {
-	char			**map;
+	char			**mtx;
+	char			*path;
 	t_dimension		size;
 }					t_map;
 
@@ -189,8 +190,8 @@ typedef struct s_game
 /*                            FUNCTIONS                           */
 
 // game
-int					start_game(t_game *game);
-int					init_data(t_game *game);
+int					start_game(char *str);
+t_game				*init_data(char *str);
 void				end_game(t_game *game);
 int					game_loop(t_game *game);
 
@@ -202,6 +203,10 @@ mlx_image_t			*draw_rect(t_window *win, int w, int h, unsigned int color);
 unsigned int		rgb_to_hex(int r, int g, int b, int a);
 
 // map
+char				**get_map(char *str);
+
+//minimap
+void	draw_minimap(t_game *game);
 
 // free
 void				handle_free(t_game *game);

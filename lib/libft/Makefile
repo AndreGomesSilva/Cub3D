@@ -6,7 +6,7 @@
 #    By: angomes- <angomes-@student.42sp.org.br     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/01 19:52:35 by angomes-          #+#    #+#              #
-#    Updated: 2024/04/30 18:11:27 by angomes-         ###   ########.fr        #
+#    Updated: 2024/05/06 18:17:52 by angomes-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,11 @@ FILES =\
 	ft_lstclear_bonus \
 	ft_lstiter_bonus \
 	ft_lstmap_bonus \
+	get_next_line \
+	get_next_line_utils \
+	ft_printf \
+	ft_printf_utils_number \
+	ft_printf_utils_string \
 
 OBJS = $(addprefix $(OBJS_DIR)/, $(addsuffix .o, $(FILES)))
 

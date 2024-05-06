@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 16:07:36 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/03 14:30:18 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/06 18:31:12 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 typedef struct s_list
 {
-	void			*content;
+	char			*content;
 	struct s_list	*next;
 }					t_list;
 
@@ -71,6 +71,9 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
+void				ft_lsterase(t_list **lst);
+int					ft_check_end_line(t_list *lst, int bytes_read,
+						t_list *rest_node);
 char				*get_next_line(int fd);
 int					ft_printf(const char *str, ...);
 int					print_char(char c);

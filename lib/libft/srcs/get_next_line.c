@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 10:42:50 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/03 14:25:46 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/06 18:33:11 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ static char	*join_content(t_list **lst)
 		}
 		start_node = start_node->next;
 	}
-	ft_lstclear(lst);
+	ft_lsterase(lst);
 	return (str);
 }
 

@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_loop.c                                        :+:      :+:    :+:   */
+/*   handle_lst_sprite.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 21:04:11 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/07 20:35:01 by angomes-         ###   ########.fr       */
+/*   Created: 2024/05/07 17:58:56 by angomes-          #+#    #+#             */
+/*   Updated: 2024/05/07 18:22:13 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	game_loop(t_game *game)
+t_sprite *add_sprite(t_sprite *sprite)
 {
-  // game->walls->sprite.texture = mlx_load_png(game->walls->sprite.path);
-  // game->walls->sprite.img = mlx_texture_to_image(game->win->mlx, game->walls->sprite.texture);
-  //
-  // mlx_put_pixel(game->walls->sprite.img, 0, 0, game->walls->color.hex);
-  draw_minimap(game);
-	mlx_loop_hook(game->win->mlx, &hook_close_window, game->win);
-	mlx_loop(game->win->mlx);
-	return (E_OK);
+  t_sprite *new;
+  t_sprite *current;
+
+  new = ft_calloc(1, sizeof(t_sprite)); 
+  if (!new)
+    return (NULL);
+  new->next = NULL;
+  current = sprite;
+  if (!current)
+    return (new);
+  while (current->next)
+    current = current->next;
+  current->next = new;
+  return (sprite);
 }

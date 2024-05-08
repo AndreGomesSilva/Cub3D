@@ -6,11 +6,30 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:38:28 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/06 18:58:26 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/07 17:29:47 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+static void	put_image_to_window(mlx_image_t *img, t_window *win,
+		int position_width, int position_height)
+{
+	mlx_image_to_window(win->mlx, img, position_width, position_height);
+}
+
+static mlx_image_t *get_image(t_game *game, t_type type)
+{
+  mlx_image_t *img;
+
+	if (type == T_WALL)
+	{
+    
+	}
+	else if (type == T_PLAYER)
+	{
+	}
+}
 
 void	draw_minimap(t_game *game)
 {
@@ -25,8 +44,10 @@ void	draw_minimap(t_game *game)
 		{
 			if (game->map->mtx[y][x] == '1')
 			{
-        mlx_image_to_window(game->win->mlx, game->walls->sprite.img, x * game->walls->sprite.img->width, y * game->walls->sprite.img->height);
 			}
+			// else if (game->map->mtx[y][x] == 'P')
+			// {
+			// }
 			x++;
 		}
 		y++;

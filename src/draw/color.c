@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 21:46:48 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/03 21:48:37 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/07 21:56:26 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,13 @@ unsigned int	rgb_to_hex(int r, int g, int b, int a)
     a = 255;
 	hex_color = (r << 16) | (g << 8) | b;
 	return (hex_color);
+}
+
+void set_color(t_color *color, int rgb[4])
+{
+  color->r = rgb[0];
+  color->g = rgb[1];
+  color->b = rgb[2];
+  color->a = rgb[3];
+  color->hex = rgb_to_hex(color->r, color->g, color->b, color->a);
 }

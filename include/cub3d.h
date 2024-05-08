@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/06 18:50:39 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/07 21:37:05 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@
 # define PI 3.14159265358979323846
 
 // texture paths for the sprites
-# define WALL "./assets/textures/wall/tile118.png"
+# define WALL_PATH "./assets/textures/wall/tile118.png"
 # define FLOOR ""
 # define CEILING ""
-# define PLAYER ""
+# define PLAYER_PATH ""
+
+/*                            COMPONENTS                          */
 
 typedef enum e_bool
 {
@@ -44,7 +46,21 @@ typedef enum e_err
 	E_OK = 0
 }					t_err;
 
-/*                            COMPONENTS                          */
+typedef enum e_type
+{
+	T_PLAYER = 0,
+	T_WALL = 1,
+	T_IMG_FLOOR = 2,
+	T_IMG_CEILING = 3
+}					t_type;
+
+typedef enum e_direction
+{
+	NORTH = 0,
+	EAST = 1,
+	SOUTH = 2,
+	WEST = 3
+}					t_direction;
 
 /** component position
  * struct with reference to x, y and z in a 2D space
@@ -102,6 +118,9 @@ typedef struct s_sprite
 	mlx_image_t		*img;
 	mlx_texture_t	*texture;
 	char			*path;
+	t_direction		direct;
+	t_color			color;
+	struct s_sprite	*next;
 }					t_sprite;
 
 /* --------------------------------------------------------------*/
@@ -113,11 +132,14 @@ typedef struct s_sprite
  *
  * @param pos -> position of the player
  * @param sprite -> sprite of the player
+ * @param direct -> direction of the player
+ * @param color -> color of the player
  */
 typedef struct s_player
 {
-	t_position pos;  // x and y
-	t_sprite sprite; // sprite
+	t_position		pos;
+	t_sprite		*sprite;
+	t_direction		direct;
 }					t_player;
 
 /** entity walls
@@ -134,15 +156,10 @@ typedef struct s_walls
 	int				id;
 	t_position		pos;
 	t_dimension		size;
-	t_color			color;
-	t_sprite		sprite;
+	t_sprite		*sprite;
 }					t_walls;
 
-/* --------------------------------------------------------------*/
-
-/*                            SYSTEMS                           */
-
-/** system window
+/** entity window
  * struct that holds the window
  *
  * @param mlx -> pointer to the mlx window
@@ -154,7 +171,7 @@ typedef struct s_window
 	t_dimension		size;
 }					t_window;
 
-/** system map
+/** entity map
  * struct that holds the map
  *
  * @param mtx -> matrix of the map
@@ -187,7 +204,7 @@ typedef struct s_game
 
 /* --------------------------------------------------------------*/
 
-/*                            FUNCTIONS                           */
+/*                            SYSTEMS                           */
 
 // game
 int					start_game(char *str);
@@ -201,12 +218,16 @@ void				hook_close_window(void *param);
 // draw
 mlx_image_t			*draw_rect(t_window *win, int w, int h, unsigned int color);
 unsigned int		rgb_to_hex(int r, int g, int b, int a);
+void				set_color(t_color *color, int rgb[4]);
 
 // map
 char				**get_map(char *str);
 
 //minimap
-void	draw_minimap(t_game *game);
+void				draw_minimap(t_game *game);
+
+//sprite
+t_sprite			*add_sprite(t_sprite *sprite);
 
 // free
 void				handle_free(t_game *game);

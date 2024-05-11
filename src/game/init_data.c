@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/10 21:10:59 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/10 23:24:50 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@ static t_window	*create_window_default_values(void)
 	return (window);
 }
 
-// static t_player	*create_player_default_values(t_window *win)
-// {
-// 	t_player	*player;
-//
-// 	player = ft_calloc(1, sizeof(t_player));
-//   if (!player)
-//     return (NULL);
-//   player->sprite = create_player_sprite(win, player);
-// 	return (player);
-// }
+static t_player	*create_player_default_values(t_window *win)
+{
+	t_player	*player;
+
+	player = ft_calloc(1, sizeof(t_player));
+  if (!player)
+    return (NULL);
+  player->sprite = create_player_sprite(win, player);
+	return (player);
+}
 
 static t_map	*create_map_default_values(char *str)
 {
@@ -69,7 +69,7 @@ t_game	*init_data(char *str)
 	game->map = create_map_default_values(str);
 	game->win = create_window_default_values();
 	game->walls = create_walls_default_values(game->win);
-	// game->player = create_player_default_values(game->win);
+	game->player = create_player_default_values(game->win);
 	if (!game || !game->map || !game->win || !game->walls)
 		return (NULL);
 	return (game);

@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:38:28 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/10 22:47:44 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/10 23:28:24 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,11 @@ void	draw_minimap(t_game *game)
         put_image_to_window(game->walls->sprite->img, game->win,
           game->walls->sprite->size.w * x, game->walls->sprite->size.h * y);
 			}
-			// else if (game->map->mtx[y][x] == 'P')
-			// {
-			// }
+			else if (game->map->mtx[y][x] == 'P')
+			{
+        put_image_to_window(game->player->sprite->img, game->win,
+          game->player->sprite->size.w * x, game->player->sprite->size.h * y);
+			}
 			x++;
 		}
 		y++;

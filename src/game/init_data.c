@@ -6,19 +6,20 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/07 21:20:19 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/10 21:10:59 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static t_walls	*create_walls_default_values(void)
+static t_walls	*create_walls_default_values(t_window *win)
 {
 	t_walls	*walls;
 
 	walls = ft_calloc(1, sizeof(t_walls));
   if (!walls)
     return (NULL);
+  walls->sprite = create_wall_sprite(win, walls);
 	return (walls);
 }
 
@@ -35,15 +36,16 @@ static t_window	*create_window_default_values(void)
 	return (window);
 }
 
-static t_player	*create_player_default_values(void)
-{
-	t_player	*player;
-
-	player = ft_calloc(1, sizeof(t_player));
-  if (!player)
-    return (NULL);
-	return (player);
-}
+// static t_player	*create_player_default_values(t_window *win)
+// {
+// 	t_player	*player;
+//
+// 	player = ft_calloc(1, sizeof(t_player));
+//   if (!player)
+//     return (NULL);
+//   player->sprite = create_player_sprite(win, player);
+// 	return (player);
+// }
 
 static t_map	*create_map_default_values(char *str)
 {
@@ -66,9 +68,9 @@ t_game	*init_data(char *str)
 	game = ft_calloc(1, sizeof(t_game));
 	game->map = create_map_default_values(str);
 	game->win = create_window_default_values();
-	game->walls = create_walls_default_values();
-	game->player = create_player_default_values();
-	if (!game || !game->map || !game->win || !game->walls || !game->player)
+	game->walls = create_walls_default_values(game->win);
+	// game->player = create_player_default_values(game->win);
+	if (!game || !game->map || !game->win || !game->walls)
 		return (NULL);
 	return (game);
-}
+} 

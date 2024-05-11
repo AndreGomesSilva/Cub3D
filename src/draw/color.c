@@ -6,13 +6,13 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 21:46:48 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/07 21:56:26 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/10 22:42:11 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-unsigned int	rgb_to_hex(int r, int g, int b, int a)
+unsigned int	rgb_to_hex(int r, int g, int b)
 {
 	unsigned int	hex_color;
 
@@ -28,19 +28,15 @@ unsigned int	rgb_to_hex(int r, int g, int b, int a)
 		b = 0;
 	else if (b > 255)
 		b = 255;
-  if (a < 0)
-    a = 0;
-  else if (a > 255)
-    a = 255;
-	hex_color = (r << 16) | (g << 8) | b;
+	hex_color = (r << 24) | (g << 16) | b << 8| (255 << 0);
 	return (hex_color);
 }
 
-void set_color(t_color *color, int rgb[4])
+void set_color(t_color *color, int r, int g, int b)
 {
-  color->r = rgb[0];
-  color->g = rgb[1];
-  color->b = rgb[2];
-  color->a = rgb[3];
-  color->hex = rgb_to_hex(color->r, color->g, color->b, color->a);
+  color->r = r;
+  color->g = g;
+  color->b = b;
+  color->hex = rgb_to_hex(color->r, color->g, color->b);
+  printf("Color: %d %d %d %x\n", color->r, color->g, color->b, color->hex);
 }

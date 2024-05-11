@@ -20,7 +20,7 @@ MAP_DIR = map/
 GAME_DIR = game/
 FREE_DIR = free/
 MINIMAP_DIR = minimap/
-SPRITE_DIR = sprite/
+SPRITE_DIR = sprites/
 
 #Libraries
 INC = -I ./include
@@ -37,7 +37,7 @@ FILE = \
 			 $(INPUT_DIR)handle_keymaps \
 			 $(DRAW_DIR)draw_rect $(DRAW_DIR)color \
 			 $(MINIMAP_DIR)render_minimap \
-			 $(SPRITE_DIR)init_sprites $(SPRITE_DIR)handle_lst_sprite \
+			 $(SPRITE_DIR)wall_sprite $(SPRITE_DIR)player_sprite $(SPRITE_DIR)handle_lst_sprite \
 			 $(MAP_DIR)get_map \
 			 $(FREE_DIR)handle_free \
 

@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/07 21:37:05 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/10 17:50:24 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define WALL_PATH "./assets/textures/wall/tile118.png"
 # define FLOOR ""
 # define CEILING ""
-# define PLAYER_PATH ""
+# define PLAYER_PATH "./assets/textures/door/door0.png"
 
 /*                            COMPONENTS                          */
 
@@ -101,7 +101,6 @@ typedef struct s_color
 	unsigned int	r;
 	unsigned int	g;
 	unsigned int	b;
-	unsigned int	a;
 	unsigned int	hex;
 }					t_color;
 
@@ -217,17 +216,19 @@ void				hook_close_window(void *param);
 
 // draw
 mlx_image_t			*draw_rect(t_window *win, int w, int h, unsigned int color);
-unsigned int		rgb_to_hex(int r, int g, int b, int a);
-void				set_color(t_color *color, int rgb[4]);
+unsigned int		rgb_to_hex(int r, int g, int b);
+void				set_color(t_color *color, int r, int g, int b);
 
 // map
 char				**get_map(char *str);
 
-//minimap
+// minimap
 void				draw_minimap(t_game *game);
 
-//sprite
+// sprite
 t_sprite			*add_sprite(t_sprite *sprite);
+t_sprite			*create_wall_sprite(t_window *win, t_walls *wall);
+t_sprite			*create_player_sprite(t_window *win, t_player *player);
 
 // free
 void				handle_free(t_game *game);

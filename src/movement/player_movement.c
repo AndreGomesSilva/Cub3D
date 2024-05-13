@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_loop.c                                        :+:      :+:    :+:   */
+/*   player_movement.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 21:04:11 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/13 15:54:30 by angomes-         ###   ########.fr       */
+/*   Created: 2024/05/13 16:56:46 by angomes-          #+#    #+#             */
+/*   Updated: 2024/05/13 19:19:42 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	game_loop(t_game *game)
+void	move_up(t_player *player, t_map *map)
 {
-  draw_minimap(game);
-  mlx_key_hook(game->win->mlx, &move_keyhook, game);
-  mlx_close_hook(game->win->mlx, &hook_close_window, game->win); //when close with the cross on title window
-	mlx_loop(game->win->mlx);
-	return (E_OK);
+  int position_x;
+  int position_y;
+
+  position_x = player->pos.x / player->sprite->size.w;
+  position_y = player->pos.y / player->sprite->size.h;
+	if (check_hit_wall(map, position_x, position_y))
+		return ;
+	set_player_position(player, player->pos.x, player->pos.y - 5);
+  get_player_position(player);
 }

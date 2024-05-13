@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 21:08:52 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/10 23:23:44 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/13 16:40:43 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_sprite	*create_wall_sprite(t_window *win, t_walls *walls)
 	while (sprite && type_of_walls < 4)
 	{
 		set_wall_sprite_values(win, sprite, type_of_walls);
-		add_sprite(walls->sprite);
+		add_sprite(sprite);
 		sprite = sprite->next;
 		type_of_walls++;
 	}

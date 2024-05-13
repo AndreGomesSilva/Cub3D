@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_loop.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 21:04:11 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/13 15:54:30 by angomes-         ###   ########.fr       */
+/*   Created: 2024/05/13 17:48:27 by angomes-          #+#    #+#             */
+/*   Updated: 2024/05/13 17:56:21 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int	game_loop(t_game *game)
+void	get_player_position(t_player *player)
 {
-  draw_minimap(game);
-  mlx_key_hook(game->win->mlx, &move_keyhook, game);
-  mlx_close_hook(game->win->mlx, &hook_close_window, game->win); //when close with the cross on title window
-	mlx_loop(game->win->mlx);
-	return (E_OK);
+	player->pos.x = player->sprite->img->instances[0].x;
+	player->pos.y = player->sprite->img->instances[0].y;
+}
+
+void	set_player_position(t_player *player, int x, int y)
+{
+	player->sprite->img->instances[0].x = x;
+	player->sprite->img->instances[0].y = y;
+}
+
+t_bool	check_hit_wall(t_map *map, int x, int y)
+{
+	if (map->mtx[y][x] == '1')
+		return (TRUE);
+	return (FALSE);
 }

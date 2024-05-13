@@ -21,6 +21,7 @@ GAME_DIR = game/
 FREE_DIR = free/
 MINIMAP_DIR = minimap/
 SPRITE_DIR = sprites/
+MOVEMENT_DIR = movement/
 
 #Libraries
 INC = -I ./include
@@ -35,6 +36,7 @@ FILE = \
 			 main \
 			 $(GAME_DIR)start_game $(GAME_DIR)init_data $(GAME_DIR)game_loop $(GAME_DIR)end_game \
 			 $(INPUT_DIR)handle_keymaps \
+			 $(MOVEMENT_DIR)player_movement $(MOVEMENT_DIR)utils \
 			 $(DRAW_DIR)draw_rect $(DRAW_DIR)color \
 			 $(MINIMAP_DIR)render_minimap \
 			 $(SPRITE_DIR)wall_sprite $(SPRITE_DIR)player_sprite $(SPRITE_DIR)handle_lst_sprite \
@@ -80,13 +82,14 @@ $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)$(FREE_DIR)
 	mkdir -p $(OBJS_DIR)$(MINIMAP_DIR)
 	mkdir -p $(OBJS_DIR)$(SPRITE_DIR)
+	mkdir -p $(OBJS_DIR)$(MOVEMENT_DIR)
 
 play: all
 	./$(NAME) $(MAP)
 
 val: all
-	@$(LEAKS) ./$(NAME)
-
+	@$(LEAKS) ./$(NAME) $(MAP)
+	
 clean:
 	$(RM) $(OBJS)
 	@make -C $(LIBFT_DIR) clean

@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/10 17:50:24 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:30:08 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 1024
+# define HEIGHT 512
 # define PI 3.14159265358979323846
 
 // texture paths for the sprites
@@ -154,7 +154,6 @@ typedef struct s_walls
 {
 	int				id;
 	t_position		pos;
-	t_dimension		size;
 	t_sprite		*sprite;
 }					t_walls;
 
@@ -213,6 +212,13 @@ int					game_loop(t_game *game);
 
 // input
 void				hook_close_window(void *param);
+void				move_keyhook(mlx_key_data_t keydatam, void *param);
+
+// movement
+void				move_up(t_player *player, t_map *map);
+t_bool				check_hit_wall(t_map *map, int x, int y);
+void				get_player_position(t_player *player);
+void set_player_position(t_player *player, int x, int y);
 
 // draw
 mlx_image_t			*draw_rect(t_window *win, int w, int h, unsigned int color);

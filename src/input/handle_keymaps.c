@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 21:27:07 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/13 17:50:07 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/13 20:41:12 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	move_keyhook(mlx_key_data_t keydatam, void *param)
 	if (keydatam.key == MLX_KEY_W)
     move_up(game->player, game->map);
 	if (keydatam.key == MLX_KEY_A)
-		printf("keydatam.key == MLX_KEY_A\n");
+    move_left(game->player, game->map);
 	if (keydatam.key == MLX_KEY_D)
-		printf("keydatam.key == MLX_KEY_D\n");
+    move_right(game->player, game->map);
 	if (keydatam.key == MLX_KEY_S)
-		printf("keydatam.key == MLX_KEY_LEFT\n");
+    move_down(game->player, game->map);
 }

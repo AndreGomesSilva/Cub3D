@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/13 20:40:49 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/15 19:35:46 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,10 @@
 # define WIDTH 1024
 # define HEIGHT 512
 # define PI 3.14159265358979323846
+# define TILE_SIZE 30
+# define FOV 60
+# define ROTATION_SPEED 0.05
+# define MOVEMENT_SPEED 1
 
 // texture paths for the sprites
 # define WALL_PATH "./assets/textures/wall/tile118.png"
@@ -94,7 +98,7 @@ typedef struct s_dimension
  * @param r -> red
  * @param g -> green
  * @param b -> blue
- * @param a -> alpha
+ * @param h -> hexadecimal
  */
 typedef struct s_color
 {
@@ -110,6 +114,10 @@ typedef struct s_color
  * @param size -> size with width and height of the sprite
  * @param img -> image of the sprite
  * @param texture -> texture of the sprite
+ * @param path -> path of the sprite
+ * @param direct -> direction of the sprite
+ * @param color -> color of the sprite
+ * @param next -> next sprite
  */
 typedef struct s_sprite
 {
@@ -128,17 +136,19 @@ typedef struct s_sprite
 
 /** entity player
  * struct that represents the player
- *
- * @param pos -> position of the player
+ * @param pos_map -> position of the player in map
+ * @param pos_pix -> position of the player in pixel
  * @param sprite -> sprite of the player
  * @param direct -> direction of the player
- * @param color -> color of the player
  */
 typedef struct s_player
 {
-	t_position		pos;
+	t_position		pos_pix;
+	t_position		pos_map;
 	t_sprite		*sprite;
 	t_direction		direct;
+	double			angle;
+	float			fov_radiant;
 }					t_player;
 
 /** entity walls
@@ -146,8 +156,6 @@ typedef struct s_player
  *
  * @param id -> a integer number that represents the id
  * @param pos -> position of the wall
- * @param size -> size of the wall
- * @param color -> color of the wall
  * @param sprite -> sprite of the wall
  */
 typedef struct s_walls
@@ -173,6 +181,7 @@ typedef struct s_window
  * struct that holds the map
  *
  * @param mtx -> matrix of the map
+ * @param path -> path of the map
  * @param size -> size of the map
  */
 typedef struct s_map
@@ -215,16 +224,16 @@ void				hook_close_window(void *param);
 void				move_keyhook(mlx_key_data_t keydatam, void *param);
 
 // movement
-
-void				move_left(t_player *player, t_map *map);
-void				move_right(t_player *player, t_map *map);
-void				move_down(t_player *player, t_map *map);
-void				move_up(t_player *player, t_map *map);
-t_bool				check_hit_wall(t_map *map, int x, int y);
+void				handle_movement(t_player *player, t_map *map,
+						t_direction direct);
+t_bool				check_hit_wall(t_map *map, int x, int y,
+						t_direction direct);
 void				get_player_position(t_player *player);
 void				set_player_position(t_player *player, int x, int y);
 
 // draw
+mlx_image_t			*draw_circle(t_window *win, int w, int h,
+						unsigned int color);
 mlx_image_t			*draw_rect(t_window *win, int w, int h, unsigned int color);
 unsigned int		rgb_to_hex(int r, int g, int b);
 void				set_color(t_color *color, int r, int g, int b);

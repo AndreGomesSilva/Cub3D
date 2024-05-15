@@ -15,8 +15,8 @@
 static void	set_wall_sprite_values(t_window *win, t_sprite *sprite, int type)
 {
 	sprite->path = WALL_PATH;
-	sprite->size.w = 32;
-	sprite->size.h = 32;
+	sprite->size.w = TILE_SIZE;
+	sprite->size.h = TILE_SIZE;
 	sprite->texture = NULL;
 	if (type == NORTH)
 	{

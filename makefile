@@ -1,6 +1,6 @@
 # Basic variables
 NAME = Cub3D
-CC = cc -g
+CC = cc -g -o3 -ffast-math
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 
@@ -37,7 +37,7 @@ FILE = \
 			 $(GAME_DIR)start_game $(GAME_DIR)init_data $(GAME_DIR)game_loop $(GAME_DIR)end_game \
 			 $(INPUT_DIR)handle_keymaps \
 			 $(MOVEMENT_DIR)player_movement $(MOVEMENT_DIR)utils \
-			 $(DRAW_DIR)draw_rect $(DRAW_DIR)color \
+			 $(DRAW_DIR)draw_rect $(DRAW_DIR)draw_circle $(DRAW_DIR)color \
 			 $(MINIMAP_DIR)render_minimap \
 			 $(SPRITE_DIR)wall_sprite $(SPRITE_DIR)player_sprite $(SPRITE_DIR)handle_lst_sprite \
 			 $(MAP_DIR)get_map \

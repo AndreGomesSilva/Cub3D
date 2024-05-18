@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 21:46:48 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/10 22:42:11 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/16 13:51:27 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,4 @@ void set_color(t_color *color, int r, int g, int b)
   color->g = g;
   color->b = b;
   color->hex = rgb_to_hex(color->r, color->g, color->b);
-  printf("Color: %d %d %d %x\n", color->r, color->g, color->b, color->hex);
 }

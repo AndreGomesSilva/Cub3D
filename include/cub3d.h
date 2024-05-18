@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/15 19:35:46 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/17 21:35:41 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,7 @@ typedef struct s_player
 	t_position		pos_pix;
 	t_position		pos_map;
 	t_sprite		*sprite;
+  mlx_image_t    *line;
 	t_direction		direct;
 	double			angle;
 	float			fov_radiant;
@@ -232,6 +233,7 @@ void				get_player_position(t_player *player);
 void				set_player_position(t_player *player, int x, int y);
 
 // draw
+mlx_image_t *create_line(t_window *win, int w, int h, int x0, int y0, int x1, int y1, unsigned int color);
 mlx_image_t			*draw_circle(t_window *win, int w, int h,
 						unsigned int color);
 mlx_image_t			*draw_rect(t_window *win, int w, int h, unsigned int color);

@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 18:38:28 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/17 21:37:36 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/19 20:24:01 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	draw_minimap(t_game *game)
 				put_image_to_window(game->player->sprite->img, game->win,
 					game->player->sprite->size.w * x,
 					game->player->sprite->size.h * y);
-        put_image_to_window(game->player->line, game->win, game->player->sprite->size.w * x, game->player->sprite->size.h * y);
         get_player_position(game->player);
 			}
 			x++;

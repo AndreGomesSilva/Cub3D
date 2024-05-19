@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/17 21:35:41 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/19 20:23:49 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,17 @@ typedef enum e_direction
 	WEST = 3
 }					t_direction;
 
-/** component position
- * struct with reference to x, y and z in a 2D space
+/** component vector
+ * struct with reference to x and y
  *
- * @param x -> x position
- * @param y -> y position
- * @param z -> z position
+ * @param x -> x
+ * @param y -> y
  */
-typedef struct s_position
+typedef struct s_vec
 {
 	int				x;
 	int				y;
-	int				z;
-}					t_position;
+}					t_vec;
 
 /** component dimension
  * struct with reference to width and height
@@ -125,7 +123,7 @@ typedef struct s_sprite
 	mlx_image_t		*img;
 	mlx_texture_t	*texture;
 	char			*path;
-	t_direction		direct;
+	t_direction		dir;
 	t_color			color;
 	struct s_sprite	*next;
 }					t_sprite;
@@ -134,22 +132,28 @@ typedef struct s_sprite
 
 /*                            ENTITYS                           */
 
+typedef struct s_line
+{
+	t_vec			start;
+	t_vec			end;
+	t_color		color;
+}					t_line;
+
 /** entity player
  * struct that represents the player
  * @param pos_map -> position of the player in map
  * @param pos_pix -> position of the player in pixel
  * @param sprite -> sprite of the player
- * @param direct -> direction of the player
+ * @param dir -> direction of the player
+ * @param dir_line -> line of the player
  */
 typedef struct s_player
 {
-	t_position		pos_pix;
-	t_position		pos_map;
+	t_vec			pos_pix;
+	t_vec			pos_map;
 	t_sprite		*sprite;
-  mlx_image_t    *line;
-	t_direction		direct;
-	double			angle;
-	float			fov_radiant;
+	t_direction		dir;
+	t_line			dir_line;
 }					t_player;
 
 /** entity walls
@@ -162,7 +166,7 @@ typedef struct s_player
 typedef struct s_walls
 {
 	int				id;
-	t_position		pos;
+	t_vec			pos;
 	t_sprite		*sprite;
 }					t_walls;
 
@@ -233,7 +237,8 @@ void				get_player_position(t_player *player);
 void				set_player_position(t_player *player, int x, int y);
 
 // draw
-mlx_image_t *create_line(t_window *win, int w, int h, int x0, int y0, int x1, int y1, unsigned int color);
+mlx_image_t			*create_line(t_window *win, int w, int h, int x0, int y0,
+						int x1, int y1, unsigned int color);
 mlx_image_t			*draw_circle(t_window *win, int w, int h,
 						unsigned int color);
 mlx_image_t			*draw_rect(t_window *win, int w, int h, unsigned int color);
@@ -250,6 +255,7 @@ void				draw_minimap(t_game *game);
 t_sprite			*add_sprite(t_sprite *sprite);
 t_sprite			*create_wall_sprite(t_window *win, t_walls *wall);
 t_sprite			*create_player_sprite(t_window *win, t_player *player);
+void				set_vector(t_vec *vec, int x, int y);
 
 // free
 void				handle_free(t_game *game);

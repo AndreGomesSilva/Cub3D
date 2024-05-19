@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/17 21:53:39 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/18 15:54:47 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static t_player	*create_player_default_values(t_window *win)
   if (!player)
     return (NULL);
   player->sprite = create_player_sprite(win, player);
-  player->line = create_line(win, 20, 20, 10, 0, 20, 15, 0x00FFFFFF);
+  player->line = create_line(win, 100, 200, 0, 200/5, 100, 200/4, 0x00FFFFFF);
 	return (player);
 }
 

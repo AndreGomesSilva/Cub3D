@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 20:20:36 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/17 22:00:51 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/18 14:09:32 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,39 @@ mlx_image_t	*draw_line(mlx_image_t *img, int x0, int y0, int x1, int y1,
 {
 	int	dx;
 	int	dy;
-	int	x;
-	int	y;
-	int	p;
+	int	sx;
+	int	sy;
+  int err;
+  int temp_err;
 
-	dx = x1 - x0;
-	dy = y1 - y0;
-	x = x0;
-	y = y0;
-	p = 2 * dy - dx;
-	while (x < x1)
-	{
-		if (p >= 0)
-		{
-			mlx_put_pixel(img, x, y, color);
-			y = y + 1;
-			p = p + 2 * dy - 2 * dx;
-		}
-		else
-		{
-      mlx_put_pixel(img, x, y, color);
-      p = p + 2 * dy;
-		}
-		x = x + 1;
-	}
+	dx = abs(x1 - x0);
+	dy = abs(y1 - y0);
+  err = dx - dy;
+  if (x0 < x1)
+    sx = 1;
+  else
+    sx = -1;
+  if (y0 < y1)
+    sy = 1;
+  else
+    sy = -1;
+
+  while(x0 != x1 || y0 != y1)
+  {
+    mlx_put_pixel(img, x0, y0, color);
+    temp_err = 2 * err;
+    if (temp_err > -dy)
+    {
+      err -= dy;
+      x0 += sx;
+    }
+    if (temp_err < dx)
+    {
+      err += dx;
+      y0 += sy;
+    }
+  }
+  mlx_put_pixel(img, x1, y1, color);
 	return (img);
 }
 

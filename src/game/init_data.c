@@ -44,7 +44,6 @@ static t_player	*create_player_default_values(t_window *win)
   if (!player)
     return (NULL);
   player->sprite = create_player_sprite(win, player);
-  player->dir_line = new_line(win, player, set_vector(&player->dir_line.start, 0, 0), set_vector(&player->dir_line.end , 10, 10));
 	return (player);
 }
 

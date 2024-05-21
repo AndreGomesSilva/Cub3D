@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/19 20:23:49 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/20 19:00:43 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ typedef struct s_line
 {
 	t_vec			start;
 	t_vec			end;
-	t_color		color;
+	t_sprite		*sprite;
 }					t_line;
 
 /** entity player
@@ -237,8 +237,7 @@ void				get_player_position(t_player *player);
 void				set_player_position(t_player *player, int x, int y);
 
 // draw
-mlx_image_t			*create_line(t_window *win, int w, int h, int x0, int y0,
-						int x1, int y1, unsigned int color);
+mlx_image_t			*create_line(t_window *win, t_line *line);
 mlx_image_t			*draw_circle(t_window *win, int w, int h,
 						unsigned int color);
 mlx_image_t			*draw_rect(t_window *win, int w, int h, unsigned int color);
@@ -249,6 +248,7 @@ void				set_color(t_color *color, int r, int g, int b);
 char				**get_map(char *str);
 
 // minimap
+void				render_dirline(t_window *win, t_player *player);
 void				draw_minimap(t_game *game);
 
 // sprite

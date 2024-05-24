@@ -39,7 +39,7 @@ FILE = \
 			 $(MOVEMENT_DIR)player_movement $(MOVEMENT_DIR)utils \
 			 $(DRAW_DIR)draw_rect $(DRAW_DIR)draw_circle $(DRAW_DIR)draw_line $(DRAW_DIR)color \
 			 $(MINIMAP_DIR)render_minimap $(MINIMAP_DIR)render_dirline \
-			 $(SPRITE_DIR)wall_sprite $(SPRITE_DIR)player_sprite $(SPRITE_DIR)handle_lst_sprite \
+			 $(SPRITE_DIR)wall_sprite $(SPRITE_DIR)player_sprite $(SPRITE_DIR)handle_lst_sprite $(SPRITE_DIR)utils \
 			 $(MAP_DIR)get_map \
 			 $(FREE_DIR)handle_free \
 

@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 18:51:15 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/22 20:35:55 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/23 17:32:51 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 void  set_player_dirline(t_player *player)
 {
-  player->dir_line.start.x = 25; 
-  player->dir_line.start.y = 25;
-  player->dir_line.end.x = 25;
-  player->dir_line.end.y = 0;
+  set_vector(&player->dir_line.start, 25, 25);
+  set_vector(&player->dir_line.end, 25, 0);
   player->dir_line.sprite = add_sprite(player->dir_line.sprite);
   set_color(&player->dir_line.sprite->color , 250, 240, 120);
 }

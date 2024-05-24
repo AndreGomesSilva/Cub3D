@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:48:27 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/23 17:43:02 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/24 17:01:26 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	set_player_position(t_player *player, int x, int y)
 {
 	player->sprite->img->instances[0].x = x;
 	player->sprite->img->instances[0].y = y;
-	player->dir_line.sprite->img->instances[0].x = x - 10;
-	player->dir_line.sprite->img->instances[0].y = y - 10;
+	player->dir_line.sprite->img->instances[0].x = x - 15;
+	player->dir_line.sprite->img->instances[0].y = y - 15;
 }
 
 t_bool	check_hit_wall(t_map *map, int x, int y, t_direction direct)

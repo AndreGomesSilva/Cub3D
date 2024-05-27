@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/24 20:44:13 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/27 16:42:09 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ typedef enum e_type
 {
 	T_PLAYER = 0,
 	T_WALL = 1,
-	T_IMG_FLOOR = 2,
-	T_IMG_CEILING = 3
+	T_FLOOR = 2,
+	T_CEILING = 3
 }					t_type;
 
 typedef enum e_direction
@@ -132,12 +132,32 @@ typedef struct s_sprite
 
 /*                            ENTITYS                           */
 
+/** entity line
+ * struct that holds the line
+ *
+ * @param start -> start of the line
+ * @param end -> end of the line
+ * @param sprite -> sprite of the line
+ */
 typedef struct s_line
 {
 	t_vec			start;
 	t_vec			end;
 	t_sprite		*sprite;
 }					t_line;
+
+/** entity fov
+ * struct that holds the fov
+ *
+ * @param angle -> angle of the fov
+ * @param l_line -> line of the fov
+ * @param r_line -> line of the fov
+ */
+typedef struct s_fov{
+  float			angle;
+  t_line			l_line;
+  t_line			r_line;
+} t_fov; 
 
 /** entity player
  * struct that represents the player
@@ -154,7 +174,8 @@ typedef struct s_player
 	t_sprite		*sprite;
 	t_direction		dir;
 	t_line			dir_line;
-	t_line      plane;
+	t_line			plane;
+  t_fov        fov;
 }					t_player;
 
 /** entity walls
@@ -166,7 +187,6 @@ typedef struct s_player
  */
 typedef struct s_walls
 {
-	int				id;
 	t_vec			pos;
 	t_sprite		*sprite;
 }					t_walls;
@@ -238,7 +258,7 @@ void				get_player_position(t_player *player);
 void				set_player_position(t_player *player, int x, int y);
 
 // draw
-mlx_image_t			*create_line(t_window *win, t_line *line);
+mlx_image_t			*create_line(t_window *win, t_line *line, int x, int y);
 mlx_image_t			*draw_circle(t_window *win, int w, int h,
 						unsigned int color);
 mlx_image_t			*draw_line(mlx_image_t *img, t_line *line);
@@ -250,6 +270,7 @@ void				set_color(t_color *color, int r, int g, int b);
 char				**get_map(char *str);
 
 // minimap
+void				render_plane(t_window *win, t_player *player);
 void				render_dirline(t_window *win, t_player *player);
 void				draw_minimap(t_game *game);
 

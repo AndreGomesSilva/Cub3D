@@ -6,18 +6,21 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 23:48:57 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/16 13:55:30 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/28 17:36:30 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-mlx_image_t	*draw_rect(t_window *win, int w, int h, unsigned int color)
+void draw_rect(t_window *win, mlx_image_t *img, unsigned int color)
 {
-	mlx_image_t	*img;
-	int			i;
-	int			j;
+	int	i;
+	int	j;
+	int	w;
+	int	h;
 
+	w = img->width;
+	h = img->height;
 	img = mlx_new_image(win->mlx, w, h);
 	i = 0;
 	while (i < (h - 1))
@@ -30,5 +33,4 @@ mlx_image_t	*draw_rect(t_window *win, int w, int h, unsigned int color)
 		}
 		i++;
 	}
-	return (img);
 }

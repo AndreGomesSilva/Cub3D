@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:56:46 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/24 16:12:04 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/27 17:44:37 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void	handle_movement(t_player *player, t_map *map, t_direction direct)
 		player->pos_pix.y -= MOVEMENT_SPEED;
 	else if (direct == SOUTH)
 		player->pos_pix.y += MOVEMENT_SPEED;
-	set_player_position(player, player->pos_pix.x, player->pos_pix.y);
-	get_player_position(player);
+	// set_player_position(player, player->pos_pix.x, player->pos_pix.y);
+	// get_player_position(player);
 }

@@ -19,8 +19,8 @@ DRAW_DIR = draw/
 MAP_DIR = map/
 GAME_DIR = game/
 FREE_DIR = free/
-MINIMAP_DIR = minimap/
-SPRITE_DIR = sprites/
+RENDER_DIR = render/
+VECTORS_DIR = vectors/
 MOVEMENT_DIR = movement/
 
 #Libraries
@@ -38,8 +38,8 @@ FILE = \
 			 $(INPUT_DIR)handle_keymaps \
 			 $(MOVEMENT_DIR)player_movement $(MOVEMENT_DIR)utils \
 			 $(DRAW_DIR)draw_rect $(DRAW_DIR)draw_circle $(DRAW_DIR)draw_line $(DRAW_DIR)color \
-			 $(MINIMAP_DIR)render_minimap $(MINIMAP_DIR)render_dirline \
-			 $(SPRITE_DIR)wall_sprite $(SPRITE_DIR)player_sprite $(SPRITE_DIR)handle_lst_sprite $(SPRITE_DIR)utils \
+			 $(RENDER_DIR)render_minimap \
+			 $(VECTORS_DIR)utils \
 			 $(MAP_DIR)get_map \
 			 $(FREE_DIR)handle_free \
 
@@ -80,8 +80,8 @@ $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)$(DRAW_DIR)
 	mkdir -p $(OBJS_DIR)$(MAP_DIR)
 	mkdir -p $(OBJS_DIR)$(FREE_DIR)
-	mkdir -p $(OBJS_DIR)$(MINIMAP_DIR)
-	mkdir -p $(OBJS_DIR)$(SPRITE_DIR)
+	mkdir -p $(OBJS_DIR)$(RENDER_DIR)
+	mkdir -p $(OBJS_DIR)$(VECTORS_DIR)
 	mkdir -p $(OBJS_DIR)$(MOVEMENT_DIR)
 
 play: all

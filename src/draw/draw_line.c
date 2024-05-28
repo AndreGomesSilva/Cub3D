@@ -6,13 +6,13 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 20:20:36 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/27 15:34:25 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/27 18:02:15 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-mlx_image_t *put_line_screen(mlx_image_t *img, t_line *line, int sx, int sy)
+void put_line_screen(mlx_image_t *img, t_line *line, int sx, int sy)
 {
   int	dx;
 	int	dy;
@@ -25,7 +25,7 @@ mlx_image_t *put_line_screen(mlx_image_t *img, t_line *line, int sx, int sy)
 
   while (line->start.x != line->end.x || line->start.y != line->end.y)
 	{
-		mlx_put_pixel(img, line->start.x, line->start.y, line->sprite->color.hex);
+		mlx_put_pixel(img, line->start.x, line->start.y, line->color.hex);
 		temp_err = 2 * err;
 		if (temp_err > -dy)
 		{
@@ -38,10 +38,9 @@ mlx_image_t *put_line_screen(mlx_image_t *img, t_line *line, int sx, int sy)
       line->start.y += sy;
 		}
   }
-  return (img);
 }
 
-mlx_image_t	*draw_line(mlx_image_t *img, t_line *line)
+void draw_line(mlx_image_t *img, t_line *line)
 {
 	int	sx;
 	int	sy;
@@ -54,14 +53,5 @@ mlx_image_t	*draw_line(mlx_image_t *img, t_line *line)
 		sy = 1;
 	else
 		sy = -1;
-	return (put_line_screen(img, line, sx, sy));
-}
-
-mlx_image_t	*create_line(t_window *win, t_line *line, int x, int y)
-{
-	mlx_image_t	*img;
-
-  img = mlx_new_image(win->mlx, x, y);
-  draw_line(img, line); 
-	return (img);
+	put_line_screen(img, line, sx, sy);
 }

@@ -6,25 +6,25 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:25:39 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/23 17:46:16 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/28 17:37:58 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	free_sprites(t_sprite *sprite)
-{
-	t_sprite	*tmp;
-	t_sprite	*next;
-
-	tmp = sprite;
-	while (tmp)
-	{
-		next = tmp->next;
-		free(tmp);
-		tmp = next;
-	}
-}
+// void	free_sprites(t_sprite *sprite)
+// {
+// 	t_sprite	*tmp;
+// 	t_sprite	*next;
+//
+// 	tmp = sprite;
+// 	while (tmp)
+// 	{
+// 		next = tmp->next;
+// 		free(tmp);
+// 		tmp = next;
+// 	}
+// }
 
 void	free_matrix(char **matrix)
 {
@@ -48,17 +48,15 @@ void	handle_free(t_game *game)
 		free_matrix(game->map->mtx);
 		free(game->map);
 	}
-	if (game->player)
-  {
-    free_sprites(game->player->dir_line.sprite);
-    free_sprites(game->player->sprite);
-		free(game->player);
-  }
-	if (game->walls)
-	{
-		free_sprites(game->walls->sprite);
-		free(game->walls);
-	}
+	// if (game->player)
+ //  {
+	// 	free(game->player);
+ //  }
+	// if (game->walls)
+	// {
+	// 	free_sprites(game->walls->sprite);
+	// 	free(game->walls);
+	// }
 	if (game)
 		free(game);
 }

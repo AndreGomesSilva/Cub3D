@@ -6,59 +6,36 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/19 20:14:01 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/27 18:42:45 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static t_walls	*create_walls_default_values(t_window *win)
+t_window *create_window()
 {
-	t_walls	*walls;
+  t_window *win;
 
-	walls = ft_calloc(1, sizeof(t_walls));
-  if (!walls)
+  win = ft_calloc(1, sizeof(t_window));
+  if (!win)
     return (NULL);
-  walls->sprite = create_wall_sprite(win, walls);
-	return (walls);
-}
-
-static t_window	*create_window_default_values(void)
-{
-	t_window	*window;
-
-	window = ft_calloc(1, sizeof(t_window));
-	window->size.w = WIDTH;
-	window->size.h = HEIGHT;
-	window->mlx = mlx_init(window->size.w, window->size.h, "Cub3D", TRUE);
-	if (!window->mlx)
-		return (NULL);
-	return (window);
-}
-
-static t_player	*create_player_default_values(t_window *win)
-{
-	t_player	*player;
-
-	player = ft_calloc(1, sizeof(t_player));
-  if (!player)
+  win->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cub3D", true);
+  if (!win->mlx)
     return (NULL);
-  player->sprite = create_player_sprite(win, player);
-	return (player);
+  return (win);
 }
 
-static t_map	*create_map_default_values(char *str)
+t_map *create_map(char *str)
 {
-	t_map	*map;
+  t_map *map;
 
-	map = ft_calloc(1, sizeof(t_map));
-	if (!map || !str)
-		return (NULL);
-	map->path = str;
-	map->mtx = get_map(map->path);
+  map = ft_calloc(1, sizeof(t_map));
+  if (!map)
+    return (NULL);
+  map->mtx = get_map(str);
   if (!map->mtx)
     return (NULL);
-	return (map);
+  return (map);
 }
 
 t_game	*init_data(char *str)
@@ -66,11 +43,10 @@ t_game	*init_data(char *str)
 	t_game	*game;
 
 	game = ft_calloc(1, sizeof(t_game));
-	game->map = create_map_default_values(str);
-	game->win = create_window_default_values();
-	game->walls = create_walls_default_values(game->win);
-	game->player = create_player_default_values(game->win);
-	if (!game || !game->map || !game->win || !game->walls)
+  game->map = create_map(str);
+  game->win = create_window();
+  game->minimap = mlx_new_image(game->win->mlx, MIN_WIDTH, MIN_HEIGHT);
+	if (!game || !game->map || !game->win)
 		return (NULL);
 	return (game);
 } 

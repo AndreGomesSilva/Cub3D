@@ -6,23 +6,22 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:24:08 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/16 14:01:42 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/28 17:35:51 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-
-
-mlx_image_t	*draw_circle(t_window *win, int w, int h, unsigned int color)
+void	draw_circle(mlx_image_t *img, unsigned int color)
 {
-	mlx_image_t	*img;
-	int			i;
-	int			j;
+	int	i;
+	int	j;
+	int	w;
+	int	h;
 
-
-	img = mlx_new_image(win->mlx, w, h);
 	i = 0;
+	w = img->width;
+	h = img->height;
 	while (i < h)
 	{
 		j = 0;
@@ -35,5 +34,4 @@ mlx_image_t	*draw_circle(t_window *win, int w, int h, unsigned int color)
 		}
 		i++;
 	}
-	return (img);
 }

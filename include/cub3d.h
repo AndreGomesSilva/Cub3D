@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/27 16:42:09 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/28 17:37:28 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define WIDTH 1024
-# define HEIGHT 512
+# define WIN_WIDTH 1024
+# define WIN_HEIGHT 512
+# define MIN_WIDTH 640
+# define MIN_HEIGHT 480
 # define PI 3.14159265358979323846
 # define TILE_SIZE 30
-# define FOV 60
-# define ROTATION_SPEED 0.05
 # define MOVEMENT_SPEED 1
 
 // texture paths for the sprites
@@ -66,17 +66,17 @@ typedef enum e_direction
 	WEST = 3
 }					t_direction;
 
-/** component vector
+/** component point
  * struct with reference to x and y
  *
  * @param x -> x
  * @param y -> y
  */
-typedef struct s_vec
+typedef struct s_point
 {
 	int				x;
 	int				y;
-}					t_vec;
+}					t_point;
 
 /** component dimension
  * struct with reference to width and height
@@ -117,16 +117,16 @@ typedef struct s_color
  * @param color -> color of the sprite
  * @param next -> next sprite
  */
-typedef struct s_sprite
-{
-	t_dimension		size;
-	mlx_image_t		*img;
-	mlx_texture_t	*texture;
-	char			*path;
-	t_direction		dir;
-	t_color			color;
-	struct s_sprite	*next;
-}					t_sprite;
+// typedef struct s_sprite
+// {
+// 	t_dimension		size;
+// 	mlx_image_t		*img;
+// 	mlx_texture_t	*texture;
+// 	char			*path;
+// 	t_direction		dir;
+// 	t_color			color;
+// 	struct s_sprite	*next;
+// }					t_sprite;
 
 /* --------------------------------------------------------------*/
 
@@ -141,9 +141,9 @@ typedef struct s_sprite
  */
 typedef struct s_line
 {
-	t_vec			start;
-	t_vec			end;
-	t_sprite		*sprite;
+	t_point			start;
+	t_point			end;
+	t_color			color;
 }					t_line;
 
 /** entity fov
@@ -153,11 +153,12 @@ typedef struct s_line
  * @param l_line -> line of the fov
  * @param r_line -> line of the fov
  */
-typedef struct s_fov{
-  float			angle;
-  t_line			l_line;
-  t_line			r_line;
-} t_fov; 
+typedef struct s_fov
+{
+	float			angle;
+	t_line			l_line;
+	t_line			r_line;
+}					t_fov;
 
 /** entity player
  * struct that represents the player
@@ -169,13 +170,12 @@ typedef struct s_fov{
  */
 typedef struct s_player
 {
-	t_vec			pos_pix;
-	t_vec			pos_map;
-	t_sprite		*sprite;
+	t_point			pos_pix;
+	t_point			pos_map;
 	t_direction		dir;
 	t_line			dir_line;
 	t_line			plane;
-  t_fov        fov;
+	t_fov			fov;
 }					t_player;
 
 /** entity walls
@@ -185,12 +185,12 @@ typedef struct s_player
  * @param pos -> position of the wall
  * @param sprite -> sprite of the wall
  */
-typedef struct s_walls
-{
-	t_vec			pos;
-	t_sprite		*sprite;
-}					t_walls;
-
+// typedef struct s_walls
+// {
+// 	t_vec			pos;
+// 	t_sprite		*sprite;
+// }					t_walls;
+//
 /** entity window
  * struct that holds the window
  *
@@ -213,7 +213,6 @@ typedef struct s_window
 typedef struct s_map
 {
 	char			**mtx;
-	char			*path;
 	t_dimension		size;
 }					t_map;
 
@@ -230,8 +229,8 @@ typedef struct s_game
 {
 	t_map			*map;
 	t_window		*win;
-	t_player		*player;
-	t_walls			*walls;
+	mlx_image_t		*minimap;
+	t_player		player;
 	t_err			error;
 }					t_game;
 
@@ -254,31 +253,24 @@ void				handle_movement(t_player *player, t_map *map,
 						t_direction direct);
 t_bool				check_hit_wall(t_map *map, int x, int y,
 						t_direction direct);
-void				get_player_position(t_player *player);
-void				set_player_position(t_player *player, int x, int y);
 
 // draw
-mlx_image_t			*create_line(t_window *win, t_line *line, int x, int y);
-mlx_image_t			*draw_circle(t_window *win, int w, int h,
+void				draw_line(mlx_image_t *img, t_line *line);
+void				draw_circle(mlx_image_t *img,
 						unsigned int color);
-mlx_image_t			*draw_line(mlx_image_t *img, t_line *line);
-mlx_image_t			*draw_rect(t_window *win, int w, int h, unsigned int color);
+void				draw_rect(t_window *win, mlx_image_t *img,
+						unsigned int color);
 unsigned int		rgb_to_hex(int r, int g, int b);
 void				set_color(t_color *color, int r, int g, int b);
 
 // map
 char				**get_map(char *str);
 
-// minimap
-void				render_plane(t_window *win, t_player *player);
-void				render_dirline(t_window *win, t_player *player);
-void				draw_minimap(t_game *game);
+//render
+int					render_minimap(t_game *game);
 
-// sprite
-t_sprite			*add_sprite(t_sprite *sprite);
-t_sprite			*create_wall_sprite(t_window *win, t_walls *wall);
-t_sprite			*create_player_sprite(t_window *win, t_player *player);
-void				set_vector(t_vec *vec, int x, int y);
+// vectors
+void				set_vector(t_point *point, int x, int y);
 
 // free
 void				handle_free(t_game *game);

@@ -6,29 +6,28 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 23:48:57 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/28 17:36:30 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/29 20:55:48 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void draw_rect(t_window *win, mlx_image_t *img, unsigned int color)
+void draw_rect_wall(mlx_image_t *img, int init_w, int init_h, t_walls *walls)
 {
-	int	i;
-	int	j;
-	int	w;
-	int	h;
-
-	w = img->width;
-	h = img->height;
-	img = mlx_new_image(win->mlx, w, h);
-	i = 0;
-	while (i < (h - 1))
+  int final_w;
+  int final_h;
+  int i;
+  int j;
+  
+  final_w = init_w + walls->size.w;
+  final_h = init_h + walls->size.h;
+  i = init_h;
+	while (i < (final_h - 1))
 	{
-		j = 0;
-		while (j < (w - 1))
+    j = init_w;
+		while (j < (final_w - 1))
 		{
-			mlx_put_pixel(img, j, i, color);
+			mlx_put_pixel(img, j, i, walls->color.hex);
 			j++;
 		}
 		i++;

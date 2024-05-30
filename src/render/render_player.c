@@ -1,30 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_loop.c                                        :+:      :+:    :+:   */
+/*   render_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 21:04:11 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/29 21:14:38 by angomes-         ###   ########.fr       */
+/*   Created: 2024/05/29 21:07:37 by angomes-          #+#    #+#             */
+/*   Updated: 2024/05/29 21:19:45 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void  init_loop(void *param)
+t_point get_player_pix_pos(t_map *map)
 {
-  t_game *game;
+  t_point pix_pos;
 
-  game = (t_game *)param;
-}
-
-int	game_loop(t_game *game)
-{
-  render_minimap(game);
-  mlx_loop_hook(game->win->mlx, &init_loop, game);
-  mlx_key_hook(game->win->mlx, &move_keyhook, game);
-  mlx_close_hook(game->win->mlx, &hook_close_window, game->win); //when close with the cross on title window
-	mlx_loop(game->win->mlx);
-	return (E_OK);
+  pix_pos.x = map->player.pos.x * map->size.w;
+  pix_pos.y = map->player.pos.y * map->size.h;
+  return (pix_pos);
 }

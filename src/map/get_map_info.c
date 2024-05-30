@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_loop.c                                        :+:      :+:    :+:   */
+/*   get_map_info.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 21:04:11 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/29 21:14:38 by angomes-         ###   ########.fr       */
+/*   Created: 2024/05/29 18:26:27 by angomes-          #+#    #+#             */
+/*   Updated: 2024/05/29 18:29:47 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void  init_loop(void *param)
+int get_num_col_map(char **map)
 {
-  t_game *game;
+  int i;
 
-  game = (t_game *)param;
+  i = 0;
+  while (map[i])
+    i++;
+  return (i);
 }
 
-int	game_loop(t_game *game)
+int get_num_row_map(char **map)
 {
-  render_minimap(game);
-  mlx_loop_hook(game->win->mlx, &init_loop, game);
-  mlx_key_hook(game->win->mlx, &move_keyhook, game);
-  mlx_close_hook(game->win->mlx, &hook_close_window, game->win); //when close with the cross on title window
-	mlx_loop(game->win->mlx);
-	return (E_OK);
+  int i;
+  int j;
+
+  i = 0;
+  while (map[i])
+  {
+    j = 0;
+    while (map[i][j])
+      j++;
+    i++;
+  }
+  return (j);
 }

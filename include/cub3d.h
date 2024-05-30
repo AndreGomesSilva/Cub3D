@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/28 17:37:28 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/29 21:02:48 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define WIN_WIDTH 1024
-# define WIN_HEIGHT 512
-# define MIN_WIDTH 640
-# define MIN_HEIGHT 480
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
+# define MIN_WIDTH 480
+# define MIN_HEIGHT 270
 # define PI 3.14159265358979323846
 # define TILE_SIZE 30
 # define MOVEMENT_SPEED 1
@@ -50,6 +50,13 @@ typedef enum e_err
 	E_OK = 0
 }					t_err;
 
+/** component type
+ * enum that represents the type
+ * @param T_PLAYER -> player
+ * @param T_WALL -> wall
+ * @param T_FLOOR -> floor
+ * @param T_CEILING -> ceiling
+ */
 typedef enum e_type
 {
 	T_PLAYER = 0,
@@ -57,6 +64,14 @@ typedef enum e_type
 	T_FLOOR = 2,
 	T_CEILING = 3
 }					t_type;
+
+/** component direction 
+ * enum that represents the direction
+ * @param NORTH -> north
+ * @param EAST -> east
+ * @param SOUTH -> south
+ * @param WEST -> west
+ */
 
 typedef enum e_direction
 {
@@ -103,6 +118,7 @@ typedef struct s_color
 	unsigned int	r;
 	unsigned int	g;
 	unsigned int	b;
+	unsigned int	a;
 	unsigned int	hex;
 }					t_color;
 
@@ -179,18 +195,17 @@ typedef struct s_player
 }					t_player;
 
 /** entity walls
- * struct that represents all walls
+ * struct that holds the walls
  *
- * @param id -> a integer number that represents the id
- * @param pos -> position of the wall
- * @param sprite -> sprite of the wall
+ * @param size -> size of the walls
+ * @param color -> color of the walls
  */
-// typedef struct s_walls
-// {
-// 	t_vec			pos;
-// 	t_sprite		*sprite;
-// }					t_walls;
-//
+typedef struct s_walls
+{
+	t_dimension		size;
+	t_color			color;
+}					t_walls;
+
 /** entity window
  * struct that holds the window
  *
@@ -216,6 +231,18 @@ typedef struct s_map
 	t_dimension		size;
 }					t_map;
 
+/** entity minimap
+ * struct that holds the minimap
+ *
+ * @param img -> image of the minimap
+ * @param walls -> walls of the minimap
+ */
+typedef struct s_minimap
+{
+	mlx_image_t		*img;
+	t_walls			walls;
+}					t_minimap;
+
 /** system game
  * struct that holds the game main data
  *
@@ -229,7 +256,7 @@ typedef struct s_game
 {
 	t_map			*map;
 	t_window		*win;
-	mlx_image_t		*minimap;
+	t_minimap		*minimap;
 	t_player		player;
 	t_err			error;
 }					t_game;
@@ -256,18 +283,21 @@ t_bool				check_hit_wall(t_map *map, int x, int y,
 
 // draw
 void				draw_line(mlx_image_t *img, t_line *line);
-void				draw_circle(mlx_image_t *img,
-						unsigned int color);
-void				draw_rect(t_window *win, mlx_image_t *img,
-						unsigned int color);
-unsigned int		rgb_to_hex(int r, int g, int b);
-void				set_color(t_color *color, int r, int g, int b);
+void	draw_circle(mlx_image_t *img,
+					unsigned int color);
+void				draw_rect_wall(mlx_image_t *img, int init_w, int init_h,
+						t_walls *walls);
+unsigned int		rgb_to_hex(int r, int g, int b, int a);
 
 // map
 char				**get_map(char *str);
+int					get_num_col_map(char **map);
+int					get_num_row_map(char **map);
+unsigned int		get_hex_color(t_color *color, int r, int g, int b);
 
 //render
 int					render_minimap(t_game *game);
+void				render_wall_minimap(t_minimap *minimap, t_map *map);
 
 // vectors
 void				set_vector(t_point *point, int x, int y);

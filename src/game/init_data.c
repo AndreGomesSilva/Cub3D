@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/27 18:42:45 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/29 20:59:04 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,25 @@ t_map *create_map(char *str)
   map->mtx = get_map(str);
   if (!map->mtx)
     return (NULL);
+  map->size.h = get_num_col_map(map->mtx);
+  map->size.w = get_num_row_map(map->mtx);
   return (map);
+}
+
+t_minimap *create_minimap(t_window *win, t_map *map)
+{
+  t_minimap *minimap;
+
+  minimap = ft_calloc(1, sizeof(t_minimap));
+  if (!minimap)
+    return (NULL);
+  minimap->img = mlx_new_image(win->mlx, MIN_WIDTH, MIN_HEIGHT);
+  if (!minimap->img)
+    return (NULL);
+  minimap->walls.color.hex = get_hex_color(&minimap->walls.color, 255, 255, 255);
+  minimap->walls.size.w = MIN_WIDTH / map->size.w;
+  minimap->walls.size.h = MIN_HEIGHT / map->size.h;
+  return (minimap);
 }
 
 t_game	*init_data(char *str)
@@ -45,8 +63,8 @@ t_game	*init_data(char *str)
 	game = ft_calloc(1, sizeof(t_game));
   game->map = create_map(str);
   game->win = create_window();
-  game->minimap = mlx_new_image(game->win->mlx, MIN_WIDTH, MIN_HEIGHT);
-	if (!game || !game->map || !game->win)
+  game->minimap = create_minimap(game->win, game->map);
+	if (!game || !game->map || !game->win || !game->minimap)
 		return (NULL);
 	return (game);
 } 

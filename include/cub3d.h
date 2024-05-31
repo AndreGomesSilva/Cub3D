@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/29 21:02:48 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/30 21:34:34 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define WIN_WIDTH 1920
-# define WIN_HEIGHT 1080
+# define WIN_WIDTH 1720
+# define WIN_HEIGHT 960
 # define MIN_WIDTH 480
 # define MIN_HEIGHT 270
 # define PI 3.14159265358979323846
@@ -50,21 +50,6 @@ typedef enum e_err
 	E_OK = 0
 }					t_err;
 
-/** component type
- * enum that represents the type
- * @param T_PLAYER -> player
- * @param T_WALL -> wall
- * @param T_FLOOR -> floor
- * @param T_CEILING -> ceiling
- */
-typedef enum e_type
-{
-	T_PLAYER = 0,
-	T_WALL = 1,
-	T_FLOOR = 2,
-	T_CEILING = 3
-}					t_type;
-
 /** component direction 
  * enum that represents the direction
  * @param NORTH -> north
@@ -80,6 +65,21 @@ typedef enum e_direction
 	SOUTH = 2,
 	WEST = 3
 }					t_direction;
+
+/** component type
+ * enum that represents the type
+ * @param T_PLAYER -> player
+ * @param T_WALL -> wall
+ * @param T_FLOOR -> floor
+ * @param T_CEILING -> ceiling
+ */
+typedef enum e_type
+{
+	T_FLOOR = 0,
+	T_WALL = 1,
+	T_PLAYER = 2,
+	T_CEILING = 3
+}					t_type;
 
 /** component point
  * struct with reference to x and y
@@ -188,6 +188,7 @@ typedef struct s_player
 {
 	t_point			pos_pix;
 	t_point			pos_map;
+  t_dimension size;
 	t_direction		dir;
 	t_line			dir_line;
 	t_line			plane;
@@ -283,11 +284,14 @@ t_bool				check_hit_wall(t_map *map, int x, int y,
 
 // draw
 void				draw_line(mlx_image_t *img, t_line *line);
-void	draw_circle(mlx_image_t *img,
-					unsigned int color);
-void				draw_rect_wall(mlx_image_t *img, int init_w, int init_h,
-						t_walls *walls);
+void				draw_circle(mlx_image_t *img, t_dimension init_dim,
+						t_dimension final_dim, unsigned int color);
 unsigned int		rgb_to_hex(int r, int g, int b, int a);
+void				draw_img(mlx_image_t *img, t_game *game, t_type type,
+						void (*func)(mlx_image_t *img, t_dimension init_dim,
+							t_dimension final_dim, t_color color));
+void	draw_rect(mlx_image_t *img, t_dimension init_dim, t_dimension final_dim,
+		t_color color);
 
 // map
 char				**get_map(char *str);

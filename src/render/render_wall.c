@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 16:45:42 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/29 21:04:36 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/30 20:10:40 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,26 @@
 
 void	render_wall_minimap(t_minimap *minimap, t_map *map)
 {
-	int	x;
-	int	y;
+  t_point p;
+  t_dimension init_dim;
+  t_dimension final_dim;
 
-	y = 0;
-	while (y < map->size.h)
+  p.y = 0;
+	while (p.y < map->size.h)
 	{
-		x = 0;
-		while (x < map->size.w)
+		p.x = 0;
+		while (p.x < map->size.w)
 		{
-			if (map->mtx[y][x] == '1')
-				draw_rect_wall(minimap->img, x * minimap->walls.size.w, y * minimap->walls.size.h, &minimap->walls);
-			x++;
+			if (map->mtx[p.y][p.x] == '1')
+      {
+        init_dim.w = p.x * minimap->walls.size.w;
+        init_dim.h = p.y * minimap->walls.size.h;
+        final_dim.w = init_dim.w + minimap->walls.size.w;
+        final_dim.h = init_dim.h + minimap->walls.size.h;
+				draw_rect(minimap->img, init_dim, final_dim, minimap->walls.color);
+      }
+			p.x++;
 		}
-		y++;
+		p.y++;
 	}
 }

@@ -38,7 +38,7 @@ FILE = \
 			 $(INPUT_DIR)handle_keymaps \
 			 $(MOVEMENT_DIR)player_movement $(MOVEMENT_DIR)utils \
 			 $(DRAW_DIR)draw_rect $(DRAW_DIR)draw_circle $(DRAW_DIR)draw_line $(DRAW_DIR)color \
-			 $(RENDER_DIR)render_minimap $(RENDER_DIR)render_wall \
+			 $(RENDER_DIR)render_minimap $(RENDER_DIR)render_utils $(RENDER_DIR)render_wall \
 			 $(VECTORS_DIR)utils \
 			 $(MAP_DIR)get_map $(MAP_DIR)get_map_info \
 			 $(FREE_DIR)handle_free \

@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/29 20:59:04 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/31 17:37:55 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ t_map *create_map(char *str)
   return (map);
 }
 
-t_minimap *create_minimap(t_window *win, t_map *map)
+t_screen *create_minimap(t_window *win, t_map *map)
 {
-  t_minimap *minimap;
+  t_screen *minimap;
 
-  minimap = ft_calloc(1, sizeof(t_minimap));
+  minimap = ft_calloc(1, sizeof(t_screen));
   if (!minimap)
     return (NULL);
   minimap->img = mlx_new_image(win->mlx, MIN_WIDTH, MIN_HEIGHT);

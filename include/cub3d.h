@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/30 21:34:34 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/31 18:47:17 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,18 @@ typedef struct s_point
 	int				y;
 }					t_point;
 
+/** component vector
+ * struct with reference to start point and end point
+ *
+ * @param start_p -> start point
+ * @param end_p -> end point
+ */
+typedef struct s_vec
+{
+	t_point			start_p;
+	t_point			end_p;
+}					t_vec;
+
 /** component dimension
  * struct with reference to width and height
  *
@@ -157,8 +169,7 @@ typedef struct s_color
  */
 typedef struct s_line
 {
-	t_point			start;
-	t_point			end;
+	t_vec			vec;
 	t_color			color;
 }					t_line;
 
@@ -188,7 +199,7 @@ typedef struct s_player
 {
 	t_point			pos_pix;
 	t_point			pos_map;
-  t_dimension size;
+	t_dimension		size;
 	t_direction		dir;
 	t_line			dir_line;
 	t_line			plane;
@@ -238,11 +249,12 @@ typedef struct s_map
  * @param img -> image of the minimap
  * @param walls -> walls of the minimap
  */
-typedef struct s_minimap
+typedef struct s_screen
 {
 	mlx_image_t		*img;
 	t_walls			walls;
-}					t_minimap;
+	t_player		player;
+}					t_screen;
 
 /** system game
  * struct that holds the game main data
@@ -257,8 +269,8 @@ typedef struct s_game
 {
 	t_map			*map;
 	t_window		*win;
-	t_minimap		*minimap;
-	t_player		player;
+	t_screen		*minimap;
+	t_screen		*main_screen;
 	t_err			error;
 }					t_game;
 
@@ -284,14 +296,9 @@ t_bool				check_hit_wall(t_map *map, int x, int y,
 
 // draw
 void				draw_line(mlx_image_t *img, t_line *line);
-void				draw_circle(mlx_image_t *img, t_dimension init_dim,
-						t_dimension final_dim, unsigned int color);
+void				draw_circle(mlx_image_t *img, t_vec vec, t_color color);
 unsigned int		rgb_to_hex(int r, int g, int b, int a);
-void				draw_img(mlx_image_t *img, t_game *game, t_type type,
-						void (*func)(mlx_image_t *img, t_dimension init_dim,
-							t_dimension final_dim, t_color color));
-void	draw_rect(mlx_image_t *img, t_dimension init_dim, t_dimension final_dim,
-		t_color color);
+void				draw_rect(mlx_image_t *img, t_vec vec, t_color color);
 
 // map
 char				**get_map(char *str);
@@ -301,7 +308,9 @@ unsigned int		get_hex_color(t_color *color, int r, int g, int b);
 
 //render
 int					render_minimap(t_game *game);
-void				render_wall_minimap(t_minimap *minimap, t_map *map);
+void				draw_screen(t_screen *screen, t_vec vec, t_color color,
+						void (*func)(mlx_image_t *img, t_vec vec,
+							t_color color));
 
 // vectors
 void				set_vector(t_point *point, int x, int y);

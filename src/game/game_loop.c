@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 21:04:11 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/31 17:43:25 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/31 20:00:04 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void  init_loop(void *param)
   t_game *game;
 
   game = (t_game *)param;
+  render_minimap(game);
 }
 
 int	game_loop(t_game *game)

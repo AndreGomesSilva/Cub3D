@@ -48,6 +48,8 @@ void	handle_free(t_game *game)
 		free_matrix(game->map->mtx);
 		free(game->map);
 	}
+  if (game->minimap)
+    free(game->minimap);
 	// if (game->player)
  //  {
 	// 	free(game->player);

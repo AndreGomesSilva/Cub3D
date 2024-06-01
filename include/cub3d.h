@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/31 18:47:17 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/31 20:28:38 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ typedef struct s_dimension
  * @param r -> red
  * @param g -> green
  * @param b -> blue
+ * @param a -> alpha
  * @param h -> hexadecimal
  */
 typedef struct s_color
@@ -197,13 +198,13 @@ typedef struct s_fov
  */
 typedef struct s_player
 {
-	t_point			pos_pix;
-	t_point			pos_map;
+	t_point			pos;
 	t_dimension		size;
 	t_direction		dir;
 	t_line			dir_line;
 	t_line			plane;
 	t_fov			fov;
+  t_color          color;
 }					t_player;
 
 /** entity walls

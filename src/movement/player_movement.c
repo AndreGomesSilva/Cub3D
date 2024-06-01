@@ -6,11 +6,16 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:56:46 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/27 17:44:37 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/05/31 20:24:02 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+void  move_player_forward(t_map *map)
+{
+  
+}
 
 void	handle_movement(t_player *player, t_map *map, t_direction direct)
 {

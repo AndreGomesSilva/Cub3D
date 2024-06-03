@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/31 20:16:03 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/03 15:25:31 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_screen *create_minimap(t_window *win, t_map *map)
   minimap->walls.color.hex = get_hex_color(&minimap->walls.color, 255, 255, 255);
   minimap->walls.size.w = MIN_WIDTH / map->size.w;
   minimap->walls.size.h = MIN_HEIGHT / map->size.h;
-  minimap->player.color.hex = get_hex_color(&minimap->player.color, 255, 150, 220);
+  minimap->player.color.hex = get_hex_color(&minimap->player.color, 170, 150, 220);
   minimap->player.size.w = MIN_WIDTH / map->size.w;
   minimap->player.size.h = MIN_HEIGHT / map->size.h;
   return (minimap);

@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/31 20:28:38 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/03 17:58:47 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ typedef enum e_err
  * @param SOUTH -> south
  * @param WEST -> west
  */
-
 typedef enum e_direction
 {
 	NORTH = 0,
@@ -198,13 +197,14 @@ typedef struct s_fov
  */
 typedef struct s_player
 {
-	t_point			pos;
+	t_point			grid_pos;
+	t_point			pix_pos;
 	t_dimension		size;
 	t_direction		dir;
 	t_line			dir_line;
 	t_line			plane;
 	t_fov			fov;
-  t_color          color;
+	t_color			color;
 }					t_player;
 
 /** entity walls
@@ -285,33 +285,35 @@ t_game				*init_data(char *str);
 void				end_game(t_game *game);
 int					game_loop(t_game *game);
 
-// input
+// hook
 void				hook_close_window(void *param);
 void				move_keyhook(mlx_key_data_t keydatam, void *param);
 
 // movement
-void				handle_movement(t_player *player, t_map *map,
+void	handle_movement(t_player *player,
 						t_direction direct);
 t_bool				check_hit_wall(t_map *map, int x, int y,
 						t_direction direct);
 
 // draw
 void				draw_line(mlx_image_t *img, t_line *line);
-void				draw_circle(mlx_image_t *img, t_vec vec, t_color color);
+void				draw_circle(mlx_image_t *img, t_vec vec,
+						unsigned int color);
 unsigned int		rgb_to_hex(int r, int g, int b, int a);
-void				draw_rect(mlx_image_t *img, t_vec vec, t_color color);
+void				draw_rect(mlx_image_t *img, t_vec vec, unsigned int color);
 
 // map
 char				**get_map(char *str);
 int					get_num_col_map(char **map);
 int					get_num_row_map(char **map);
+void				set_transparent(t_color *color, int a);
 unsigned int		get_hex_color(t_color *color, int r, int g, int b);
 
 //render
 int					render_minimap(t_game *game);
-void				draw_screen(t_screen *screen, t_vec vec, t_color color,
+void				draw_screen(t_screen *screen, t_vec vec, unsigned int color,
 						void (*func)(mlx_image_t *img, t_vec vec,
-							t_color color));
+							unsigned int color));
 
 // vectors
 void				set_vector(t_point *point, int x, int y);

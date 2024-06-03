@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/03 15:25:31 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:29:05 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ t_screen *create_minimap(t_window *win, t_map *map)
   minimap->img = mlx_new_image(win->mlx, MIN_WIDTH, MIN_HEIGHT);
   if (!minimap->img)
     return (NULL);
+  minimap->size.w = MIN_WIDTH;
+  minimap->size.h = MIN_HEIGHT;
   minimap->walls.color.hex = get_hex_color(&minimap->walls.color, 255, 255, 255);
   minimap->walls.size.w = MIN_WIDTH / map->size.w;
   minimap->walls.size.h = MIN_HEIGHT / map->size.h;

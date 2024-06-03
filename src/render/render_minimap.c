@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:11:22 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/03 18:16:20 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:29:29 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,17 @@ void	draw_player_minimap(t_screen *minimap, t_dimension size)
   draw_screen(minimap, vec, player->color.hex, draw_circle);
 }
 
+void blank_screen (t_screen *screen, t_dimension size, unsigned int color)
+{
+  t_vec vec;
+
+  vec.start_p.x = 0;
+  vec.start_p.y = 0;
+  vec.end_p.x = size.w;
+  vec.end_p.y = size.h;
+  draw_screen(screen, vec, color, draw_rect);
+}
+
 void	draw_minimap(t_game *game, t_map *map, t_dimension size)
 {
 	t_point	p;
@@ -90,6 +101,7 @@ void	draw_minimap(t_game *game, t_map *map, t_dimension size)
 
 int	render_minimap(t_game *game)
 {
+  blank_screen(game->minimap, game->minimap->size, BLACK);
 	draw_minimap(game, game->map, game->map->size);
 	draw_player_minimap(game->minimap, game->map->size);
 	mlx_image_to_window(game->win->mlx, game->minimap->img, 0, 0);

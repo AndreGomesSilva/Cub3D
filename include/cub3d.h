@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/03 17:58:47 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/03 18:29:47 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@
 # define PI 3.14159265358979323846
 # define TILE_SIZE 30
 # define MOVEMENT_SPEED 1
+
+// Some colors
+# define WHITE 0xFFFFFF
+# define RED 0xFF0000
+# define GREEN 0x00FF00
+# define BLUE 0x0000FF
+# define BLACK 0x000000
 
 // texture paths for the sprites
 # define WALL_PATH "./assets/textures/wall/tile118.png"
@@ -253,6 +260,7 @@ typedef struct s_map
 typedef struct s_screen
 {
 	mlx_image_t		*img;
+  t_dimension size;
 	t_walls			walls;
 	t_player		player;
 }					t_screen;

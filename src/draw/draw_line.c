@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 20:20:36 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/04 18:43:08 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/07 18:12:33 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,40 +19,38 @@ void	put_line_screen(mlx_image_t *img, t_line *line, int sx, int sy)
 	int	err;
 	int	temp_err;
 
-	dx = abs(line->vec.end_p.x - line->vec.start_p.x);
-	dy = abs(line->vec.end_p.y - line->vec.start_p.y);
+	dx = abs((int)(line->end.x - line->start.x));
+	dy = abs((int)(line->end.y - line->start.y));
 	err = dx - dy;
-	while (line->vec.start_p.x != line->vec.end_p.x ||
-			line->vec.start_p.y != line->vec.end_p.y)
+	while (line->start.x != line->end.x ||
+			line->start.y != line->end.y)
 	{
-		mlx_put_pixel(img, line->vec.start_p.x, line->vec.start_p.y,
+		mlx_put_pixel(img, line->start.x, line->start.y,
 				line->color.hex);
 		temp_err = 2 * err;
 		if (temp_err > -dy)
 		{
 			err -= dy;
-			line->vec.start_p.x += sx;
+			line->start.x += sx;
 		}
 		if (temp_err < dx)
 		{
 			err += dx;
-			line->vec.start_p.y += sy;
+			line->start.y += sy;
 		}
 	}
 }
 
-void	draw_line(mlx_image_t *img, t_vec vec, unsigned int color)
+void	draw_line(mlx_image_t *img, t_line line, unsigned int color)
 {
 	t_point	s;
-  t_line line;
 
-  line.vec = vec;
   line.color.hex = color;
-	if (vec.start_p.x < vec.end_p.x)
+	if (line.start.x < line.end.x)
 		s.x = 1;
 	else
 		s.x = -1;
-	if (vec.start_p.y < vec.end_p.y)
+	if (line.start.y < line.end.y)
 		s.y = 1;
 	else
 		s.y = -1;

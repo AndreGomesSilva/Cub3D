@@ -6,24 +6,24 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 23:48:57 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/03 14:27:19 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/07 18:38:36 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	draw_rect(mlx_image_t *img, t_vec vec,
+void	draw_rect(mlx_image_t *img, t_line line,
 		unsigned int color)
 {
 	t_point	p;
 
-	p.y = vec.start_p.y;
-	while (p.y < (vec.end_p.y - 1))
+	p.y = line.start.y;
+	while (p.y < (line.end.y) - 1.0)
 	{
-		p.x = vec.start_p.x;
-		while (p.x < (vec.end_p.x - 1))
+		p.x = line.start.x;
+		while (p.x < (line.end.x) - 1.0)
 		{
-			mlx_put_pixel(img, p.x, p.y, color);
+			mlx_put_pixel(img, (int)p.x, (int)p.y, color);
 			p.x++;
 		}
 		p.y++;

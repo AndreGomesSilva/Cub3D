@@ -6,48 +6,57 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/04 20:41:26 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/07 21:44:32 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
-#define CUB3D_H
+# define CUB3D_H
 
-#include "../lib/MLX42/include/MLX42/MLX42.h"
-#include "../lib/libft/include/libft.h"
-#include <fcntl.h>
-#include <limits.h>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+# include "../lib/MLX42/include/MLX42/MLX42.h"
+# include "../lib/libft/include/libft.h"
+# include <fcntl.h>
+# include <limits.h>
+# include <math.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-#define WIN_WIDTH 1720
-#define WIN_HEIGHT 960
-#define MIN_WIDTH 480
-#define MIN_HEIGHT 270
-#define PI 3.14159265358979323846
-#define TILE_SIZE 30
-#define MOVEMENT_SPEED 1
+# define WIN_WIDTH 1720
+# define WIN_HEIGHT 960
+# define MIN_WIDTH 480
+# define MIN_HEIGHT 270
+# define PI 3.14159265358979323846
+# define FOV_ANGLE 60.00
+# define TILE_SIZE 30
+# define MOVEMENT_SPEED 1
 
 // Some colors
-#define WHITE 0xFFFFFF
-#define RED 0xFF0000
-#define GREEN 0x00FF00
-#define BLUE 0x0000FF
-#define BLACK 0x000000
+# define WHITE 0xFFFFFF
+# define RED 0xFF0000
+# define GREEN 0x00FF00
+# define BLUE 0x0000FF
+# define BLACK 0x000000
 
 // texture paths for the sprites
-#define WALL_PATH "./assets/textures/wall/tile118.png"
-#define FLOOR ""
-#define CEILING ""
-#define PLAYER_PATH "./assets/textures/door/door0.png"
+# define WALL_PATH "./assets/textures/wall/tile118.png"
+# define FLOOR ""
+# define CEILING ""
+# define PLAYER_PATH "./assets/textures/door/door0.png"
 
 /*                            COMPONENTS                          */
 
-typedef enum e_bool { FALSE = 0, TRUE = 1 } t_bool;
+typedef enum e_bool
+{
+	FALSE = 0,
+	TRUE = 1
+}					t_bool;
 
-typedef enum e_err { E_FAIL = -1, E_OK = 0 } t_err;
+typedef enum e_err
+{
+	E_FAIL = -1,
+	E_OK = 0
+}					t_err;
 
 /** component direction
  * enum that represents the direction
@@ -56,12 +65,13 @@ typedef enum e_err { E_FAIL = -1, E_OK = 0 } t_err;
  * @param SOUTH -> south
  * @param WEST -> west
  */
-typedef enum e_direction {
-  NORTH = 0,
-  EAST = 1,
-  SOUTH = 2,
-  WEST = 3
-} t_direction;
+typedef enum e_direction
+{
+	NORTH = 0,
+	EAST = 1,
+	SOUTH = 2,
+	WEST = 3
+}					t_direction;
 
 /** component type
  * enum that represents the type
@@ -70,12 +80,13 @@ typedef enum e_direction {
  * @param T_FLOOR -> floor
  * @param T_CEILING -> ceiling
  */
-typedef enum e_type {
-  T_FLOOR = 0,
-  T_WALL = 1,
-  T_PLAYER = 2,
-  T_CEILING = 3
-} t_type;
+typedef enum e_type
+{
+	T_FLOOR = 0,
+	T_WALL = 1,
+	T_PLAYER = 2,
+	T_CEILING = 3
+}					t_type;
 
 /** component point
  * struct with reference to x and y
@@ -83,21 +94,11 @@ typedef enum e_type {
  * @param x -> x
  * @param y -> y
  */
-typedef struct s_point {
-  int x;
-  int y;
-} t_point;
-
-/** component vector
- * struct with reference to start point and end point
- *
- * @param start_p -> start point
- * @param end_p -> end point
- */
-typedef struct s_vec {
-  t_point start_p;
-  t_point end_p;
-} t_vec;
+typedef struct s_point
+{
+	double				x;
+	double				y;
+}					t_point;
 
 /** component dimension
  * struct with reference to width and height
@@ -105,10 +106,11 @@ typedef struct s_vec {
  * @param w -> width
  * @param h -> height
  */
-typedef struct s_dimension {
-  int w;
-  int h;
-} t_dimension;
+typedef struct s_dimension
+{
+	int				w;
+	int				h;
+}					t_dimension;
 
 /** component color
  * struct with reference to red, green, blue and alpha
@@ -119,13 +121,14 @@ typedef struct s_dimension {
  * @param a -> alpha
  * @param h -> hexadecimal
  */
-typedef struct s_color {
-  unsigned int r;
-  unsigned int g;
-  unsigned int b;
-  unsigned int a;
-  unsigned int hex;
-} t_color;
+typedef struct s_color
+{
+	unsigned int	r;
+	unsigned int	g;
+	unsigned int	b;
+	unsigned int	a;
+	unsigned int	hex;
+}					t_color;
 
 /** component sprite
  * struct that hold the sprite of entity
@@ -160,10 +163,12 @@ typedef struct s_color {
  * @param end -> end of the line
  * @param sprite -> sprite of the line
  */
-typedef struct s_line {
-  t_vec vec;
-  t_color color;
-} t_line;
+typedef struct s_line
+{
+	t_point			start;
+	t_point			end;
+	t_color			color;
+}					t_line;
 
 /** entity fov
  * struct that holds the fov
@@ -172,11 +177,11 @@ typedef struct s_line {
  * @param l_line -> line of the fov
  * @param r_line -> line of the fov
  */
-typedef struct s_fov {
-  float angle;
-  t_line l_line;
-  t_line r_line;
-} t_fov;
+typedef struct s_fov
+{
+	t_line			l_line;
+	t_line			r_line;
+}					t_fov;
 
 /** entity player
  * struct that represents the player
@@ -190,18 +195,19 @@ typedef struct s_fov {
  * @param fov -> field of view of the player
  * @param color -> color of the player
  */
-typedef struct s_player {
-  t_point grid_pos;
-  t_point pix_pos;
-  t_point origin;
-  t_dimension size;
-  t_direction dir;
-  t_line dir_line;
-  t_line plane_pos;
-  t_line plane_neg;
-  t_fov fov;
-  t_color color;
-} t_player;
+typedef struct s_player
+{
+	t_point			grid_pos;
+	t_point			pix_pos;
+	t_point			origin;
+	t_dimension		size;
+	t_direction		dir;
+	t_line			dir_line;
+	t_line			plane_pos;
+	t_line			plane_neg;
+	t_fov			fov;
+	t_color			color;
+}					t_player;
 
 /** entity walls
  * struct that holds the walls
@@ -209,10 +215,11 @@ typedef struct s_player {
  * @param size -> size of the walls
  * @param color -> color of the walls
  */
-typedef struct s_walls {
-  t_dimension size;
-  t_color color;
-} t_walls;
+typedef struct s_walls
+{
+	t_dimension		size;
+	t_color			color;
+}					t_walls;
 
 /** entity window
  * struct that holds the window
@@ -220,10 +227,11 @@ typedef struct s_walls {
  * @param mlx -> pointer to the mlx window
  * @param size -> size of the window
  */
-typedef struct s_window {
-  mlx_t *mlx;
-  t_dimension size;
-} t_window;
+typedef struct s_window
+{
+	mlx_t			*mlx;
+	t_dimension		size;
+}					t_window;
 
 /** entity map
  * struct that holds the map
@@ -232,10 +240,11 @@ typedef struct s_window {
  * @param path -> path of the map
  * @param size -> size of the map
  */
-typedef struct s_map {
-  char **mtx;
-  t_dimension size;
-} t_map;
+typedef struct s_map
+{
+	char			**mtx;
+	t_dimension		size;
+}					t_map;
 
 /** entity minimap
  * struct that holds the minimap
@@ -243,12 +252,13 @@ typedef struct s_map {
  * @param img -> image of the minimap
  * @param walls -> walls of the minimap
  */
-typedef struct s_screen {
-  mlx_image_t *img;
-  t_dimension size;
-  t_walls walls;
-  t_player player;
-} t_screen;
+typedef struct s_screen
+{
+	mlx_image_t		*img;
+	t_dimension		size;
+	t_walls			walls;
+	t_player		player;
+}					t_screen;
 
 /** system game
  * struct that holds the game main data
@@ -259,55 +269,59 @@ typedef struct s_screen {
  * @param walls -> pointer to walls
  * @param error -> hold the error value if 0 then no error
  */
-typedef struct s_game {
-  t_map *map;
-  t_window *win;
-  t_screen *minimap;
-  t_screen *main_screen;
-  t_err error;
-} t_game;
+typedef struct s_game
+{
+	t_map			*map;
+	t_window		*win;
+	t_screen		*minimap;
+	t_screen		*main_screen;
+	t_err			error;
+}					t_game;
 
 /* --------------------------------------------------------------*/
 
 /*                            SYSTEMS                           */
 
 // game
-int start_game(char *str);
-t_game *init_data(char *str);
-void end_game(t_game *game);
-int game_loop(t_game *game);
+int					start_game(char *str);
+t_game				*init_data(char *str);
+void				end_game(t_game *game);
+int					game_loop(t_game *game);
 
 // hook
-void hook_close_window(void *param);
-void move_keyhook(mlx_key_data_t keydatam, void *param);
+void				hook_close_window(void *param);
+void				move_keyhook(mlx_key_data_t keydatam, void *param);
 
 // movement
-void handle_movement(t_player *player, t_direction direct);
-t_bool check_hit_wall(t_map *map, int x, int y, t_direction direct);
+void				handle_movement(t_player *player, t_direction direct);
+t_bool				check_hit_wall(t_map *map, int x, int y,
+						t_direction direct);
 
 // draw
-void draw_line(mlx_image_t *img, t_vec vec, unsigned int color);
-void draw_circle(mlx_image_t *img, t_vec vec, unsigned int color);
-unsigned int rgb_to_hex(int r, int g, int b, int a);
-void draw_rect(mlx_image_t *img, t_vec vec, unsigned int color);
+void				draw_line(mlx_image_t *img, t_line line, unsigned int color);
+void				draw_circle(mlx_image_t *img, t_line line,
+						unsigned int color);
+unsigned int		rgb_to_hex(int r, int g, int b, int a);
+void				draw_rect(mlx_image_t *img, t_line line, unsigned int color);
 
 // map
-char **get_map(char *str);
-int get_num_col_map(char **map);
-int get_num_row_map(char **map);
-void set_transparent(t_color *color, int a);
-unsigned int get_hex_color(t_color *color, int r, int g, int b);
+char				**get_map(char *str);
+int					get_num_col_map(char **map);
+int					get_num_row_map(char **map);
+void				set_transparent(t_color *color, int a);
+unsigned int		get_hex_color(t_color *color, int r, int g, int b);
 
 // render
-int render_minimap(t_game *game);
-void draw_screen(t_screen *screen, t_vec vec, unsigned int color,
-                 void (*func)(mlx_image_t *img, t_vec vec, unsigned int color));
+int					render_minimap(t_game *game);
+void				draw_screen(t_screen *screen, t_line line,
+						unsigned int color, void (*func)(mlx_image_t *img,
+							t_line line, unsigned int color));
 
 // vectors
-t_vec	rotate_vector(t_vec vec, double angle_radians);
-void set_vector(t_point *point, int x, int y);
+t_line				rotate_line(t_line line, double angle_radians);
+void				set_vector(t_point *point, int x, int y);
 
 // free
-void handle_free(t_game *game);
+void				handle_free(t_game *game);
 
 #endif

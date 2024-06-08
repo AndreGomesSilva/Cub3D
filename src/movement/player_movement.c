@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:56:46 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/03 17:58:11 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/07 20:49:35 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // {
 //   
 // }
-
+//
 void	handle_movement(t_player *player, t_direction direct)
 {
 	if (direct == WEST)

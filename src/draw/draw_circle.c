@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:24:08 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/04 19:07:34 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/07 18:26:43 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,17 @@ void	fillCirclePoints(mlx_image_t *img, int xc, int yc, int x, int y,
 	drawHorizontalLine(img, xc - y, xc + y, yc - x, color);
 }
 
-void	draw_circle(mlx_image_t *img, t_vec vec, unsigned int color)
+void	draw_circle(mlx_image_t *img, t_line line, unsigned int color)
 {
 	int	r;
 	int	x;
 	int	y;
 	int	d;
 
-	int radius_x = (vec.end_p.x - vec.start_p.x) / 2; // Radius along x-axis
-	int radius_y = (vec.end_p.y - vec.start_p.y) / 2; // Radius along y-axis
-	int center_x = vec.start_p.x;          // Center x-coordinate
-	int center_y = vec.start_p.y;          // Center y-coordinate
+	int radius_x = (line.end.x - line.start.x) / 2; // Radius along x-axis
+	int radius_y = (line.end.y - line.start.y) / 2; // Radius along y-axis
+	int center_x = line.start.x;          // Center x-coordinate
+	int center_y = line.start.y;          // Center y-coordinate
 	// Use the smaller radius for the circle (to maintain the aspect ratio)
 	r = (radius_x < radius_y) ? radius_x : radius_y;
 	x = 0;

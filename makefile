@@ -36,10 +36,10 @@ FILE = \
 			 main \
 			 $(GAME_DIR)start_game $(GAME_DIR)init_data $(GAME_DIR)game_loop $(GAME_DIR)end_game \
 			 $(INPUT_DIR)handle_keymaps \
-			 $(MOVEMENT_DIR)player_movement $(MOVEMENT_DIR)utils \
+			 $(MOVEMENT_DIR)player_movement $(MOVEMENT_DIR)utils $(MOVEMENT_DIR)rotate_player \
 			 $(DRAW_DIR)draw_rect $(DRAW_DIR)draw_circle $(DRAW_DIR)draw_line $(DRAW_DIR)color \
 			 $(RENDER_DIR)render_minimap \
-			 $(VECTORS_DIR)rotate_vector $(VECTORS_DIR)utils \
+			 $(VECTORS_DIR)rotate_line $(VECTORS_DIR)utils \
 			 $(MAP_DIR)get_map $(MAP_DIR)get_map_info \
 			 $(FREE_DIR)handle_free \
 

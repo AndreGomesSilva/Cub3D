@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/07 21:44:32 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/10 20:48:15 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ typedef enum e_type
  */
 typedef struct s_point
 {
-	double				x;
-	double				y;
+	double			x;
+	double			y;
 }					t_point;
 
 /** component dimension
@@ -202,11 +202,13 @@ typedef struct s_player
 	t_point			origin;
 	t_dimension		size;
 	t_direction		dir;
+	double			angle;
 	t_line			dir_line;
 	t_line			plane_pos;
 	t_line			plane_neg;
 	t_fov			fov;
 	t_color			color;
+	t_bool			is_moving;
 }					t_player;
 
 /** entity walls
@@ -274,6 +276,7 @@ typedef struct s_game
 	t_map			*map;
 	t_window		*win;
 	t_screen		*minimap;
+	mlx_image_t		*minimap_img;
 	t_screen		*main_screen;
 	t_err			error;
 }					t_game;
@@ -296,13 +299,16 @@ void				move_keyhook(mlx_key_data_t keydatam, void *param);
 void				handle_movement(t_player *player, t_direction direct);
 t_bool				check_hit_wall(t_map *map, int x, int y,
 						t_direction direct);
+void				rotate_player(t_player *player, double angle, t_direction dir);
 
 // draw
-void				draw_line(mlx_image_t *img, t_line line, unsigned int color);
+void				draw_line(mlx_image_t *img, t_line line,
+						unsigned int color);
 void				draw_circle(mlx_image_t *img, t_line line,
 						unsigned int color);
 unsigned int		rgb_to_hex(int r, int g, int b, int a);
-void				draw_rect(mlx_image_t *img, t_line line, unsigned int color);
+void				draw_rect(mlx_image_t *img, t_line line,
+						unsigned int color);
 
 // map
 char				**get_map(char *str);
@@ -310,9 +316,12 @@ int					get_num_col_map(char **map);
 int					get_num_row_map(char **map);
 void				set_transparent(t_color *color, int a);
 unsigned int		get_hex_color(t_color *color, int r, int g, int b);
+void				cover_screen(t_screen *screen, t_dimension size,
+						unsigned int color);
 
 // render
-int					render_minimap(t_game *game);
+void				render_minimap(t_game *game);
+void				update_minimap(t_game *game);
 void				draw_screen(t_screen *screen, t_line line,
 						unsigned int color, void (*func)(mlx_image_t *img,
 							t_line line, unsigned int color));
@@ -320,6 +329,8 @@ void				draw_screen(t_screen *screen, t_line line,
 // vectors
 t_line				rotate_line(t_line line, double angle_radians);
 void				set_vector(t_point *point, int x, int y);
+double				degrees_to_radians(double degrees);
+double				radiants_to_degrees(double radians);
 
 // free
 void				handle_free(t_game *game);

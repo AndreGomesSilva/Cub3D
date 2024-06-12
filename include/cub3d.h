@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/10 20:48:15 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/11 21:50:27 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,13 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define WIN_WIDTH 1720
-# define WIN_HEIGHT 960
+# define WIN_WIDTH 860
+# define WIN_HEIGHT 640
 # define MIN_WIDTH 480
 # define MIN_HEIGHT 270
-# define PI 3.14159265358979323846
-# define FOV_ANGLE 60.00
+# define FOV 60.00
 # define TILE_SIZE 30
-# define MOVEMENT_SPEED 1
+# define SPEED 5
 
 // Some colors
 # define WHITE 0xFFFFFF
@@ -58,19 +57,19 @@ typedef enum e_err
 	E_OK = 0
 }					t_err;
 
-/** component direction
- * enum that represents the direction
- * @param NORTH -> north
- * @param EAST -> east
- * @param SOUTH -> south
- * @param WEST -> west
- */
+// /** component direction
+//  * enum that represents the direction
+//  * @param NORTH -> north
+//  * @param EAST -> east
+//  * @param SOUTH -> south
+//  * @param WEST -> west
+//  */
 typedef enum e_direction
 {
-	NORTH = 0,
-	EAST = 1,
-	SOUTH = 2,
-	WEST = 3
+	UP = 0,
+	LEFT = 1,
+	DOWN = 2,
+	RIGHT = 3
 }					t_direction;
 
 /** component type
@@ -201,11 +200,10 @@ typedef struct s_player
 	t_point			pix_pos;
 	t_point			origin;
 	t_dimension		size;
-	t_direction		dir;
-	double			angle;
 	t_line			dir_line;
 	t_line			plane_pos;
 	t_line			plane_neg;
+  double      angle; 
 	t_fov			fov;
 	t_color			color;
 	t_bool			is_moving;
@@ -299,7 +297,8 @@ void				move_keyhook(mlx_key_data_t keydatam, void *param);
 void				handle_movement(t_player *player, t_direction direct);
 t_bool				check_hit_wall(t_map *map, int x, int y,
 						t_direction direct);
-void				rotate_player(t_player *player, double angle, t_direction dir);
+void				rotate_player(t_player *player, double angle,
+						t_direction dir);
 
 // draw
 void				draw_line(mlx_image_t *img, t_line line,
@@ -309,6 +308,7 @@ void				draw_circle(mlx_image_t *img, t_line line,
 unsigned int		rgb_to_hex(int r, int g, int b, int a);
 void				draw_rect(mlx_image_t *img, t_line line,
 						unsigned int color);
+void				draw_minimap(t_game *game, t_map *map, t_dimension size);
 
 // map
 char				**get_map(char *str);
@@ -325,6 +325,13 @@ void				update_minimap(t_game *game);
 void				draw_screen(t_screen *screen, t_line line,
 						unsigned int color, void (*func)(mlx_image_t *img,
 							t_line line, unsigned int color));
+void				update_player_origin(t_player *player);
+t_line				get_line_grid_to_pix(t_point p, t_dimension size);
+void				set_player_positions(t_player *player, t_point p);
+void				update_player_minimap(t_screen *minimap);
+void				draw_player_minimap(t_screen *minimap);
+void				draw_minimap(t_game *game, t_map *map, t_dimension size);
+void				update_minimap(t_game *game);
 
 // vectors
 t_line				rotate_line(t_line line, double angle_radians);

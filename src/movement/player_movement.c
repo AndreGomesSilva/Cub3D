@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:56:46 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/10 21:50:07 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/11 22:02:43 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,60 +21,32 @@
 void	handle_movement(t_player *player, t_direction direct)
 {
 	player->is_moving = TRUE;
-	printf("%f\n", player->angle);
-	if (direct == WEST)
-		rotate_player(player, MOVEMENT_SPEED, WEST);
-	else if (direct == EAST)
-		rotate_player(player, MOVEMENT_SPEED, EAST);
-	else if (direct == NORTH)
+	printf("P.Angle %f\n", player->angle);
+	if (direct == LEFT)
+		rotate_player(player, SPEED, LEFT);
+	else if (direct == RIGHT)
+		rotate_player(player, SPEED, RIGHT);
+	else if (direct == UP)
 	{
-		if (player->angle > 0 && player->angle < 90)
+		if (player->angle == 0)
+			player->pix_pos.y -= SPEED;
+		else if (player->angle > 0 && player->angle < 45)
 		{
-			player->pix_pos.y -= sin(degrees_to_radians(player->angle))
-				* MOVEMENT_SPEED;
-			player->pix_pos.x += cos(degrees_to_radians(player->angle))
-				* MOVEMENT_SPEED;
+      printf("sin %f", SPEED * sin(player->angle));
+			player->pix_pos.y -= SPEED * sin(player->angle);
+			printf("Pos.y %f\n", player->pix_pos.y);
+      printf("sin %f", SPEED * cos(player->angle));
+			player->pix_pos.x += SPEED * cos(player->angle);
+			printf("Pos.x %f\n", player->pix_pos.x);
 		}
-		else if (player->angle > 90 && player->angle < 180)
-		{
-			player->pix_pos.y += sin(degrees_to_radians(player->angle))
-				* MOVEMENT_SPEED;
-			player->pix_pos.x += cos(degrees_to_radians(player->angle))
-				* MOVEMENT_SPEED;
-		}
-		else if (player->angle > 180 && player->angle < 270)
-		{
-			player->pix_pos.y += sin(degrees_to_radians(player->angle))
-				* MOVEMENT_SPEED;
-			player->pix_pos.x -= cos(degrees_to_radians(player->angle))
-				* MOVEMENT_SPEED;
-		}
-		else if (player->angle > 270 && player->angle < 360)
-		{
-			player->pix_pos.y -= sin(degrees_to_radians(player->angle))
-				* MOVEMENT_SPEED;
-			player->pix_pos.x -= cos(degrees_to_radians(player->angle))
-				* MOVEMENT_SPEED;
-		}
-		else if (player->angle == 0)
-		{
-			player->pix_pos.y -= MOVEMENT_SPEED;
-		}
-		else if (player->angle == 90)
-		{
-			player->pix_pos.x += MOVEMENT_SPEED;
-		}
-		else if (player->angle == 180)
-		{
-			player->pix_pos.y -= MOVEMENT_SPEED;
-		}
-		else if (player->angle == 270)
-		{
-			player->pix_pos.x += MOVEMENT_SPEED;
-		}
+		//	else if (direct == DOWN)
+		//  {
+		//    if (player->dir_line.angle == 360)
+		//      player->dir_line.angle = 0;
+		//    else
+		//      player->dir_line.angle += MOVEMENT_SPEED;
+		//  }
+		// set_player_position(player, player->pos_pix.x, player->pos_pix.y);
+		// get_player_position(player);
 	}
-	else if (direct == SOUTH)
-		player->pix_pos.y += MOVEMENT_SPEED;
-	// set_player_position(player, player->pos_pix.x, player->pos_pix.y);
-	// get_player_position(player);
 }

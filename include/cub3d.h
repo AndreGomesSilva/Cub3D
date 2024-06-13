@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/11 21:50:27 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/12 20:35:41 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define MIN_HEIGHT 270
 # define FOV 60.00
 # define TILE_SIZE 30
-# define SPEED 5
+# define SPEED 2
 
 // Some colors
 # define WHITE 0xFFFFFF

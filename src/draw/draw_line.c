@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 20:20:36 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/07 18:12:33 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/12 20:44:02 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,18 @@ void	put_line_screen(mlx_image_t *img, t_line *line, int sx, int sy)
 	int	dy;
 	int	err;
 	int	temp_err;
+  t_line *temp_line;
 
+  temp_line = line;
 	dx = abs((int)(line->end.x - line->start.x));
 	dy = abs((int)(line->end.y - line->start.y));
+	printf("dx: %d, dy: %d\n", dx, dy);
 	err = dx - dy;
-	while (line->start.x != line->end.x ||
-			line->start.y != line->end.y)
+	while (temp_line->start.x != temp_line->end.x ||
+			temp_line->start.y != temp_line->end.y)
 	{
-		mlx_put_pixel(img, line->start.x, line->start.y,
-				line->color.hex);
+    printf("x: %f, y: %f\n", temp_line->start.x, temp_line->start.y);
+		mlx_put_pixel(img, line->start.x, temp_line->start.y, temp_line->color.hex);
 		temp_err = 2 * err;
 		if (temp_err > -dy)
 		{
@@ -45,7 +48,7 @@ void	draw_line(mlx_image_t *img, t_line line, unsigned int color)
 {
 	t_point	s;
 
-  line.color.hex = color;
+	line.color.hex = color;
 	if (line.start.x < line.end.x)
 		s.x = 1;
 	else

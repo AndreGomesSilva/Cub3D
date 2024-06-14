@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 20:20:36 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/12 20:44:02 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/13 17:22:58 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,15 @@ void	put_line_screen(mlx_image_t *img, t_line *line, int sx, int sy)
 	int	dy;
 	int	err;
 	int	temp_err;
-  t_line *temp_line;
 
-  temp_line = line;
-	dx = abs((int)(line->end.x - line->start.x));
-	dy = abs((int)(line->end.y - line->start.y));
-	printf("dx: %d, dy: %d\n", dx, dy);
+	dx = abs((int)round(line->end.x - line->start.x));
+	dy = abs((int)round(line->end.y - line->start.y));
 	err = dx - dy;
-	while (temp_line->start.x != temp_line->end.x ||
-			temp_line->start.y != temp_line->end.y)
+	while ((int)line->start.x < MIN_WIDTH && (int)line->start.y < MIN_HEIGHT &&
+			(line->start.x != line->end.x || line->start.y != line->end.y))
 	{
-    printf("x: %f, y: %f\n", temp_line->start.x, temp_line->start.y);
-		mlx_put_pixel(img, line->start.x, temp_line->start.y, temp_line->color.hex);
+		mlx_put_pixel(img, (int)line->start.x, (int)line->start.y,
+				line->color.hex);
 		temp_err = 2 * err;
 		if (temp_err > -dy)
 		{
@@ -42,6 +39,7 @@ void	put_line_screen(mlx_image_t *img, t_line *line, int sx, int sy)
 			line->start.y += sy;
 		}
 	}
+	mlx_put_pixel(img, line->start.x, line->start.y, line->color.hex);
 }
 
 void	draw_line(mlx_image_t *img, t_line line, unsigned int color)

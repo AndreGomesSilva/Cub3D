@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/12 20:35:41 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/13 21:37:43 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define MIN_HEIGHT 270
 # define FOV 60.00
 # define TILE_SIZE 30
-# define SPEED 2
+# define SPEED 3
 
 // Some colors
 # define WHITE 0xFFFFFF
@@ -57,6 +57,18 @@ typedef enum e_err
 	E_OK = 0
 }					t_err;
 
+typedef enum e_cardinal
+{
+  NORTH = 0,
+  EAST = 1,
+  SOUTH = 2,
+  WEST = 3,
+  NORTHWEST = 4,
+  NORTHEAST = 5,
+  SOUTHEAST = 6,
+  SOUTHWEST = 7
+}					t_cardinal;
+
 // /** component direction
 //  * enum that represents the direction
 //  * @param NORTH -> north
@@ -69,8 +81,9 @@ typedef enum e_direction
 	UP = 0,
 	LEFT = 1,
 	DOWN = 2,
-	RIGHT = 3
+	RIGHT = 3,
 }					t_direction;
+
 
 /** component type
  * enum that represents the type

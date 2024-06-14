@@ -19,7 +19,6 @@ void	update_dir_line(t_screen *minimap, t_player *player)
 	player->dir_line.end.x = player->origin.x;
 	player->dir_line.end.y = player->origin.y - 10;
 	player->dir_line = rotate_line(player->dir_line, player->angle);
-	printf("finish rotate \n");
 	draw_screen(minimap, player->dir_line, player->dir_line.color.hex,
 		draw_line);
 }

@@ -206,7 +206,7 @@ typedef struct s_player
 	t_line			dir_line;
 	t_line			plane_pos;
 	t_line			plane_neg;
-  double      angle; 
+  double      angle;
 	t_fov			fov;
 	t_color			color;
 	t_bool			is_moving;
@@ -297,7 +297,7 @@ void				hook_close_window(void *param);
 void				move_keyhook(mlx_key_data_t keydatam, void *param);
 
 // movement
-void				handle_player_movement(t_player *player, t_move direct);
+void				handle_player_movement(t_player *player, t_move move);
 double				rotate_entity(double prev_angle, double next_angle,
 						t_move move);
 t_point	move_entity(t_point pos, double angle, t_move move, double speed);
@@ -336,10 +336,11 @@ void				draw_player_minimap(t_screen *minimap);
 void				draw_minimap(t_game *game, t_map *map, t_dimension size);
 void				update_minimap(t_game *game);
 
-// vectors
+// math
 t_line				rotate_line(t_line line, double angle_radians);
 double				degrees_to_radians(double degrees);
 double				radiants_to_degrees(double radians);
+double              abs_double(double number);
 
 // free
 void				handle_free(t_game *game);

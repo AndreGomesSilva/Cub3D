@@ -20,7 +20,7 @@ MAP_DIR = map/
 GAME_DIR = game/
 FREE_DIR = free/
 RENDER_DIR = render/
-VECTORS_DIR = vectors/
+MATH_DIR = math/
 MOVEMENT_DIR = movement/
 
 #Libraries
@@ -40,7 +40,7 @@ FILE = \
 			 $(DRAW_DIR)draw_rect $(DRAW_DIR)draw_circle $(DRAW_DIR)draw_line $(DRAW_DIR)color \
 			 $(RENDER_DIR)render_minimap $(RENDER_DIR)render_player_minimap $(RENDER_DIR)render_utils \
 			 $(RENDER_DIR)update_player_minimap \
-			 $(VECTORS_DIR)rotate_line \
+			 $(MATH_DIR)rotate_line $(MATH_DIR)math_utils \
 			 $(MAP_DIR)get_map $(MAP_DIR)get_map_info \
 			 $(FREE_DIR)handle_free \
 
@@ -82,7 +82,7 @@ $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)$(MAP_DIR)
 	mkdir -p $(OBJS_DIR)$(FREE_DIR)
 	mkdir -p $(OBJS_DIR)$(RENDER_DIR)
-	mkdir -p $(OBJS_DIR)$(VECTORS_DIR)
+	mkdir -p $(OBJS_DIR)$(MATH_DIR)
 	mkdir -p $(OBJS_DIR)$(MOVEMENT_DIR)
 
 play: all
@@ -90,12 +90,12 @@ play: all
 
 val: all
 	@$(LEAKS) ./$(NAME) $(MAP)
-	
+
 clean:
 	$(RM) $(OBJS)
 	@make -C $(LIBFT_DIR) clean
 	$(RM) -r $(OBJS_DIR)
-	
+
 fclean: clean
 	$(RM) $(NAME)
 	@make -C $(LIBFT_DIR) fclean

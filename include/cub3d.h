@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/13 21:37:43 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/14 11:17:10 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@
 # define MIN_HEIGHT 270
 # define FOV 60.00
 # define TILE_SIZE 30
-# define SPEED 3
+# define MOVEMENT_SPEED 2
+# define ROTATION_SPEED 3
 
 // Some colors
 # define WHITE 0xFFFFFF
@@ -57,32 +58,43 @@ typedef enum e_err
 	E_OK = 0
 }					t_err;
 
+/** component cardinal
+ * enum that represents the cardinal
+ * @param N -> north
+ * @param E -> east
+ * @param S -> south
+ * @param W -> west
+ * @param NW -> northwest
+ * @param NE -> northeast
+ * @param SE -> southeast
+ * @param SW -> southwest
+ */
 typedef enum e_cardinal
 {
-  NORTH = 0,
-  EAST = 1,
-  SOUTH = 2,
-  WEST = 3,
-  NORTHWEST = 4,
-  NORTHEAST = 5,
-  SOUTHEAST = 6,
-  SOUTHWEST = 7
+  N = 0,
+  E = 1,
+  S = 2,
+  W = 3,
+  NW = 4,
+  NE = 5,
+  SE = 6,
+  SW = 7
 }					t_cardinal;
 
-// /** component direction
-//  * enum that represents the direction
-//  * @param NORTH -> north
-//  * @param EAST -> east
-//  * @param SOUTH -> south
-//  * @param WEST -> west
-//  */
-typedef enum e_direction
+/** component move
+ * enum that represents the move in some cardinal direction
+ * @param UP -> up
+ * @param LEFT -> left
+ * @param DOWN -> down
+ * @param RIGHT -> right
+ */
+typedef enum e_move
 {
 	UP = 0,
 	LEFT = 1,
 	DOWN = 2,
 	RIGHT = 3,
-}					t_direction;
+}					t_move;
 
 
 /** component type
@@ -141,28 +153,6 @@ typedef struct s_color
 	unsigned int	a;
 	unsigned int	hex;
 }					t_color;
-
-/** component sprite
- * struct that hold the sprite of entity
- *
- * @param size -> size with width and height of the sprite
- * @param img -> image of the sprite
- * @param texture -> texture of the sprite
- * @param path -> path of the sprite
- * @param direct -> direction of the sprite
- * @param color -> color of the sprite
- * @param next -> next sprite
- */
-// typedef struct s_sprite
-// {
-// 	t_dimension		size;
-// 	mlx_image_t		*img;
-// 	mlx_texture_t	*texture;
-// 	char			*path;
-// 	t_direction		dir;
-// 	t_color			color;
-// 	struct s_sprite	*next;
-// }					t_sprite;
 
 /* --------------------------------------------------------------*/
 
@@ -307,11 +297,11 @@ void				hook_close_window(void *param);
 void				move_keyhook(mlx_key_data_t keydatam, void *param);
 
 // movement
-void				handle_movement(t_player *player, t_direction direct);
-t_bool				check_hit_wall(t_map *map, int x, int y,
-						t_direction direct);
-void				rotate_player(t_player *player, double angle,
-						t_direction dir);
+void				handle_player_movement(t_player *player, t_move direct);
+double				rotate_entity(double prev_angle, double next_angle,
+						t_move move);
+t_point	move_entity(t_point pos, double angle, t_move move, double speed);
+t_cardinal	get_cardinal(double angle);
 
 // draw
 void				draw_line(mlx_image_t *img, t_line line,
@@ -348,7 +338,6 @@ void				update_minimap(t_game *game);
 
 // vectors
 t_line				rotate_line(t_line line, double angle_radians);
-void				set_vector(t_point *point, int x, int y);
 double				degrees_to_radians(double degrees);
 double				radiants_to_degrees(double radians);
 

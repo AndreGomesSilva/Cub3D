@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:00:55 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/12 17:17:38 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/14 11:27:28 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,6 @@ void	draw_fov_line(t_screen *screen, t_player *player)
 	fov_right = rotate_line(fov_right, FOV / 2);
 	player->fov.l_line = fov_left;
 	player->fov.r_line = fov_right;
-	// int j;
-	// j = FOV;
-	// while (j > 0) {
-	//   fov_left = rotate_line(fov_left, 1);
-	//   fov_right = rotate_line(fov_right, -1);
-	//   draw_screen(screen, fov_left, player->color.hex, draw_line);
-	//   draw_screen(screen, fov_right, player->color.hex, draw_line);
-	//   j--;
-	// }
 	draw_screen(screen, fov_left, player->color.hex, draw_line);
 	draw_screen(screen, fov_right, player->color.hex, draw_line);
 }
@@ -74,13 +65,13 @@ void	draw_dir_line(t_screen *screen, t_player *player)
 	line.start.x = player->origin.x;
 	line.start.y = player->origin.y;
 	line.end.x = player->origin.x;
-	line.end.y = player->origin.y - player->size.h;
+	line.end.y = player->origin.y - 10;
 	player->dir_line = line;
-	player->dir_line.color.hex =
-		get_hex_color(&player->dir_line.color, 20, 160, 180);
+	player->dir_line.color.hex = get_hex_color(&player->dir_line.color, 20, 160,
+			180);
 	player->dir_line = rotate_line(player->dir_line, player->angle);
 	draw_screen(screen, player->dir_line, player->dir_line.color.hex,
-			draw_line);
+		draw_line);
 }
 
 void	draw_player_minimap(t_screen *minimap)
@@ -95,6 +86,6 @@ void	draw_player_minimap(t_screen *minimap)
 	line.end.y = line.start.y + 7;
 	draw_screen(minimap, line, player->color.hex, draw_circle);
 	draw_dir_line(minimap, player);
-	draw_plane_line(minimap, player);
+	// draw_plane_line(minimap, player);
 	draw_fov_line(minimap, player);
 }

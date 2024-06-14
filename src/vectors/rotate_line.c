@@ -28,19 +28,6 @@ double	radiants_to_degrees(double radians)
 	return (result);
 }
 
-// t_point rotate_point_origin(t_point origin, t_point p_rotate,
-//                             double angle_radians) {
-//   t_point result;
-//
-//   result.x = round((p_rotate.x - origin.x) * cos(angle_radians) -
-//                    (p_rotate.y - origin.y) * sin(angle_radians) +
-//                    p_rotate.x);
-//   result.y = round(p_rotate.x - origin.x) * sin(angle_radians) +
-//              (p_rotate.y - origin.y) * cos(angle_radians) + origin.y;
-//
-//   return (result);
-// }
-
 t_point	rotate_point(t_point p, double angle_radians)
 {
 	t_point	result;

@@ -6,30 +6,11 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 11:11:50 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/14 11:53:25 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/14 21:31:29 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-
-t_cardinal	get_cardinal(double angle)
-{
-	if (angle == 270)
-		return (W);
-	else if (angle == 180)
-		return (S);
-	else if (angle == 90)
-		return (E);
-	else if (angle > 0 && angle < 90)
-		return (NE);
-	else if (angle > 90 && angle < 180)
-		return (SE);
-	else if (angle > 180 && angle < 270)
-		return (SW);
-	else if (angle > 270 && angle < 360)
-		return (NW);
-	return (N);
-}
 
 double	rotate_entity(double prev_angle, double next_angle, t_move move)
 {
@@ -52,61 +33,63 @@ double	rotate_entity(double prev_angle, double next_angle, t_move move)
 	return (new_angle);
 }
 
-static t_point	get_new_pos(double angle)
+static t_point	get_distance(double angle)
 {
-	t_point	pos;
+	t_point	dis;
 	double	cosent;
 	double	sinent;
 
 	cosent = cos(degrees_to_radians(angle));
 	sinent = sin(degrees_to_radians(angle));
-	if (cosent < 0)
-		cosent *= -1;
-	if (sinent < 0)
-		sinent *= -1;
-	pos.y = cosent;
-	pos.x = sinent;
-	return (pos);
+	cosent = abs_double(cosent);
+	sinent = abs_double(sinent);
+	dis.y = cosent;
+	dis.x = sinent;
+	return (dis);
+}
+
+t_point get_quadrant_direction(double angle, t_move move)
+{
+  t_point dir;
+  
+  dir.x = 0;
+  dir.y = 0;
+  if ((move == UP && (angle < 90 || angle > 270)) || (move == DOWN && angle > 90 && angle < 270))
+    dir.y = -1;
+  else  if ((move == UP && angle > 90 && angle < 270) || (move == DOWN && (angle < 90 || angle > 270)))
+    dir.y = 1;
+  if ((move == UP && angle < 360 && angle > 180) || (move == DOWN && angle < 180 && angle > 0))
+    dir.x = -1;
+  else  if ((move == UP && angle < 180 && angle > 0) || (move == DOWN && angle < 360 && angle > 180))
+    dir.x = 1;
+  return (dir);
+}
+
+t_point	get_new_pos(t_point pos, t_point dist, t_point dir, double speed)
+{
+  t_point new_pos;
+  
+  new_pos.x = pos.x;
+  new_pos.y = pos.y;
+  if (dir.x == 1)
+    new_pos.x = pos.x + speed * dist.x;
+  else
+    new_pos.x = pos.x - speed * dist.x;
+  if (dir.y == 1)
+    new_pos.y = pos.y + speed * dist.y;
+  else 
+    new_pos.y = pos.y - speed * dist.y;
+	return (new_pos);
 }
 
 t_point	move_entity(t_point pos, double angle, t_move move, double speed)
 {
-	t_point		new_end_point;
-  t_point   new_pos;
-	t_cardinal	card;
+	t_point		dist;
+  t_point   dir;
+	t_point		new_pos;
 
-	new_end_point = get_new_pos(angle);
-	card = get_cardinal(angle);
-	if ((move == UP && card == N) || (move == DOWN && card == S))
-		pos.y -= speed;
-	else if ((move == UP && card == NE) || (move == DOWN && card == SW))
-	{
-		pos.y -= speed * new_end_point.y;
-		pos.x += speed * new_end_point.x;
-	}
-	else if ((move == UP && card == E) || (move == DOWN && card == W))
-		pos.x += speed;
-	else if ((move == UP && card == SE) || (move == DOWN && card == NW))
-	{
-		pos.y += speed * new_end_point.y;
-		pos.x += speed * new_end_point.x;
-	}
-	else if ((move == UP && card == S) || (move == DOWN && card == N))
-		pos.y += speed;
-	else if ((move == UP && card == SW) || (move == DOWN && card == NE))
-	{
-		pos.y += speed * new_end_point.y;
-		pos.x -= speed * new_end_point.x;
-	}
-	else if ((move == UP && card == W) || (move == DOWN && card == E))
-		pos.x -= speed;
-	else if ((move == UP && card == NW) || (move == DOWN && card == SE))
-	{
-		pos.y -= speed * new_end_point.y;
-		pos.x -= speed * new_end_point.x;
-	}
-	else if ((move == UP && card == N) || (move == DOWN && card == S))
-		pos.y -= speed;
-	new_pos = pos;
+	dist = get_distance(angle);
+  dir = get_quadrant_direction(angle, move);
+  new_pos = get_new_pos(pos, dist, dir, speed);
 	return (new_pos);
 }

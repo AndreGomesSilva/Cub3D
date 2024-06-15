@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/14 11:17:10 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/14 19:27:33 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,29 +58,6 @@ typedef enum e_err
 	E_OK = 0
 }					t_err;
 
-/** component cardinal
- * enum that represents the cardinal
- * @param N -> north
- * @param E -> east
- * @param S -> south
- * @param W -> west
- * @param NW -> northwest
- * @param NE -> northeast
- * @param SE -> southeast
- * @param SW -> southwest
- */
-typedef enum e_cardinal
-{
-  N = 0,
-  E = 1,
-  S = 2,
-  W = 3,
-  NW = 4,
-  NE = 5,
-  SE = 6,
-  SW = 7
-}					t_cardinal;
-
 /** component move
  * enum that represents the move in some cardinal direction
  * @param UP -> up
@@ -95,7 +72,6 @@ typedef enum e_move
 	DOWN = 2,
 	RIGHT = 3,
 }					t_move;
-
 
 /** component type
  * enum that represents the type
@@ -206,7 +182,7 @@ typedef struct s_player
 	t_line			dir_line;
 	t_line			plane_pos;
 	t_line			plane_neg;
-  double      angle;
+	double			angle;
 	t_fov			fov;
 	t_color			color;
 	t_bool			is_moving;
@@ -300,8 +276,8 @@ void				move_keyhook(mlx_key_data_t keydatam, void *param);
 void				handle_player_movement(t_player *player, t_move move);
 double				rotate_entity(double prev_angle, double next_angle,
 						t_move move);
-t_point	move_entity(t_point pos, double angle, t_move move, double speed);
-t_cardinal	get_cardinal(double angle);
+t_point				move_entity(t_point pos, double angle, t_move move,
+						double speed);
 
 // draw
 void				draw_line(mlx_image_t *img, t_line line,
@@ -340,7 +316,7 @@ void				update_minimap(t_game *game);
 t_line				rotate_line(t_line line, double angle_radians);
 double				degrees_to_radians(double degrees);
 double				radiants_to_degrees(double radians);
-double              abs_double(double number);
+double				abs_double(double number);
 
 // free
 void				handle_free(t_game *game);

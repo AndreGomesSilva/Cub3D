@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 11:11:50 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/14 21:31:29 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/15 19:13:01 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ double	rotate_entity(double prev_angle, double next_angle, t_move move)
 {
 	double	new_angle;
 
+  new_angle = prev_angle;
 	if (move == LEFT)
 	{
 		if (prev_angle == 0)

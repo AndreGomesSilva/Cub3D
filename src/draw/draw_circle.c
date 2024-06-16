@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:24:08 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/07 18:26:43 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/15 21:14:41 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,94 +15,68 @@
 void	drawHorizontalLine(mlx_image_t *img, int x1, int x2, int y,
 		unsigned int color)
 {
-	for (int x = x1; x <= x2; x++)
-	{
-		mlx_put_pixel(img, x, y, color);
-	}
+  int x;
+
+  x = 0;
+  while (x1 <= x2)
+  {
+    mlx_put_pixel(img, x, y, color);
+    x1++;
+  }
 }
 
-// Function to plot and fill the points in all eight octants
-void	fillCirclePoints(mlx_image_t *img, int xc, int yc, int x, int y,
+void	fillCirclePoints(mlx_image_t *img, t_point center, t_point offset,
 		unsigned int color)
 {
-	drawHorizontalLine(img, xc - x, xc + x, yc + y, color);
-	drawHorizontalLine(img, xc - x, xc + x, yc - y, color);
-	drawHorizontalLine(img, xc - y, xc + y, yc + x, color);
-	drawHorizontalLine(img, xc - y, xc + y, yc - x, color);
+	drawHorizontalLine(img, center.x - offset.x, center.x + offset.x, center.y
+			+ offset.y, color);
+	drawHorizontalLine(img, center.x - offset.x, center.x + offset.x, center.y
+			- offset.y, color);
+	drawHorizontalLine(img, center.x - offset.y, center.x + offset.y, center.y
+			+ offset.x, color);
+	drawHorizontalLine(img, center.x - offset.y, center.x + offset.y, center.y
+			- offset.x, color);
+}
+
+double	get_radius(t_line line)
+{
+	t_point	radius;
+	double	result;
+
+	radius.x = (line.end.x - line.start.x) / 2;
+	radius.y = (line.end.y - line.start.y) / 2;
+	if (radius.x < radius.y)
+		result = radius.x;
+	else
+		result = radius.y;
+	return (result);
 }
 
 void	draw_circle(mlx_image_t *img, t_line line, unsigned int color)
 {
-	int	r;
-	int	x;
-	int	y;
-	int	d;
+	double	radius;
+	t_point	offset;
+	double	decision;
+	t_point	center;
 
-	int radius_x = (line.end.x - line.start.x) / 2; // Radius along x-axis
-	int radius_y = (line.end.y - line.start.y) / 2; // Radius along y-axis
-	int center_x = line.start.x;          // Center x-coordinate
-	int center_y = line.start.y;          // Center y-coordinate
-	// Use the smaller radius for the circle (to maintain the aspect ratio)
-	r = (radius_x < radius_y) ? radius_x : radius_y;
-	x = 0;
-	y = r;
-	d = 3 - 2 * r;
-	while (y >= x)
+	center.x = line.start.x;
+	center.y = line.start.y;
+	radius = get_radius(line);
+	offset.x = 0;
+	offset.y = radius;
+	decision = 3 - 2 * radius;
+	while (offset.y >= offset.x)
 	{
-		// Plot and fill the points in all eight octants
-		fillCirclePoints(img, center_x, center_y, x, y, color);
-		x++;
-		if (d > 0)
+		fillCirclePoints(img, center, offset, color);
+		offset.x++;
+		if (decision > 0)
 		{
-			y--;
-			d = d + 4 * (x - y) + 10;
+			offset.y--;
+			decision = decision + 4 * (offset.x - offset.y) + 10;
 		}
 		else
 		{
-			d = d + 4 * x + 6;
+			decision = decision + 4 * offset.x + 6;
 		}
 	}
 }
-
-// void draw_circle(mlx_image_t *img, t_vec vec, unsigned int color) {
-//     t_point p;
-//     int radius_x = (vec.end_p.x - vec.start_p.x) / 2; // Radius along x-axis
-//     int radius_y = (vec.end_p.y - vec.start_p.y) / 2; // Radius along y-axis
-//     int center_x = vec.start_p.x + radius_x; // Center x-coordinate
-//     int center_y = vec.start_p.y + radius_y; // Center y-coordinate
-//
-//     p.y = vec.start_p.y;
-//     while (p.y < vec.end_p.y) {
-//         p.x = vec.start_p.x;
-//         while (p.x < vec.end_p.x) {
-//             // Calculate the squared distance from the center
-//             int dist_x = p.x - center_x;
-//             int dist_y = p.y - center_y;
-//             if ((dist_x * dist_x + dist_y * dist_y) < (radius_x
-//                 mlx_put_pixel(img, p.x, p.y, color);
-//             }
-//             p.x++;
-//         }
-//         p.y++;
-//     }
-// }
-//
-// void	draw_circle(mlx_image_t *img, t_vec vec, t_color color)
-// {
-// 	t_point	p;
-//
-// 	p.y = vec.start_p.y;
-// 	while (p.y < vec.end_p.y)
-// 	{
-// 		p.x = vec.start_p.x;
-// 		while (p.x < vec.end_p.x)
-// 		{
-// 			if (((p.x - vec.end_p.x / 2) * (p.x - vec.end_p.x / 2)) + ((p.y
-// 						- vec.end_p.y / 2) * (p.y - vec.end_p.y
-// 						/ 2)) < (vec.end_p.x / 2) * (vec.end_p.x / 2))
-// 				mlx_put_pixel(img, p.x, p.y, color.hex);
-// 			p.x++;
-// 		}
-// 		p.y++;
-// 	}
-// }

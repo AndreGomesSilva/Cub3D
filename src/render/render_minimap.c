@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:11:22 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/11 15:31:22 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/17 19:08:55 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ void	draw_minimap(t_game *game, t_map *map, t_dimension size)
 				draw_screen(game->minimap,
 							get_line_grid_to_pix(p, game->minimap->walls.size),
 							0xFFEEBBFF,
-							draw_rect);
-			if (game->minimap->player.grid_pos.x == 0 &&
-				game->minimap->player.grid_pos.y == 0)
-			{
-				if (map->mtx[(int)p.y][(int)p.x] == 'P')
-					set_player_positions(&game->minimap->player, p);
-			}
+							draw_rect); //chao amarelado no minimapa
+			// if (game->minimap->player.grid_pos.x == 0 &&
+			// 	game->minimap->player.grid_pos.y == 0)
+			// {
+			// 	if (map->mtx[(int)p.y][(int)p.x] == 'P')
+			// 		set_player_position(&game->minimap->player, p);
+			// }
 			p.x++;
 		}
 		p.y++;
@@ -53,6 +53,6 @@ void	draw_minimap(t_game *game, t_map *map, t_dimension size)
 void	render_minimap(t_game *game)
 {
 	draw_minimap(game, game->map, game->map->size);
-	draw_player_minimap(game->minimap);
+	draw_player_minimap(game->minimap, game->player);
 	mlx_image_to_window(game->win->mlx, game->minimap->img, 0, 0);
 }

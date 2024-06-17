@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:00:55 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/14 11:27:28 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/17 19:07:32 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,10 @@ void	draw_dir_line(t_screen *screen, t_player *player)
 		draw_line);
 }
 
-void	draw_player_minimap(t_screen *minimap)
+void	draw_player_minimap(t_screen *minimap, t_player *player)
 {
-	t_player	*player;
 	t_line		line;
 
-	player = &minimap->player;
 	line.start.x = player->origin.x;
 	line.start.y = player->origin.y;
 	line.end.x = line.start.x + 7;

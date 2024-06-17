@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:25:39 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/28 17:37:58 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/17 19:12:35 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ void	handle_free(t_game *game)
 	}
   if (game->minimap)
     free(game->minimap);
-	// if (game->player)
- //  {
-	// 	free(game->player);
- //  }
+	if (game->player)
+  {
+		free(game->player);
+  }
 	// if (game->walls)
 	// {
 	// 	free_sprites(game->walls->sprite);

@@ -22,6 +22,7 @@ FREE_DIR = free/
 RENDER_DIR = render/
 MATH_DIR = math/
 MOVEMENT_DIR = movement/
+PLAYER_DIR = player/
 
 #Libraries
 INC = -I ./include
@@ -36,6 +37,7 @@ FILE = \
 			 main \
 			 $(GAME_DIR)start_game $(GAME_DIR)init_data $(GAME_DIR)game_loop $(GAME_DIR)end_game \
 			 $(INPUT_DIR)handle_keymaps \
+			 $(PLAYER_DIR)init_player \
 			 $(MOVEMENT_DIR)player_movement $(MOVEMENT_DIR)entity_movement \
 			 $(DRAW_DIR)draw_rect $(DRAW_DIR)draw_circle $(DRAW_DIR)draw_line $(DRAW_DIR)color $(DRAW_DIR)draw_background \
 			 $(RENDER_DIR)render_minimap $(RENDER_DIR)render_player_minimap $(RENDER_DIR)render_utils $(RENDER_DIR)render_background \
@@ -78,6 +80,7 @@ $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)
 	mkdir -p $(OBJS_DIR)$(GAME_DIR)
 	mkdir -p $(OBJS_DIR)$(INPUT_DIR)
+	mkdir -p $(OBJS_DIR)$(PLAYER_DIR)
 	mkdir -p $(OBJS_DIR)$(DRAW_DIR)
 	mkdir -p $(OBJS_DIR)$(MAP_DIR)
 	mkdir -p $(OBJS_DIR)$(FREE_DIR)

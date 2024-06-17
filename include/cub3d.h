@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/17 17:09:56 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/17 19:07:58 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,8 +166,8 @@ typedef struct s_fov
 /** entity player
  * struct that represents the player
  * @param grid_pos -> grid position of the player
- * @param pix_pos -> pixel position of the player
- * @param origin -> origin of the player
+ * @param pix_pos -> pixel position of the player (oh the map file)
+ * @param origin -> origin of the player (inside the grid block)
  * @param size -> size of the player
  * @param dir -> direction of the player
  * @param dir_line -> line of the player
@@ -180,6 +180,7 @@ typedef struct s_player
 	t_point			grid_pos;
 	t_point			pix_pos;
 	t_point			origin;
+	t_point			dir;
 	t_dimension		size;
 	t_line			dir_line;
 	t_line			plane_pos;
@@ -254,6 +255,7 @@ typedef struct s_game
 {
 	t_map			*map;
 	t_window		*win;
+	t_player		*player;
 	t_screen		*minimap;
 	mlx_image_t		*minimap_img;
 	mlx_image_t		*background_img;
@@ -297,6 +299,9 @@ void				draw_rect(mlx_image_t *img, t_line line,
 						unsigned int color);
 void				draw_minimap(t_game *game, t_map *map, t_dimension size);
 
+//player
+t_player	*create_player(t_map *map);
+
 // map
 char				**get_map(char *str);
 int					get_num_col_map(char **map);
@@ -321,7 +326,7 @@ void				update_player_origin(t_player *player);
 t_line				get_line_grid_to_pix(t_point p, t_dimension size);
 void				set_player_positions(t_player *player, t_point p);
 void				update_player_minimap(t_screen *minimap);
-void				draw_player_minimap(t_screen *minimap);
+void				draw_player_minimap(t_screen *minimap, t_player *player);
 void				draw_minimap(t_game *game, t_map *map, t_dimension size);
 void				update_minimap(t_game *game);
 

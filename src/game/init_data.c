@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/13 17:23:45 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/17 19:01:35 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,6 @@ t_screen *create_minimap(t_window *win, t_map *map)
   minimap->walls.color.hex = get_hex_color(&minimap->walls.color, 255, 255, 255);
   minimap->walls.size.w = MIN_WIDTH / map->size.w;
   minimap->walls.size.h = MIN_HEIGHT / map->size.h;
-  minimap->player.color.hex = get_hex_color(&minimap->player.color, 170, 150, 220);
-  minimap->player.size.w = MIN_WIDTH / map->size.w;
-  minimap->player.size.h = MIN_HEIGHT / map->size.h;
-  minimap->player.angle = 0;
   return (minimap);
 }
 
@@ -69,6 +65,7 @@ t_game	*init_data(char *str)
 	game = ft_calloc(1, sizeof(t_game));
   game->map = create_map(str);
   game->win = create_window();
+	game->player = create_player(game->map);
 	game->background_img = mlx_new_image(game->win->mlx, WIN_WIDTH, WIN_HEIGHT);
   game->minimap = create_minimap(game->win, game->map);
 	if (!game || !game->map || !game->win || !game->minimap)

@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 21:04:11 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/11 17:41:05 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/13 17:27:23 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	init_loop(void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
+	mlx_image_to_window(game->win->mlx, game->background_img, 0, 0);
 	if (game->minimap->player.is_moving)
 	{
     update_minimap(game);
@@ -25,8 +26,9 @@ void	init_loop(void *param)
 
 int	game_loop(t_game *game)
 {
+	render_background(game);
 	render_minimap(game);
-	mlx_loop_hook(game->win->mlx, &init_loop, game);
+	// mlx_loop_hook(game->win->mlx, &init_loop, game);
 	mlx_key_hook(game->win->mlx, &move_keyhook, game);
 	mlx_close_hook(game->win->mlx, &hook_close_window,
 					game->win); // when close with the cross on title window

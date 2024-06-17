@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/14 19:27:33 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/17 17:09:56 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@
 # define ROTATION_SPEED 3
 
 // Some colors
+# define CEILING_COLOR 0x2986ccFF
+# define FLOOR_COLOR 0x999999FF
 # define WHITE 0xFFFFFF
-# define RED 0xFF0000
+# define RED 0xFF0000FF
 # define GREEN 0x00FF00
 # define BLUE 0x0000FF
 # define BLACK 0x000000
@@ -254,6 +256,7 @@ typedef struct s_game
 	t_window		*win;
 	t_screen		*minimap;
 	mlx_image_t		*minimap_img;
+	mlx_image_t		*background_img;
 	t_screen		*main_screen;
 	t_err			error;
 }					t_game;
@@ -280,6 +283,11 @@ t_point				move_entity(t_point pos, double angle, t_move move,
 						double speed);
 
 // draw
+
+/**
+ * Draws background (floor and ceiling) on img
+ */
+void				draw_background(mlx_image_t *img);
 void				draw_line(mlx_image_t *img, t_line line,
 						unsigned int color);
 void				draw_circle(mlx_image_t *img, t_line line,
@@ -299,6 +307,11 @@ void				cover_screen(t_screen *screen, t_dimension size,
 						unsigned int color);
 
 // render
+
+/**
+ * Render background to game window (aka draws & put to window)
+ */
+void				render_background(t_game *game);
 void				render_minimap(t_game *game);
 void				update_minimap(t_game *game);
 void				draw_screen(t_screen *screen, t_line line,

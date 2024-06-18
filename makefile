@@ -88,8 +88,8 @@ $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)$(MATH_DIR)
 	mkdir -p $(OBJS_DIR)$(MOVEMENT_DIR)
 
-play: all
-	./$(NAME) $(MAP)
+play: 
+	 @make &&./$(NAME) $(MAP)
 
 val: all
 	@$(LEAKS) ./$(NAME) $(MAP)

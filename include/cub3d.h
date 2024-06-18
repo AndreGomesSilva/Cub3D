@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/17 19:07:58 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/18 16:43:26 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define WIN_HEIGHT 640
 # define MIN_WIDTH 480
 # define MIN_HEIGHT 270
-# define FOV 60.00
+# define FOV M_PI / 3
 # define TILE_SIZE 30
 # define MOVEMENT_SPEED 2
 # define ROTATION_SPEED 3
@@ -180,6 +180,7 @@ typedef struct s_player
 	t_point			grid_pos;
 	t_point			pix_pos;
 	t_point			origin;
+  t_point     plane;
 	t_point			dir;
 	t_dimension		size;
 	t_line			dir_line;

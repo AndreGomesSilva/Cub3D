@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 21:04:11 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/18 18:04:42 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/18 18:30:18 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	init_loop(void *param)
 int	game_loop(t_game *game)
 {
 	render_background(game);
-	//render_scene(game);
+	render_scene(game);
 	render_minimap(game);
 	// mlx_loop_hook(game->win->mlx, &init_loop, game);
 	mlx_key_hook(game->win->mlx, &move_keyhook, game);

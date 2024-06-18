@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/18 16:43:26 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/18 17:51:36 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,28 @@ typedef struct s_color
 	unsigned int	hex;
 }					t_color;
 
+/** component ray
+ *
+ *
+ * @param dir-> point with direction of ray
+ * @param side_dist -> point with distance that ray must travel between grid lines (vertical and horizontal)
+ * @param delta_dist -> point with distance that ray must travel until first grid line (vertical and horziontal)
+ * @param perp_wall_dist -> perpendicular distance between where ray hit and projection plane
+ * @param step_x -> right or left?
+ * @param step_y -> up or down?
+ * @param camera_x -> lame name
+ */
+typedef struct s_ray
+{
+	t_point	dir;
+	t_point	side_dist;
+	t_point delta_dist;
+	double	perp_wall_dist;
+	int		step_x;
+	int		step_y;
+	double	camera_x;
+}					t_ray;
+
 /* --------------------------------------------------------------*/
 
 /*                            ENTITYS                           */
@@ -180,8 +202,9 @@ typedef struct s_player
 	t_point			grid_pos;
 	t_point			pix_pos;
 	t_point			origin;
-  t_point     plane;
+	t_point			plane;
 	t_point			dir;
+	t_ray			ray;
 	t_dimension		size;
 	t_line			dir_line;
 	t_line			plane_pos;
@@ -318,6 +341,7 @@ void				cover_screen(t_screen *screen, t_dimension size,
  * Render background to game window (aka draws & put to window)
  */
 void				render_background(t_game *game);
+void				render_scene(t_game *game);
 void				render_minimap(t_game *game);
 void				update_minimap(t_game *game);
 void				draw_screen(t_screen *screen, t_line line,

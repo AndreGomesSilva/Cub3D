@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/19 18:13:50 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/19 19:12:45 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ t_game	*init_data(char *str)
   game->win = create_window();
 	game->player = create_player(game->map);
 	game->background_img = mlx_new_image(game->win->mlx, WIN_WIDTH, WIN_HEIGHT);
+	game->main_img = mlx_new_image(game->win->mlx, WIN_WIDTH, WIN_HEIGHT);
   game->minimap = create_minimap(game->win, game->map);
 	if (!game || !game->map || !game->win || !game->minimap)
 		return (NULL);

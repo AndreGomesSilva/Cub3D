@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:36:35 by iusantos          #+#    #+#             */
-/*   Updated: 2024/06/19 17:41:42 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/19 19:14:03 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,35 @@ static void	dda_loop(t_ray *ray, t_map *map)
 	}
 }
 
+static void calculate_perp_wall_dist(t_ray *ray)
+{
+	if (ray->side == 0)
+	{
+		ray->perp_wall_dist = ray->side_dist.x - ray->delta_dist.x;
+	}
+	else
+	{
+		ray->perp_wall_dist = ray->side_dist.y - ray->delta_dist.y;
+	}
+
+}
+
+static void create_vertical_line(t_ray *ray, int col, mlx_image_t *img)
+{
+	int line_height;
+	int draw_start;
+	int draw_end;
+
+	line_height = (int) (WIN_HEIGHT / ray->perp_wall_dist);
+	draw_start = WIN_HEIGHT / 2 - line_height / 2;
+	if (draw_start < 0)
+		draw_start = 0;
+	draw_end = WIN_HEIGHT / 2 + line_height / 2;
+	if (draw_end >= WIN_HEIGHT)
+		draw_end = WIN_HEIGHT - 1;
+	draw_v_line(col, draw_start, draw_end, RED, img);
+}
+
 void	render_scene(t_game *game)
 {
 	int	x;
@@ -90,10 +119,13 @@ void	render_scene(t_game *game)
 	{
 		set_raydir_camera_deltadist(game->player, x);
 		set_raydir_step_sidedist_map(game->player);
-    dda_loop(&game->player->ray, game->map);
+		dda_loop(&game->player->ray, game->map);
+		calculate_perp_wall_dist(&game->player->ray);
+		create_vertical_line(&game->player->ray, x, game->main_img);
 		// printf("x: %d | camera: %f | ray_dir x: %f | ray_dir y : %f \n | ray map x: %d | ray map y: %d \n", x,
 				// game->player->ray.camera_x, game->player->ray.dir.x,
 				// game->player->ray.dir.y, game->player->ray.map_x, game->player->ray.map_y);
+	mlx_image_to_window(game->win->mlx, game->main_img, 0, 0);
 
 		x++;
 	}

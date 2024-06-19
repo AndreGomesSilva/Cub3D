@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/19 18:10:20 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/19 19:12:15 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,6 +290,7 @@ typedef struct s_game
 	t_player		*player;
 	t_screen		*minimap;
 	mlx_image_t		*minimap_img;
+	mlx_image_t		*main_img;
 	mlx_image_t		*background_img;
 	t_screen		*main_screen;
 	t_err			error;
@@ -330,6 +331,7 @@ unsigned int		rgb_to_hex(int r, int g, int b, int a);
 void				draw_rect(mlx_image_t *img, t_line line,
 						unsigned int color);
 void				draw_minimap(t_game *game, t_map *map, t_dimension size);
+void				draw_v_line(int col, int start, int end, unsigned int color, mlx_image_t *img);
 
 //player
 t_player			*create_player(t_map *map);

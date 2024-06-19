@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/19 16:37:19 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/19 18:10:20 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define WIN_HEIGHT 640
 # define MIN_WIDTH 480
 # define MIN_HEIGHT 270
-# define FOV M_PI / 3
+# define FOV M_PI / 2
 # define TILE_SIZE 30
 # define MOVEMENT_SPEED 2
 # define ROTATION_SPEED 3
@@ -136,9 +136,12 @@ typedef struct s_color
  *
  *
  * @param dir-> point with direction of ray
- * @param side_dist -> point with distance that ray must travel between grid lines (vertical and horizontal)
- * @param delta_dist -> point with distance that ray must travel until first grid line (vertical and horziontal)
- * @param perp_wall_dist -> perpendicular distance between where ray hit and projection plane
+ * @param side_dist
+	-> point with distance that ray must travel between grid lines (vertical and horizontal)
+ * @param delta_dist
+	-> point with distance that ray must travel until first grid line (vertical and horziontal)
+ * @param perp_wall_dist
+	-> perpendicular distance between where ray hit and projection plane
  * @param map_x -> which map column the ray is in
  * @param map_y -> which map row the ray is in
  * @param step_x -> right or left?
@@ -147,15 +150,16 @@ typedef struct s_color
  */
 typedef struct s_ray
 {
-	t_point	dir;
-	t_point	side_dist;
-	t_point delta_dist;
-	double	perp_wall_dist;
-	int		map_x;
-	int		map_y;
-	int		step_x;
-	int		step_y;
-	double	camera_x;
+	t_point			dir;
+	t_point			side_dist;
+	t_point			delta_dist;
+	double			perp_wall_dist;
+	int				map_x;
+	int				map_y;
+	int				step_x;
+	int				step_y;
+	int				side;
+	double			camera_x;
 }					t_ray;
 
 /* --------------------------------------------------------------*/
@@ -328,7 +332,7 @@ void				draw_rect(mlx_image_t *img, t_line line,
 void				draw_minimap(t_game *game, t_map *map, t_dimension size);
 
 //player
-t_player	*create_player(t_map *map);
+t_player			*create_player(t_map *map);
 
 // map
 char				**get_map(char *str);

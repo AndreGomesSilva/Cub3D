@@ -6,13 +6,13 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 18:26:27 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/29 18:29:47 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/19 17:32:16 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-int get_num_col_map(char **map)
+int get_num_row_map(char **map)
 {
   int i;
 
@@ -22,7 +22,7 @@ int get_num_col_map(char **map)
   return (i);
 }
 
-int get_num_row_map(char **map)
+int get_num_col_map(char **map)
 {
   int i;
   int j;

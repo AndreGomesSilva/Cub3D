@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/18 17:51:36 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/19 16:37:19 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,8 @@ typedef struct s_color
  * @param side_dist -> point with distance that ray must travel between grid lines (vertical and horizontal)
  * @param delta_dist -> point with distance that ray must travel until first grid line (vertical and horziontal)
  * @param perp_wall_dist -> perpendicular distance between where ray hit and projection plane
+ * @param map_x -> which map column the ray is in
+ * @param map_y -> which map row the ray is in
  * @param step_x -> right or left?
  * @param step_y -> up or down?
  * @param camera_x -> lame name
@@ -149,6 +151,8 @@ typedef struct s_ray
 	t_point	side_dist;
 	t_point delta_dist;
 	double	perp_wall_dist;
+	int		map_x;
+	int		map_y;
 	int		step_x;
 	int		step_y;
 	double	camera_x;

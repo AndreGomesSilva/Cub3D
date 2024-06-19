@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 17:59:27 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/18 16:37:43 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/19 16:37:19 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,8 @@ t_player	*create_player(t_map *map)
 	init_player_size_and_color(player, map);
 	init_player(player, map);
   init_player_plane(player);
-  printf("player dir x: %f, y: %f\n", player->dir.x, player->dir.y);
-  printf("player plane x: %f, y: %f\n", player->plane.x, player->plane.y);
+  // printf("player dir x: %f, y: %f\n", player->dir.x, player->dir.y);
+  // printf("player plane x: %f, y: %f\n", player->plane.x, player->plane.y);
 	return (player);
 }
 

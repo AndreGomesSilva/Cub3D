@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 17:59:27 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/19 16:37:19 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/20 18:05:58 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	set_player_position(t_player *player, t_point p)
 {
-	player->grid_pos.x = p.x;
-	player->grid_pos.y = p.y;
+	player->grid_pos.x = p.x + 0.5;
+	player->grid_pos.y = p.y + 0.5;
 	player->pix_pos.x = p.x * player->size.w;
 	player->pix_pos.y = p.y * player->size.h;
 	update_player_origin(player);
@@ -56,31 +56,31 @@ static void	init_player_size_and_color(t_player *player, t_map *map)
 	player->color.hex = get_hex_color(&player->color, 170, 150, 220);
 }
 
-static void init_player_plane(t_player *player)
+static void	init_player_plane(t_player *player)
 {
-  double tan_half_fov;
+	double	tan_half_fov;
 
-  tan_half_fov = tan(FOV / 2);
-  if (player->dir.x == 0 && player->dir.y == -1)
-  {
-    player->plane.x = tan_half_fov;
-    player->plane.y = 0;
-  }
-  else if (player->dir.x == 0 && player->dir.y == 1)
-  {
-    player->plane.x = -tan_half_fov;
-    player->plane.y = 0;
-  }
-  else if (player->dir.x == 1 && player->dir.y == 0)
-  {
-    player->plane.x = 0;
-    player->plane.y = tan_half_fov;
-  }
-  else if (player->dir.x == -1 && player->dir.y == 0)
-  {
-    player->plane.x = 0;
-    player->plane.y = -tan_half_fov;
-  }
+	tan_half_fov = tan(FOV / 2);
+	if (player->dir.x == 0 && player->dir.y == -1)
+	{
+		player->plane.x = tan_half_fov;
+		player->plane.y = 0;
+	}
+	else if (player->dir.x == 0 && player->dir.y == 1)
+	{
+		player->plane.x = -tan_half_fov;
+		player->plane.y = 0;
+	}
+	else if (player->dir.x == 1 && player->dir.y == 0)
+	{
+		player->plane.x = 0;
+		player->plane.y = tan_half_fov;
+	}
+	else if (player->dir.x == -1 && player->dir.y == 0)
+	{
+		player->plane.x = 0;
+		player->plane.y = -tan_half_fov;
+	}
 }
 
 static int	init_player(t_player *player, t_map *map)
@@ -117,9 +117,9 @@ t_player	*create_player(t_map *map)
 	player = ft_calloc(1, sizeof(t_player));
 	init_player_size_and_color(player, map);
 	init_player(player, map);
-  init_player_plane(player);
-  // printf("player dir x: %f, y: %f\n", player->dir.x, player->dir.y);
-  // printf("player plane x: %f, y: %f\n", player->plane.x, player->plane.y);
+	init_player_plane(player);
+	// printf("player dir x: %f, y: %f\n", player->dir.x, player->dir.y);
+	// printf("player plane x: %f, y: %f\n", player->plane.x, player->plane.y);
 	return (player);
 }
 

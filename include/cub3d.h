@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/20 15:30:53 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/20 17:52:57 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define WIN_HEIGHT 640
 # define MIN_WIDTH 480
 # define MIN_HEIGHT 270
-# define FOV M_PI / 2
+# define FOV M_PI / 3
 # define TILE_SIZE 30
 # define MOVEMENT_SPEED 2
 # define ROTATION_SPEED 3

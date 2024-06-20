@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 21:04:11 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/13 17:27:23 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/20 15:16:44 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ void	init_loop(void *param)
 int	game_loop(t_game *game)
 {
 	render_background(game);
+	printf("player_x: %f | player_y: %f\n", game->player->grid_pos.x, game->player->grid_pos.y);
+	printf("player_dir_x: %f | player_dir_y: %f\n", game->player->dir.x, game->player->dir.y);
+
+	render_scene(game);
 	render_minimap(game);
 	// mlx_loop_hook(game->win->mlx, &init_loop, game);
 	mlx_key_hook(game->win->mlx, &move_keyhook, game);

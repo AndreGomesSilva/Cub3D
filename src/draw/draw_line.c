@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 20:20:36 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/14 19:01:02 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/19 19:07:01 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,16 @@ void	draw_line(mlx_image_t *img, t_line line, unsigned int color)
 	else
 		dir_step.y = -1;
 	put_line_screen(img, &line, dir_step.x, dir_step.y);
+}
+
+void	draw_v_line(int col, int start, int end, unsigned int color, mlx_image_t *img)
+{
+	int i;
+
+	i = start;
+	while (i < end)
+	{
+		mlx_put_pixel(img, col, i, color);
+		i++;
+	}
 }

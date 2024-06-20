@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/17 19:07:58 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/20 17:52:57 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define WIN_HEIGHT 640
 # define MIN_WIDTH 480
 # define MIN_HEIGHT 270
-# define FOV 60.00
+# define FOV M_PI / 3
 # define TILE_SIZE 30
 # define MOVEMENT_SPEED 2
 # define ROTATION_SPEED 3
@@ -36,9 +36,11 @@
 # define FLOOR_COLOR 0x999999FF
 # define WHITE 0xFFFFFF
 # define RED 0xFF0000FF
-# define GREEN 0x00FF00
-# define BLUE 0x0000FF
-# define BLACK 0x000000
+# define GREEN 0x00FF00FF
+# define BLUE 0x0000FFFF
+# define BLACK 0x000000FF
+# define YELLOW 0xFEE020FF
+# define PURPLE 0x674EA7FF
 
 // texture paths for the sprites
 # define WALL_PATH "./assets/textures/wall/tile118.png"
@@ -132,6 +134,37 @@ typedef struct s_color
 	unsigned int	hex;
 }					t_color;
 
+/** component ray
+ *
+ *
+ * @param dir-> point with direction of ray
+ * @param side_dist
+	-> point with distance that ray must travel between grid lines (vertical and horizontal)
+ * @param delta_dist
+	-> point with distance that ray must travel until first grid line (vertical and horziontal)
+ * @param perp_wall_dist
+	-> perpendicular distance between where ray hit and projection plane
+ * @param map_x -> which map column the ray is in
+ * @param map_y -> which map row the ray is in
+ * @param step_x -> right or left?
+ * @param step_y -> up or down?
+ * @param camera_x -> lame name
+ */
+typedef struct s_ray
+{
+	t_point			dir;
+	t_point			side_dist;
+	t_point			delta_dist;
+	double			perp_wall_dist;
+	int				map_x;
+	int				map_y;
+	int				step_x;
+	int				step_y;
+	int				side;
+	unsigned int	color;
+	double			camera_x;
+}					t_ray;
+
 /* --------------------------------------------------------------*/
 
 /*                            ENTITYS                           */
@@ -180,7 +213,9 @@ typedef struct s_player
 	t_point			grid_pos;
 	t_point			pix_pos;
 	t_point			origin;
+	t_point			plane;
 	t_point			dir;
+	t_ray			ray;
 	t_dimension		size;
 	t_line			dir_line;
 	t_line			plane_pos;
@@ -258,6 +293,7 @@ typedef struct s_game
 	t_player		*player;
 	t_screen		*minimap;
 	mlx_image_t		*minimap_img;
+	mlx_image_t		*main_img;
 	mlx_image_t		*background_img;
 	t_screen		*main_screen;
 	t_err			error;
@@ -298,9 +334,10 @@ unsigned int		rgb_to_hex(int r, int g, int b, int a);
 void				draw_rect(mlx_image_t *img, t_line line,
 						unsigned int color);
 void				draw_minimap(t_game *game, t_map *map, t_dimension size);
+void				draw_v_line(int col, int start, int end, unsigned int color, mlx_image_t *img);
 
 //player
-t_player	*create_player(t_map *map);
+t_player			*create_player(t_map *map);
 
 // map
 char				**get_map(char *str);
@@ -317,6 +354,7 @@ void				cover_screen(t_screen *screen, t_dimension size,
  * Render background to game window (aka draws & put to window)
  */
 void				render_background(t_game *game);
+void				render_scene(t_game *game);
 void				render_minimap(t_game *game);
 void				update_minimap(t_game *game);
 void				draw_screen(t_screen *screen, t_line line,

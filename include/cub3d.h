@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/19 19:12:15 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/20 15:30:53 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@
 # define FLOOR_COLOR 0x999999FF
 # define WHITE 0xFFFFFF
 # define RED 0xFF0000FF
-# define GREEN 0x00FF00
-# define BLUE 0x0000FF
-# define BLACK 0x000000
+# define GREEN 0x00FF00FF
+# define BLUE 0x0000FFFF
+# define BLACK 0x000000FF
+# define YELLOW 0xFEE020FF
+# define PURPLE 0x674EA7FF
 
 // texture paths for the sprites
 # define WALL_PATH "./assets/textures/wall/tile118.png"
@@ -159,6 +161,7 @@ typedef struct s_ray
 	int				step_x;
 	int				step_y;
 	int				side;
+	unsigned int	color;
 	double			camera_x;
 }					t_ray;
 

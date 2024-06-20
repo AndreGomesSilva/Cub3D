@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:36:35 by iusantos          #+#    #+#             */
-/*   Updated: 2024/06/19 19:14:03 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/20 17:04:33 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,38 @@ static void	dda_loop(t_ray *ray, t_map *map)
 		}
 		else
 		{
-      ray->side_dist.y += ray->delta_dist.y;
-      ray->map_y += ray->step_y;
-      ray->side = 1;
+			ray->side_dist.y += ray->delta_dist.y;
+      		ray->map_y += ray->step_y;
+      		ray->side = 1;
 		}
-    if (map->mtx[ray->map_x][ray->map_y] == '1')
-      hit = 1;
+    if (map->mtx[ray->map_y][ray->map_x] == '1')
+		{
+			hit = 1;
+			ray->color = RED;
+		}
+    if (map->mtx[ray->map_y][ray->map_x] == '2')
+		{
+			hit = 1;
+			ray->color = GREEN;
+		}
+    if (map->mtx[ray->map_y][ray->map_x] == '3')
+		{
+			hit = 1;
+			ray->color = BLUE;
+		}
+    if (map->mtx[ray->map_y][ray->map_x] == '4')
+		{
+			hit = 1;
+			ray->color = YELLOW;
+		}
+    if (map->mtx[ray->map_y][ray->map_x] == '5')
+		{
+			hit = 1;
+			ray->color = PURPLE;
+		}
 	}
+
+	// printf("map hit: %c\n", map->mtx[ray->map_x][ray->map_y]);
 }
 
 static void calculate_perp_wall_dist(t_ray *ray)
@@ -107,7 +132,7 @@ static void create_vertical_line(t_ray *ray, int col, mlx_image_t *img)
 	draw_end = WIN_HEIGHT / 2 + line_height / 2;
 	if (draw_end >= WIN_HEIGHT)
 		draw_end = WIN_HEIGHT - 1;
-	draw_v_line(col, draw_start, draw_end, RED, img);
+	draw_v_line(col, draw_start, draw_end, ray->color, img);
 }
 
 void	render_scene(t_game *game)

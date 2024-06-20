@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:04:01 by angomes-          #+#    #+#             */
-/*   Updated: 2024/05/06 18:10:34 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/20 16:50:03 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,25 @@ static char	*ft_join(char *s1, char *s2)
 	return (str);
 }
 
+static void print_map(char **map)
+{
+	int i;
+	int j;
+
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while(map[i][j])
+		{
+			printf("%c ", map[i][j]);
+			j++;
+		}
+		printf("\n");
+		i++;
+	}
+}
+
 char	**get_map(char *str)
 {
 	char	*line;
@@ -58,6 +77,7 @@ char	**get_map(char *str)
 	}
 	close(fd);
 	map = ft_split(all_lines, '\n');
+	print_map(map);
 	free(all_lines);
 	return (map);
 }

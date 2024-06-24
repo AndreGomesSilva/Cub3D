@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:36:35 by iusantos          #+#    #+#             */
-/*   Updated: 2024/06/24 16:26:33 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/24 17:55:14 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,8 @@ void	render_scene(t_game *game)
 		// printf("x: %d | camera: %f | ray_dir x: %f | ray_dir y : %f \n | ray map x: %d | ray map y: %d \n", x,
 				// game->player->ray.camera_x, game->player->ray.dir.x,
 				// game->player->ray.dir.y, game->player->ray.map_x, game->player->ray.map_y);
-	mlx_image_to_window(game->win->mlx, game->main_img, 0, 0);
 
 		x++;
 	}
+	mlx_image_to_window(game->win->mlx, game->main_img, 0, 0);
 }

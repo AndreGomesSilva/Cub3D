@@ -1,6 +1,6 @@
 # Basic variables
 NAME = Cub3D
-CC = cc -g -o3 -ffast-math
+CC = cc -Ofast 
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -rf
 

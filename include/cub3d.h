@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/24 16:32:33 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/24 17:30:45 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 #define FOV M_PI / 3
 #define TILE_SIZE 30
 #define MOVEMENT_SPEED 0.4
-#define ROTATION_SPEED 3
+#define ROTATION_SPEED 0.05
 
 // Some colors
 #define CEILING_COLOR 0x2986ccFF
@@ -66,8 +66,8 @@ typedef enum e_move {
   LEFT,
   BACKWARD,
   RIGHT,
-  ARROW_LEFT,
-  ARROW_RIGHT,
+  R_LEFT,
+  R_RIGHT
 } t_move;
 
 /** component type

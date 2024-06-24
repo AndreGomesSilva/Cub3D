@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:56:46 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/24 16:39:07 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/24 17:47:23 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,11 +64,35 @@ void	move_player_left_right(t_player *player, t_map *map, t_move move)
 	}
 }
 
+void	rotate_player(t_player *player, t_move move)
+{
+	double old_dir_x;
+	double old_plane_x;
+
+	old_dir_x = player->dir.x;
+	old_plane_x = player->plane.x;
+	if (move == R_LEFT)
+	{
+		player->dir.x = player->dir.x * cos(-ROTATION_SPEED) - player->dir.y * sin(-ROTATION_SPEED);
+		player->dir.y = old_dir_x * sin(-ROTATION_SPEED) + player->dir.y * cos(-ROTATION_SPEED);
+		player->plane.x = player->plane.x * cos(-ROTATION_SPEED) - player->plane.y * sin(-ROTATION_SPEED);
+		player->plane.y = old_plane_x * sin(-ROTATION_SPEED) + player->plane.y * cos(-ROTATION_SPEED);
+	}
+	else 
+	{
+		player->dir.x = player->dir.x * cos(ROTATION_SPEED) - player->dir.y * sin(ROTATION_SPEED);
+		player->dir.y = old_dir_x * sin(ROTATION_SPEED) + player->dir.y * cos(ROTATION_SPEED);
+		player->plane.x = player->plane.x * cos(ROTATION_SPEED) - player->plane.y * sin(ROTATION_SPEED);
+		player->plane.y = old_plane_x * sin(ROTATION_SPEED) + player->plane.y * cos(ROTATION_SPEED);
+	}
+	player->has_moved = TRUE;
+}
+
 void	handle_player_movement(t_player *player, t_map *map, t_move move)
 {
 	if (move == LEFT || move == RIGHT)
 	{
-    move_player_left_right(player, map, move);
+		move_player_left_right(player, map, move);
 		// player->angle = rotate_entity(player->angle, ROTATION_SPEED, LEFT);
 	}
 	else if (move == FORWARD || move == BACKWARD)
@@ -80,5 +104,9 @@ void	handle_player_movement(t_player *player, t_map *map, t_move move)
 				printf("Angle: %lf\n", player->angle);
 				printf("Player grid_pos: x: %f y: %f\n", player->grid_pos.x,
 						player->grid_pos.y);
+	}
+	else if (move == R_RIGHT || move == R_LEFT)
+	{
+		rotate_player(player, move);
 	}
 }

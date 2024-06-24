@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 11:11:50 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/24 15:02:32 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/24 16:40:22 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,17 @@ t_point get_quadrant_direction(double angle, t_move move) {
 
   dir.x = 0;
   dir.y = 0;
-  if ((move == UP && (angle < 90 || angle > 270)) ||
-      (move == DOWN && angle > 90 && angle < 270))
+  if ((move == FORWARD && (angle < 90 || angle > 270)) ||
+      (move == BACKWARD && angle > 90 && angle < 270))
     dir.y = -1;
-  else if ((move == UP && angle > 90 && angle < 270) ||
-           (move == DOWN && (angle < 90 || angle > 270)))
+  else if ((move == FORWARD && angle > 90 && angle < 270) ||
+           (move == BACKWARD && (angle < 90 || angle > 270)))
     dir.y = 1;
-  if ((move == UP && angle < 360 && angle > 180) ||
-      (move == DOWN && angle < 180 && angle > 0))
+  if ((move == FORWARD && angle < 360 && angle > 180) ||
+      (move == BACKWARD && angle < 180 && angle > 0))
     dir.x = -1;
-  else if ((move == UP && angle < 180 && angle > 0) ||
-           (move == DOWN && angle < 360 && angle > 180))
+  else if ((move == FORWARD && angle < 180 && angle > 0) ||
+           (move == BACKWARD && angle < 360 && angle > 180))
     dir.x = 1;
   return (dir);
 }

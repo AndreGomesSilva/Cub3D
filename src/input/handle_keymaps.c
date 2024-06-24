@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 18:51:43 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/24 15:52:24 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/24 16:39:52 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void move_keyhook(mlx_key_data_t keydatam, void *param)
   if (keydatam.key == MLX_KEY_ESCAPE)
     mlx_close_window(game->win->mlx);
   if (keydatam.key == MLX_KEY_W)
-    handle_player_movement(game->player, game->map, UP);
+    handle_player_movement(game->player, game->map, FORWARD);
   if (keydatam.key == MLX_KEY_A)
     handle_player_movement(game->player, game->map, LEFT);
   if (keydatam.key == MLX_KEY_D)
     handle_player_movement(game->player, game->map, RIGHT);
   if (keydatam.key == MLX_KEY_S)
-    handle_player_movement(game->player, game->map, DOWN);
+    handle_player_movement(game->player, game->map, BACKWARD);
 }

@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/24 15:51:50 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/24 16:32:33 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #define MIN_HEIGHT 270
 #define FOV M_PI / 3
 #define TILE_SIZE 30
-#define MOVEMENT_SPEED 0.2
+#define MOVEMENT_SPEED 0.4
 #define ROTATION_SPEED 3
 
 // Some colors
@@ -62,10 +62,12 @@ typedef enum e_err { E_FAIL = -1, E_OK = 0 } t_err;
  * @param RIGHT -> right
  */
 typedef enum e_move {
-  UP = 0,
-  LEFT = 1,
-  DOWN = 2,
-  RIGHT = 3,
+  FORWARD,
+  LEFT,
+  BACKWARD,
+  RIGHT,
+  ARROW_LEFT,
+  ARROW_RIGHT,
 } t_move;
 
 /** component type

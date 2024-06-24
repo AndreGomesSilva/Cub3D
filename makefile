@@ -1,7 +1,8 @@
 # Basic variables
 NAME = Cub3D
-CC = cc -Ofast 
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
+DEV_FLAGS = -g3
 RM = rm -rf
 
 # Valgrind with suppressions for MLX42_lib and send the output to leaks.sup file.
@@ -13,6 +14,7 @@ LIBFT_DIR = ./lib/libft/
 HEADER = ./include
 SRCS_DIR = src/
 OBJS_DIR = obj/
+DEV_OBJS_DIR = obj/
 SRC_DIR_LIB = ./src/lib
 INPUT_DIR = input/
 DRAW_DIR = draw/
@@ -88,7 +90,7 @@ $(OBJS_DIR):
 	mkdir -p $(OBJS_DIR)$(MATH_DIR)
 	mkdir -p $(OBJS_DIR)$(MOVEMENT_DIR)
 
-play: 
+play: libft libmlx
 	 @make &&./$(NAME) $(MAP)
 
 val: all

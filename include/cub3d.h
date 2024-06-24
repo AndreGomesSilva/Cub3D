@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/24 15:17:50 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/24 15:51:50 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #define MIN_HEIGHT 270
 #define FOV M_PI / 3
 #define TILE_SIZE 30
-#define MOVEMENT_SPEED 0.5
+#define MOVEMENT_SPEED 0.2
 #define ROTATION_SPEED 3
 
 // Some colors
@@ -295,7 +295,7 @@ void hook_close_window(void *param);
 void move_keyhook(mlx_key_data_t keydatam, void *param);
 
 // movement
-void handle_player_movement(t_player *player, t_move move);
+void handle_player_movement(t_player *player, t_map *map, t_move move);
 double rotate_entity(double prev_angle, double next_angle, t_move move);
 t_point move_entity(t_point pos, double angle, t_move move, double speed);
 

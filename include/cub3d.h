@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/25 17:02:52 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/25 17:37:20 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ typedef enum e_type
 /** component point
  * struct with reference to x and y
  *
- * @param x -> x
- * @param y -> y
+ * @param x -> (double) x
+ * @param y -> (double) y
  */
 typedef struct s_point
 {
@@ -167,11 +167,9 @@ typedef struct s_ray
 	t_point			dir;
 	t_point			side_dist;
 	t_point			delta_dist;
+	t_point			map;
+	t_point			step;
 	double			perp_wall_dist;
-	int				map_x;
-	int				map_y;
-	int				step_x;
-	int				step_y;
 	t_wall				side_wall;
 	unsigned int	color;
 	double			camera_x;

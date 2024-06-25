@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:36:35 by iusantos          #+#    #+#             */
-/*   Updated: 2024/06/25 16:46:58 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/25 18:05:07 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,30 +29,30 @@ static void	set_raydir_camera_deltadist(t_player *player, int x)
 
 static void	set_raydir_step_sidedist_map(t_player *player)
 {
-	player->ray.map_x = (int)player->grid_pos.x;
-	player->ray.map_y = (int)player->grid_pos.y;
+	player->ray.map.x = (int)player->grid_pos.x;
+	player->ray.map.y = (int)player->grid_pos.y;
 	if (player->ray.dir.x < 0)
 	{
-		player->ray.step_x = -1;
-		player->ray.side_dist.x = (player->grid_pos.x - player->ray.map_x)
+		player->ray.step.x = -1;
+		player->ray.side_dist.x = (player->grid_pos.x - player->ray.map.x)
 			* player->ray.delta_dist.x;
 	}
 	else
 	{
-		player->ray.step_x = 1;
-		player->ray.side_dist.x = (player->ray.map_x + 1.0 - player->grid_pos.x)
+		player->ray.step.x = 1;
+		player->ray.side_dist.x = (player->ray.map.x + 1.0 - player->grid_pos.x)
 			* player->ray.delta_dist.x;
 	}
 	if (player->ray.dir.y < 0)
 	{
-		player->ray.step_y = -1;
-		player->ray.side_dist.y = (player->grid_pos.y - player->ray.map_y)
+		player->ray.step.y = -1;
+		player->ray.side_dist.y = (player->grid_pos.y - player->ray.map.y)
 			* player->ray.delta_dist.y;
 	}
 	else
 	{
-		player->ray.step_y = 1;
-		player->ray.side_dist.y = (player->ray.map_y + 1.0 - player->grid_pos.y)
+		player->ray.step.y = 1;
+		player->ray.side_dist.y = (player->ray.map.y + 1.0 - player->grid_pos.y)
 			* player->ray.delta_dist.y;
 	}
 }
@@ -67,7 +67,7 @@ static void	dda_loop(t_ray *ray, t_map *map)
 		if (ray->side_dist.x < ray->side_dist.y)
 		{
 			ray->side_dist.x += ray->delta_dist.x;
-			ray->map_x += ray->step_x;
+			ray->map.x += ray->step.x;
 			if (ray->dir.x < 0)
 				ray->side_wall = WEST;
 			else
@@ -76,13 +76,13 @@ static void	dda_loop(t_ray *ray, t_map *map)
 		else
 		{
 			ray->side_dist.y += ray->delta_dist.y;
-			ray->map_y += ray->step_y;
+			ray->map.y += ray->step.y;
 			if (ray->dir.y < 0)
 				ray->side_wall = NORTH;
 			else
 				ray->side_wall = SOUTH;
 		}
-		if (map->mtx[ray->map_y][ray->map_x] == '1')
+		if (map->mtx[(int)ray->map.y][(int)ray->map.x] == '1')
 		{
 			hit = 1;
 			if (ray->side_wall == NORTH)
@@ -134,11 +134,10 @@ void	render_scene(t_game *game)
 		dda_loop(&game->player->ray, game->map);
 		calculate_perp_wall_dist(&game->player->ray);
 		create_vertical_line(&game->player->ray, x, game->main_img);
-		// printf("x: %d | camera: %f | ray_dir x: %f | ray_dir y :
-					// %f \n | ray map x: %d | ray map y: %d \n", x,
-			// game->player->ray.camera_x, game->player->ray.dir.x,
-			// game->player->ray.dir.y, game->player->ray.map_x,
-				// game->player->ray.map_y);
+		// printf("x: %d | camera: %f | ray_dir x: %f | ray_dir y :					%f \n | ray map x: %f | ray map y: %f \n", x,
+		// 	game->player->ray.camera_x, game->player->ray.dir.x,
+		// 	game->player->ray.dir.y, game->player->ray.map.x,
+		// 		game->player->ray.map.y);
 					x++;
 	}
 	mlx_image_to_window(game->win->mlx, game->main_img, 0, 0);

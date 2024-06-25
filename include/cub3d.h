@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/25 18:43:03 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/25 18:46:03 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,16 @@ typedef struct s_color
 	unsigned int	hex;
 }					t_color;
 
+typedef struct s_texture
+{
+	int				buffer[WIN_HEIGHT];
+	double			step;
+	double			pos;
+	t_point			p;
+	double			wall_x;
+	t_color			color;
+}					t_texture;
+
 /** component ray
  *
  *
@@ -171,6 +181,7 @@ typedef struct s_ray
 	t_point			step;
 	double			perp_wall_dist;
 	t_wall				side_wall;
+  t_texture     tex;
 	unsigned int	color;
 	double			camera_x;
 }					t_ray;
@@ -190,15 +201,6 @@ typedef struct s_line
 	t_color			color;
 }					t_line;
 
-typedef struct s_texture
-{
-	int				buffer[WIN_HEIGHT];
-	double			step;
-	double			pos;
-	t_point			tex;
-	double			wall_x;
-	t_color			color;
-}					t_texture;
 /* --------------------------------------------------------------*/
 
 /*                            ENTITYS                           */

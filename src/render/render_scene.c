@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:36:35 by iusantos          #+#    #+#             */
-/*   Updated: 2024/06/25 18:05:07 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/25 18:42:12 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ static void	create_vertical_line(t_ray *ray, int col, mlx_image_t *img)
 	draw_end = WIN_HEIGHT / 2 + line_height / 2;
 	if (draw_end >= WIN_HEIGHT)
 		draw_end = WIN_HEIGHT - 1;
+  // texture_pre_render(ray, draw_start, draw_end) 
 	draw_v_line(col, draw_start, draw_end, ray->color, img);
 }
 

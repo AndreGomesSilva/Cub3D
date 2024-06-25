@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/25 17:37:20 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/25 18:43:03 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,15 @@ typedef struct s_line
 	t_color			color;
 }					t_line;
 
+typedef struct s_texture
+{
+	int				buffer[WIN_HEIGHT];
+	double			step;
+	double			pos;
+	t_point			tex;
+	double			wall_x;
+	t_color			color;
+}					t_texture;
 /* --------------------------------------------------------------*/
 
 /*                            ENTITYS                           */

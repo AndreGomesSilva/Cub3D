@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/19 19:12:45 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/25 17:06:57 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,17 @@ t_screen *create_minimap(t_window *win, t_map *map)
   return (minimap);
 }
 
+int load_textures(mlx_texture_t **wall_texture)
+{
+  wall_texture[NORTH] = mlx_load_png("../../assets/textures/wall_textures/tile066.png");
+  wall_texture[SOUTH] = mlx_load_png("../../assets/textures/wall_textures/tile106.png");
+  wall_texture[EAST] = mlx_load_png("../../assets/textures/wall_textures/tile118.png");
+  wall_texture[WEST] = mlx_load_png("../../assets/textures/wall_textures/tile120.png");
+  if (!wall_texture[NORTH] || !wall_texture[SOUTH] || !wall_texture[EAST] || !wall_texture[WEST])
+    return (E_FAIL);
+  return (E_OK);
+}
+
 t_game	*init_data(char *str)
 {
 	t_game	*game;
@@ -66,6 +77,7 @@ t_game	*init_data(char *str)
   game->map = create_map(str);
   game->win = create_window();
 	game->player = create_player(game->map);
+  load_textures(game->wall_texture);
 	game->background_img = mlx_new_image(game->win->mlx, WIN_WIDTH, WIN_HEIGHT);
 	game->main_img = mlx_new_image(game->win->mlx, WIN_WIDTH, WIN_HEIGHT);
   game->minimap = create_minimap(game->win, game->map);

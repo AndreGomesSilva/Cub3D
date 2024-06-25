@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/25 16:41:06 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/25 17:02:52 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -309,7 +309,7 @@ typedef struct s_game
 	mlx_image_t		*minimap_img;
 	mlx_image_t		*main_img;
 	mlx_image_t		*background_img;
-	mlx_texture_t	wall_texture[4];
+	mlx_texture_t	*wall_texture[4];
 	t_err			error;
 }					t_game;
 

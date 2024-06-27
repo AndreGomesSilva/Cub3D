@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/25 18:46:03 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/26 17:08:23 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,9 +149,11 @@ typedef struct s_texture
 	int				buffer[WIN_HEIGHT];
 	double			step;
 	double			pos;
-	t_point			p;
+	int				tex_col;
+	int				tex_row;
 	double			wall_x;
 	t_color			color;
+	mlx_texture_t	**texture;
 }					t_texture;
 
 /** component ray
@@ -180,8 +182,9 @@ typedef struct s_ray
 	t_point			map;
 	t_point			step;
 	double			perp_wall_dist;
-	t_wall				side_wall;
-  t_texture     tex;
+  int        line_height;
+	t_wall			side_wall;
+	t_texture		tex;
 	unsigned int	color;
 	double			camera_x;
 }					t_ray;
@@ -358,7 +361,7 @@ unsigned int		rgb_to_hex(int r, int g, int b, int a);
 void				draw_rect(mlx_image_t *img, t_line line,
 						unsigned int color);
 void				draw_minimap(t_game *game, t_map *map, t_dimension size);
-void				draw_v_line(int col, int start, int end, unsigned int color,
+void				draw_v_line(int col, int start, int end, int *buffer,
 						mlx_image_t *img);
 
 // player
@@ -392,6 +395,8 @@ void				update_player_minimap(t_screen *minimap);
 void				draw_player_minimap(t_screen *minimap, t_player *player);
 void				draw_minimap(t_game *game, t_map *map, t_dimension size);
 void				update_minimap(t_game *game);
+void				texture_pre_render(t_ray *ray, t_point player_pos,
+						int draw_start, int draw_end);
 
 // math
 t_line				rotate_line(t_line line, double angle_radians);

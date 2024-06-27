@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:36:35 by iusantos          #+#    #+#             */
-/*   Updated: 2024/06/25 18:42:12 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/26 17:08:19 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,21 +106,21 @@ static void	calculate_perp_wall_dist(t_ray *ray)
 		ray->perp_wall_dist = ray->side_dist.y - ray->delta_dist.y;
 }
 
-static void	create_vertical_line(t_ray *ray, int col, mlx_image_t *img)
+static void	create_vertical_line(t_ray *ray, int col, t_point player_pos,
+		mlx_image_t *img)
 {
-	int	line_height;
 	int	draw_start;
 	int	draw_end;
 
-	line_height = (int)(WIN_HEIGHT / ray->perp_wall_dist);
-	draw_start = WIN_HEIGHT / 2 - line_height / 2;
+	ray->line_height = (int)(WIN_HEIGHT / ray->perp_wall_dist);
+	draw_start = WIN_HEIGHT / 2 - ray->line_height / 2;
 	if (draw_start < 0)
 		draw_start = 0;
-	draw_end = WIN_HEIGHT / 2 + line_height / 2;
+	draw_end = WIN_HEIGHT / 2 + ray->line_height / 2;
 	if (draw_end >= WIN_HEIGHT)
 		draw_end = WIN_HEIGHT - 1;
-  // texture_pre_render(ray, draw_start, draw_end) 
-	draw_v_line(col, draw_start, draw_end, ray->color, img);
+	texture_pre_render(ray, player_pos, draw_start, draw_end);
+	draw_v_line(col, draw_start, draw_end, ray->tex.buffer, img);
 }
 
 void	render_scene(t_game *game)
@@ -134,12 +134,15 @@ void	render_scene(t_game *game)
 		set_raydir_step_sidedist_map(game->player);
 		dda_loop(&game->player->ray, game->map);
 		calculate_perp_wall_dist(&game->player->ray);
-		create_vertical_line(&game->player->ray, x, game->main_img);
-		// printf("x: %d | camera: %f | ray_dir x: %f | ray_dir y :					%f \n | ray map x: %f | ray map y: %f \n", x,
+		create_vertical_line(&game->player->ray, x, game->player->grid_pos,
+				game->main_img);
+		// printf("x: %d | camera: %f | ray_dir x:
+									// %f | ray_dir y :					%f \n | ray map x:
+									// %f | ray map y: %f \n", x,
 		// 	game->player->ray.camera_x, game->player->ray.dir.x,
 		// 	game->player->ray.dir.y, game->player->ray.map.x,
 		// 		game->player->ray.map.y);
-					x++;
+		x++;
 	}
 	mlx_image_to_window(game->win->mlx, game->main_img, 0, 0);
 }

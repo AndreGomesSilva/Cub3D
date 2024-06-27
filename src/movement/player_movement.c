@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:56:46 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/24 17:47:23 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/26 16:12:27 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ void	handle_player_movement(t_player *player, t_map *map, t_move move)
 		//     move_entity(player->pix_pos, player->angle, move,
 				// MOVEMENT_SPEED);
 				move_player_forward_backward(player, map, move);
-				printf("Angle: %lf\n", player->angle);
-				printf("Player grid_pos: x: %f y: %f\n", player->grid_pos.x,
-						player->grid_pos.y);
+				// printf("Angle: %lf\n", player->angle);
+				// printf("Player grid_pos: x: %f y: %f\n", player->grid_pos.x,
+						// player->grid_pos.y);
 	}
 	else if (move == R_RIGHT || move == R_LEFT)
 	{

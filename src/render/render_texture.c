@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 18:46:51 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/27 15:45:16 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/27 15:49:10 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	fill_buffer(t_ray *ray, int draw_start, int draw_end)
 	{
 		ray->tex.tex_row = (int)ray->tex.pos & (tex_surface->height - 1);
 		ray->tex.pos += ray->tex.step;
-		ray->tex.rgb = *(unsigned int *)tex_surface->pixels + (unsigned int)(ray->tex.tex_row * tex_surface->width + ray->tex.tex_col);
+		ray->tex.rgb = *((unsigned int *)tex_surface->pixels + (unsigned int)(ray->tex.tex_row * tex_surface->width + ray->tex.tex_col));
 		ray->tex.color.hex = ((ray->tex.rgb & 0xFF) << 24 |
 			(ray->tex.rgb & 0xFF00) << 8 |
 			(ray->tex.rgb & 0xFF0000) >> 8 |

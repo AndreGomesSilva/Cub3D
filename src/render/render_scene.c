@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:36:35 by iusantos          #+#    #+#             */
-/*   Updated: 2024/06/26 17:08:19 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/27 15:13:02 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ static void	create_vertical_line(t_ray *ray, int col, t_point player_pos,
 		draw_end = WIN_HEIGHT - 1;
 	texture_pre_render(ray, player_pos, draw_start, draw_end);
 	draw_v_line(col, draw_start, draw_end, ray->tex.buffer, img);
+	// ft_bzero(ray->tex.buffer, WIN_HEIGHT);
 }
 
 void	render_scene(t_game *game)

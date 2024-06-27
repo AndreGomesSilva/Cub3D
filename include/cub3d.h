@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/26 17:08:23 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/27 15:09:33 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,7 @@ typedef struct s_texture
 	int				tex_col;
 	int				tex_row;
 	double			wall_x;
+	unsigned int	rgb;
 	t_color			color;
 	mlx_texture_t	**texture;
 }					t_texture;
@@ -182,7 +183,7 @@ typedef struct s_ray
 	t_point			map;
 	t_point			step;
 	double			perp_wall_dist;
-  int        line_height;
+	int				line_height;
 	t_wall			side_wall;
 	t_texture		tex;
 	unsigned int	color;

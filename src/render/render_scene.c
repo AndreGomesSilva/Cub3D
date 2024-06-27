@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:36:35 by iusantos          #+#    #+#             */
-/*   Updated: 2024/06/24 17:55:14 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:25:59 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,30 +29,30 @@ static void	set_raydir_camera_deltadist(t_player *player, int x)
 
 static void	set_raydir_step_sidedist_map(t_player *player)
 {
-	player->ray.map_x = (int)player->grid_pos.x;
-	player->ray.map_y = (int)player->grid_pos.y;
+	player->ray.map.x = (int)player->grid_pos.x;
+	player->ray.map.y = (int)player->grid_pos.y;
 	if (player->ray.dir.x < 0)
 	{
-		player->ray.step_x = -1;
-		player->ray.side_dist.x = (player->grid_pos.x - player->ray.map_x)
+		player->ray.step.x = -1;
+		player->ray.side_dist.x = (player->grid_pos.x - player->ray.map.x)
 			* player->ray.delta_dist.x;
 	}
 	else
 	{
-		player->ray.step_x = 1;
-		player->ray.side_dist.x = (player->ray.map_x + 1.0 - player->grid_pos.x)
+		player->ray.step.x = 1;
+		player->ray.side_dist.x = (player->ray.map.x + 1.0 - player->grid_pos.x)
 			* player->ray.delta_dist.x;
 	}
 	if (player->ray.dir.y < 0)
 	{
-		player->ray.step_y = -1;
-		player->ray.side_dist.y = (player->grid_pos.y - player->ray.map_y)
+		player->ray.step.y = -1;
+		player->ray.side_dist.y = (player->grid_pos.y - player->ray.map.y)
 			* player->ray.delta_dist.y;
 	}
 	else
 	{
-		player->ray.step_y = 1;
-		player->ray.side_dist.y = (player->ray.map_y + 1.0 - player->grid_pos.y)
+		player->ray.step.y = 1;
+		player->ray.side_dist.y = (player->ray.map.y + 1.0 - player->grid_pos.y)
 			* player->ray.delta_dist.y;
 	}
 }
@@ -67,72 +67,50 @@ static void	dda_loop(t_ray *ray, t_map *map)
 		if (ray->side_dist.x < ray->side_dist.y)
 		{
 			ray->side_dist.x += ray->delta_dist.x;
-			ray->map_x += ray->step_x;
-			ray->side = 0;
+			ray->map.x += ray->step.x;
+			if (ray->dir.x < 0)
+				ray->side_wall = WEST;
+			else
+				ray->side_wall = EAST;
 		}
 		else
 		{
 			ray->side_dist.y += ray->delta_dist.y;
-      		ray->map_y += ray->step_y;
-      		ray->side = 1;
+			ray->map.y += ray->step.y;
+			if (ray->dir.y < 0)
+				ray->side_wall = NORTH;
+			else
+				ray->side_wall = SOUTH;
 		}
-    if (map->mtx[ray->map_y][ray->map_x] == '1')
-		{
+		if (map->mtx[(int)ray->map.y][(int)ray->map.x] == '1')
 			hit = 1;
-			ray->color = RED;
-		}
-    if (map->mtx[ray->map_y][ray->map_x] == '2')
-		{
-			hit = 1;
-			ray->color = GREEN;
-		}
-    if (map->mtx[ray->map_y][ray->map_x] == '3')
-		{
-			hit = 1;
-			ray->color = BLUE;
-		}
-    if (map->mtx[ray->map_y][ray->map_x] == '4')
-		{
-			hit = 1;
-			ray->color = YELLOW;
-		}
-    if (map->mtx[ray->map_y][ray->map_x] == '5')
-		{
-			hit = 1;
-			ray->color = PURPLE;
-		}
 	}
-
-	// printf("map hit: %c\n", map->mtx[ray->map_x][ray->map_y]);
 }
 
-static void calculate_perp_wall_dist(t_ray *ray)
+static void	calculate_perp_wall_dist(t_ray *ray)
 {
-	if (ray->side == 0)
-	{
+	if (ray->side_wall == WEST || ray->side_wall == EAST)
 		ray->perp_wall_dist = ray->side_dist.x - ray->delta_dist.x;
-	}
 	else
-	{
 		ray->perp_wall_dist = ray->side_dist.y - ray->delta_dist.y;
-	}
-
 }
 
-static void create_vertical_line(t_ray *ray, int col, mlx_image_t *img)
+static void	create_vertical_line(t_ray *ray, int col, t_point player_pos,
+		mlx_image_t *img)
 {
-	int line_height;
-	int draw_start;
-	int draw_end;
+	int	draw_start;
+	int	draw_end;
 
-	line_height = (int) (WIN_HEIGHT / ray->perp_wall_dist);
-	draw_start = WIN_HEIGHT / 2 - line_height / 2;
+	ray->line_height = (int)(WIN_HEIGHT / ray->perp_wall_dist);
+	draw_start = WIN_HEIGHT / 2 - ray->line_height / 2;
 	if (draw_start < 0)
 		draw_start = 0;
-	draw_end = WIN_HEIGHT / 2 + line_height / 2;
+	draw_end = WIN_HEIGHT / 2 + ray->line_height / 2;
 	if (draw_end >= WIN_HEIGHT)
 		draw_end = WIN_HEIGHT - 1;
-	draw_v_line(col, draw_start, draw_end, ray->color, img);
+	texture_pre_render(ray, player_pos, draw_start, draw_end);
+	draw_v_line(col, draw_start, draw_end, ray->tex.buffer, img);
+	ft_bzero(ray->tex.buffer, WIN_HEIGHT);
 }
 
 void	render_scene(t_game *game)
@@ -146,11 +124,8 @@ void	render_scene(t_game *game)
 		set_raydir_step_sidedist_map(game->player);
 		dda_loop(&game->player->ray, game->map);
 		calculate_perp_wall_dist(&game->player->ray);
-		create_vertical_line(&game->player->ray, x, game->main_img);
-		// printf("x: %d | camera: %f | ray_dir x: %f | ray_dir y : %f \n | ray map x: %d | ray map y: %d \n", x,
-				// game->player->ray.camera_x, game->player->ray.dir.x,
-				// game->player->ray.dir.y, game->player->ray.map_x, game->player->ray.map_y);
-
+		create_vertical_line(&game->player->ray, x, game->player->grid_pos,
+				game->main_img);
 		x++;
 	}
 	mlx_image_to_window(game->win->mlx, game->main_img, 0, 0);

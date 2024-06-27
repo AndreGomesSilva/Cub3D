@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 18:46:51 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/27 15:49:10 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:18:01 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,25 @@
 
 static void	fill_buffer(t_ray *ray, int draw_start, int draw_end)
 {
-	int	row;
-	mlx_texture_t *tex_surface;
+	int				row;
+	mlx_texture_t	*tex_surface;
 
 	tex_surface = ray->tex.texture[ray->side_wall];
-
 	row = draw_start;
-	ray->tex.step = 1.0 * tex_surface->height
-		/ ray->line_height;
+	ray->tex.step = 1.0 * tex_surface->height / ray->line_height;
 	ray->tex.pos = (draw_start - WIN_HEIGHT / 2 + ray->line_height / 2)
 		* ray->tex.step;
 	while (row < draw_end)
 	{
 		ray->tex.tex_row = (int)ray->tex.pos & (tex_surface->height - 1);
 		ray->tex.pos += ray->tex.step;
-		ray->tex.rgb = *((unsigned int *)tex_surface->pixels + (unsigned int)(ray->tex.tex_row * tex_surface->width + ray->tex.tex_col));
+		ray->tex.rgb = *((unsigned int *)tex_surface->pixels
+				+ (unsigned int)(ray->tex.tex_row * tex_surface->width
+					+ ray->tex.tex_col));
 		ray->tex.color.hex = ((ray->tex.rgb & 0xFF) << 24 |
-			(ray->tex.rgb & 0xFF00) << 8 |
-			(ray->tex.rgb & 0xFF0000) >> 8 |
-			(ray->tex.rgb & 0xFF000000) >> 24);
+								(ray->tex.rgb & 0xFF00) << 8 |
+								(ray->tex.rgb & 0xFF0000) >> 8 |
+								(ray->tex.rgb & 0xFF000000) >> 24);
 		ray->tex.buffer[row] = ray->tex.color.hex;
 		row++;
 	}

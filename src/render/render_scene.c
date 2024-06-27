@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:36:35 by iusantos          #+#    #+#             */
-/*   Updated: 2024/06/27 15:13:02 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/27 16:25:59 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,19 +83,8 @@ static void	dda_loop(t_ray *ray, t_map *map)
 				ray->side_wall = SOUTH;
 		}
 		if (map->mtx[(int)ray->map.y][(int)ray->map.x] == '1')
-		{
 			hit = 1;
-			if (ray->side_wall == NORTH)
-				ray->color = RED;
-			else if (ray->side_wall == SOUTH)
-				ray->color = GREEN;
-			else if (ray->side_wall == EAST)
-				ray->color = BLUE;
-			else
-				ray->color = YELLOW;
-		}
 	}
-	// printf("map hit: %c\n", map->mtx[ray->map_x][ray->map_y]);
 }
 
 static void	calculate_perp_wall_dist(t_ray *ray)
@@ -121,7 +110,7 @@ static void	create_vertical_line(t_ray *ray, int col, t_point player_pos,
 		draw_end = WIN_HEIGHT - 1;
 	texture_pre_render(ray, player_pos, draw_start, draw_end);
 	draw_v_line(col, draw_start, draw_end, ray->tex.buffer, img);
-	// ft_bzero(ray->tex.buffer, WIN_HEIGHT);
+	ft_bzero(ray->tex.buffer, WIN_HEIGHT);
 }
 
 void	render_scene(t_game *game)
@@ -137,12 +126,6 @@ void	render_scene(t_game *game)
 		calculate_perp_wall_dist(&game->player->ray);
 		create_vertical_line(&game->player->ray, x, game->player->grid_pos,
 				game->main_img);
-		// printf("x: %d | camera: %f | ray_dir x:
-									// %f | ray_dir y :					%f \n | ray map x:
-									// %f | ray map y: %f \n", x,
-		// 	game->player->ray.camera_x, game->player->ray.dir.x,
-		// 	game->player->ray.dir.y, game->player->ray.map.x,
-		// 		game->player->ray.map.y);
 		x++;
 	}
 	mlx_image_to_window(game->win->mlx, game->main_img, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/28 17:50:28 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/28 18:10:32 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ t_map	*create_map(char *str)
 		return (NULL);
 	if (check_for_invalid_character(map->mtx) != E_OK)
 		return (NULL);
+  if (check_number_of_players(map->mtx) != E_OK)
+    return (NULL);
 	map->size.w = get_num_col_map(map->mtx);
 	map->size.h = get_num_row_map(map->mtx);
 	return (map);

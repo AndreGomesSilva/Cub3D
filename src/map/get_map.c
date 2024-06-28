@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:04:01 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/28 17:04:55 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/28 17:11:50 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static char	*ft_join(char *s1, char *s2)
 	return (str);
 }
 
+// Debug function
 static void	print_map(char **map)
 {
 	int	i;

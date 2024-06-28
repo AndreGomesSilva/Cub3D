@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/27 16:26:48 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/28 16:43:32 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ t_game	*init_data(char *str)
 {
 	t_game	*game;
 
+  if (map_validation(str) == E_FAIL)
+    return (NULL);
 	game = ft_calloc(1, sizeof(t_game));
 	game->map = create_map(str);
 	game->win = create_window();

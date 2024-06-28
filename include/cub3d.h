@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/27 15:09:33 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/28 16:42:31 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -369,6 +369,7 @@ void				draw_v_line(int col, int start, int end, int *buffer,
 t_player			*create_player(t_map *map);
 
 // map
+int					map_validation(char *file_name);
 char				**get_map(char *str);
 int					get_num_col_map(char **map);
 int					get_num_row_map(char **map);
@@ -376,6 +377,7 @@ void				set_transparent(t_color *color, int a);
 unsigned int		get_hex_color(t_color *color, int r, int g, int b);
 void				cover_screen(t_screen *screen, t_dimension size,
 						unsigned int color);
+int					print_error(char *str);
 
 // render
 

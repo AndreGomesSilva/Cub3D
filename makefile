@@ -45,7 +45,7 @@ FILE = \
 			 $(RENDER_DIR)render_minimap $(RENDER_DIR)render_player_minimap $(RENDER_DIR)render_utils $(RENDER_DIR)render_background  \
 			 $(RENDER_DIR)update_player_minimap $(RENDER_DIR)render_scene $(RENDER_DIR)render_texture \
 			 $(MATH_DIR)rotate_line $(MATH_DIR)math_utils \
-			 $(MAP_DIR)get_map $(MAP_DIR)get_map_info \
+			 $(MAP_DIR)get_map $(MAP_DIR)get_map_info $(MAP_DIR)map_validation $(MAP_DIR)print_error \
 			 $(FREE_DIR)handle_free \
 
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILE)))

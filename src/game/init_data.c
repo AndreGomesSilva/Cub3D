@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/27 16:26:48 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/28 18:10:32 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@ t_map	*create_map(char *str)
 	map->mtx = get_map(str);
 	if (!map->mtx)
 		return (NULL);
+	if (check_for_invalid_character(map->mtx) != E_OK)
+		return (NULL);
+  if (check_number_of_players(map->mtx) != E_OK)
+    return (NULL);
 	map->size.w = get_num_col_map(map->mtx);
 	map->size.h = get_num_row_map(map->mtx);
 	return (map);
@@ -71,21 +75,22 @@ int	load_textures(mlx_texture_t **wall_texture)
 	return (E_OK);
 }
 
-t_game	*init_data(char *str)
+int	init_data(t_game *game, char *str)
 {
-	t_game	*game;
-
-	game = ft_calloc(1, sizeof(t_game));
+  if (validate_file(str) != E_OK)
+    return (E_FAIL);
 	game->map = create_map(str);
+  if (!game->map)
+    return (E_FAIL);
 	game->win = create_window();
 	game->player = create_player(game->map);
 	if (load_textures(game->wall_texture) == E_FAIL)
-		return (NULL);
+		return (E_FAIL);
 	game->player->ray.tex.texture = game->wall_texture;
 	game->background_img = mlx_new_image(game->win->mlx, WIN_WIDTH, WIN_HEIGHT);
 	game->main_img = mlx_new_image(game->win->mlx, WIN_WIDTH, WIN_HEIGHT);
 	game->minimap = create_minimap(game->win, game->map);
 	if (!game || !game->map || !game->win || !game->minimap)
-		return (NULL);
-	return (game);
+		return (E_FAIL);
+	return (E_OK);
 }

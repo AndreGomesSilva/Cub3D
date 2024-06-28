@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/27 15:09:33 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/28 18:11:18 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -332,7 +332,7 @@ typedef struct s_game
 
 // game
 int					start_game(char *str);
-t_game				*init_data(char *str);
+int					init_data(t_game *game, char *str);
 void				end_game(t_game *game);
 int					game_loop(t_game *game);
 
@@ -369,6 +369,9 @@ void				draw_v_line(int col, int start, int end, int *buffer,
 t_player			*create_player(t_map *map);
 
 // map
+int					validate_file(char *file_name);
+int					check_for_invalid_character(char **map_matrix);
+int					check_number_of_players(char **map_matrix);
 char				**get_map(char *str);
 int					get_num_col_map(char **map);
 int					get_num_row_map(char **map);
@@ -376,6 +379,7 @@ void				set_transparent(t_color *color, int a);
 unsigned int		get_hex_color(t_color *color, int r, int g, int b);
 void				cover_screen(t_screen *screen, t_dimension size,
 						unsigned int color);
+int					print_error(char *str);
 
 // render
 

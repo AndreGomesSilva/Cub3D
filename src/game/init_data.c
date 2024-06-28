@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/28 17:03:27 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/28 17:50:28 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ t_map	*create_map(char *str)
 		return (NULL);
 	map->mtx = get_map(str);
 	if (!map->mtx)
+		return (NULL);
+	if (check_for_invalid_character(map->mtx) != E_OK)
 		return (NULL);
 	map->size.w = get_num_col_map(map->mtx);
 	map->size.h = get_num_row_map(map->mtx);

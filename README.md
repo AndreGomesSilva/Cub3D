@@ -21,7 +21,7 @@ Cub3D is a project that demonstrates the basics of 3D rendering using raycasting
 
 *Note: The project is still in development, and additional features will be added over time.*
 
-file:///nfs/homes/angomes-/Videos/demo_cub_3d.webm
+[demo_cub_3d.webm](https://github.com/AndreGomesSilva/Cub3D/assets/59901704/61f917ec-d731-4785-a267-1907a1806388)
 
 ## Installation
 

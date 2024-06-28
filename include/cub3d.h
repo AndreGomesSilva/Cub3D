@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/28 16:42:31 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/28 17:03:17 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -332,7 +332,7 @@ typedef struct s_game
 
 // game
 int					start_game(char *str);
-t_game				*init_data(char *str);
+int					init_data(t_game *game, char *str);
 void				end_game(t_game *game);
 int					game_loop(t_game *game);
 
@@ -369,7 +369,7 @@ void				draw_v_line(int col, int start, int end, int *buffer,
 t_player			*create_player(t_map *map);
 
 // map
-int					map_validation(char *file_name);
+int					validate_file(char *file_name);
 char				**get_map(char *str);
 int					get_num_col_map(char **map);
 int					get_num_row_map(char **map);

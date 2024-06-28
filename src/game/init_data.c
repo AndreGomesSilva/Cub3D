@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/28 16:43:32 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/28 17:03:27 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,23 +71,22 @@ int	load_textures(mlx_texture_t **wall_texture)
 	return (E_OK);
 }
 
-t_game	*init_data(char *str)
+int	init_data(t_game *game, char *str)
 {
-	t_game	*game;
-
-  if (map_validation(str) == E_FAIL)
-    return (NULL);
-	game = ft_calloc(1, sizeof(t_game));
+  if (validate_file(str) != E_OK)
+    return (E_FAIL);
 	game->map = create_map(str);
+  if (!game->map)
+    return (E_FAIL);
 	game->win = create_window();
 	game->player = create_player(game->map);
 	if (load_textures(game->wall_texture) == E_FAIL)
-		return (NULL);
+		return (E_FAIL);
 	game->player->ray.tex.texture = game->wall_texture;
 	game->background_img = mlx_new_image(game->win->mlx, WIN_WIDTH, WIN_HEIGHT);
 	game->main_img = mlx_new_image(game->win->mlx, WIN_WIDTH, WIN_HEIGHT);
 	game->minimap = create_minimap(game->win, game->map);
 	if (!game || !game->map || !game->win || !game->minimap)
-		return (NULL);
-	return (game);
+		return (E_FAIL);
+	return (E_OK);
 }

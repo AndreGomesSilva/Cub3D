@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:04:01 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/20 16:50:03 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/28 17:04:55 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char	*ft_join(char *s1, char *s2)
 	char	*str;
 
 	if (!s1 || !s2)
-    return (NULL);
+		return (NULL);
 	s1_len = ft_strlen(s1);
 	s2_len = ft_strlen(s2);
 	str = (char *)malloc(sizeof(char) * (s1_len + s2_len + 1));
@@ -38,16 +38,16 @@ static char	*ft_join(char *s1, char *s2)
 	return (str);
 }
 
-static void print_map(char **map)
+static void	print_map(char **map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (map[i])
 	{
 		j = 0;
-		while(map[i][j])
+		while (map[i][j])
 		{
 			printf("%c ", map[i][j]);
 			j++;
@@ -66,7 +66,10 @@ char	**get_map(char *str)
 
 	fd = open(str, O_RDONLY);
 	if (fd == -1)
+	{
+		print_error("Could not open map file\n");
 		return (NULL);
+	}
 	all_lines = (char *)ft_calloc(1, sizeof(char));
 	while (TRUE)
 	{

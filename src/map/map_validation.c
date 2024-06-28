@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 16:27:34 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/28 16:47:59 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/28 17:03:24 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int check_extension(char *file_name)
   return (E_FAIL);
 }
 
-int map_validation(char *file_name)
+int validate_file(char *file_name)
 {
   if (check_extension(file_name) != E_OK)
     return (print_error("Invalid extension\n"));

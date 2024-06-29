@@ -6,11 +6,11 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/28 18:10:32 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/29 16:58:34 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "cub3d.h"
 
 t_window	*create_window(void)
 {
@@ -37,29 +37,39 @@ t_map	*create_map(char *str)
 		return (NULL);
 	if (check_for_invalid_character(map->mtx) != E_OK)
 		return (NULL);
-  if (check_number_of_players(map->mtx) != E_OK)
-    return (NULL);
+	if (check_number_of_players(map->mtx) != E_OK)
+		return (NULL);
 	map->size.w = get_num_col_map(map->mtx);
 	map->size.h = get_num_row_map(map->mtx);
 	return (map);
 }
 
-t_screen	*create_minimap(t_window *win, t_map *map)
+static t_minimap	*create_minimap(t_window *win, t_map *map)
 {
-	t_screen	*minimap;
+	t_minimap	*minimap;
 
-	minimap = ft_calloc(1, sizeof(t_screen));
+	minimap = ft_calloc(1, sizeof(t_minimap));
 	if (!minimap)
 		return (NULL);
 	minimap->img = mlx_new_image(win->mlx, MIN_WIDTH, MIN_HEIGHT);
 	if (!minimap->img)
 		return (NULL);
-	minimap->size.w = MIN_WIDTH;
 	minimap->size.h = MIN_HEIGHT;
-	minimap->walls.color.hex = get_hex_color(&minimap->walls.color, 255, 255,
+	minimap->size.w = MIN_WIDTH;
+	minimap->wall_size.w = MIN_WIDTH / map->size.w;
+	minimap->wall_size.h = MIN_HEIGHT / map->size.h;
+	minimap->floor_size.w = MIN_WIDTH / map->size.w;
+	minimap->floor_size.h = MIN_HEIGHT / map->size.h;
+	minimap->player_size.w = MIN_WIDTH / map->size.w;
+	minimap->player_size.h = MIN_HEIGHT / map->size.h;
+	minimap->floor_color.hex = get_hex_color(&minimap->floor_color, 233, 234,
+			153);
+	minimap->wall_color.hex = get_hex_color(&minimap->wall_color, 255, 255,
 			255);
-	minimap->walls.size.w = MIN_WIDTH / map->size.w;
-	minimap->walls.size.h = MIN_HEIGHT / map->size.h;
+	minimap->dir_line_color.hex = get_hex_color(&minimap->dir_line_color, 20,
+			160, 180);
+	minimap->player_color.hex = get_hex_color(&minimap->player_color, 255, 255,
+			173);
 	return (minimap);
 }
 
@@ -77,11 +87,11 @@ int	load_textures(mlx_texture_t **wall_texture)
 
 int	init_data(t_game *game, char *str)
 {
-  if (validate_file(str) != E_OK)
-    return (E_FAIL);
+	if (validate_file(str) != E_OK)
+		return (E_FAIL);
 	game->map = create_map(str);
-  if (!game->map)
-    return (E_FAIL);
+	if (!game->map)
+		return (E_FAIL);
 	game->win = create_window();
 	game->player = create_player(game->map);
 	if (load_textures(game->wall_texture) == E_FAIL)
@@ -90,7 +100,7 @@ int	init_data(t_game *game, char *str)
 	game->background_img = mlx_new_image(game->win->mlx, WIN_WIDTH, WIN_HEIGHT);
 	game->main_img = mlx_new_image(game->win->mlx, WIN_WIDTH, WIN_HEIGHT);
 	game->minimap = create_minimap(game->win, game->map);
-	if (!game || !game->map || !game->win || !game->minimap)
+	if (!game || !game->map || !game->win || !game->minimap || !game->player)
 		return (E_FAIL);
 	return (E_OK);
 }

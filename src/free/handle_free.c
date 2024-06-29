@@ -6,11 +6,11 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:25:39 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/17 19:12:35 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/29 14:30:51 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "cub3d.h"
 
 // void	free_sprites(t_sprite *sprite)
 // {
@@ -54,11 +54,6 @@ void	handle_free(t_game *game)
   {
 		free(game->player);
   }
-	// if (game->walls)
-	// {
-	// 	free_sprites(game->walls->sprite);
-	// 	free(game->walls);
-	// }
 	if (game)
 		free(game);
 }

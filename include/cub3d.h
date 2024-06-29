@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/28 18:11:18 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/29 18:18:11 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 
 # define WIN_WIDTH 860
 # define WIN_HEIGHT 640
-# define MIN_WIDTH 480
-# define MIN_HEIGHT 270
+# define MIN_WIDTH 240
+# define MIN_HEIGHT 160
 # define FOV M_PI / 3
 # define TILE_SIZE 30
 # define MOVEMENT_SPEED 0.4
@@ -162,13 +162,13 @@ typedef struct s_texture
  *
  * @param dir-> point with direction of ray
  * @param side_dist
-        -> point with distance that ray must travel between grid lines (vertical
+		-> point with distance that ray must travel between grid lines (vertical
  and horizontal)
  * @param delta_dist
-        -> point with distance that ray must travel until first grid line
+		-> point with distance that ray must travel until first grid line
  (vertical and horziontal)
  * @param perp_wall_dist
-        -> perpendicular distance between where ray hit and projection plane
+		-> perpendicular distance between where ray hit and projection plane
  * @param map_x -> which map column the ray is in
  * @param map_y -> which map row the ray is in
  * @param step_x -> right or left?
@@ -237,32 +237,12 @@ typedef struct s_fov
 typedef struct s_player
 {
 	t_point			grid_pos;
-	t_point			pix_pos;
-	t_point			origin;
 	t_point			plane;
 	t_point			dir;
 	t_ray			ray;
-	t_dimension		size;
-	t_line			dir_line;
-	t_line			plane_pos;
-	t_line			plane_neg;
 	double			angle;
-	t_fov			fov;
-	t_color			color;
 	t_bool			has_moved;
 }					t_player;
-
-/** entity walls
- * struct that holds the walls
- *
- * @param size -> size of the walls
- * @param color -> color of the walls
- */
-typedef struct s_walls
-{
-	t_dimension		size;
-	t_color			color;
-}					t_walls;
 
 /** entity window
  * struct that holds the window
@@ -292,17 +272,23 @@ typedef struct s_map
 /** entity minimap
  * struct that holds the minimap
  *
- * @param img -> image of the minimap
- * @param walls -> walls of the minimap
+ * @param minimap_img -> pointer to the minimap image
+ * @param wall -> pointer to the wall
  */
-typedef struct s_screen
+typedef struct s_minimap
 {
 	mlx_image_t		*img;
+	t_point			player_pos;
+	t_line			dir_line;
+	t_color			wall_color;
+	t_color			floor_color;
+	t_color			player_color;
+	t_color			dir_line_color;
+	t_dimension		player_size;
+	t_dimension		floor_size;
+	t_dimension		wall_size;
 	t_dimension		size;
-	t_walls			walls;
-	t_player		player;
-}					t_screen;
-
+}					t_minimap;
 /** system game
  * struct that holds the game main data
  *
@@ -318,8 +304,7 @@ typedef struct s_game
 	t_map			*map;
 	t_window		*win;
 	t_player		*player;
-	t_screen		*minimap;
-	mlx_image_t		*minimap_img;
+	t_minimap		*minimap;
 	mlx_image_t		*main_img;
 	mlx_image_t		*background_img;
 	mlx_texture_t	*wall_texture[4];
@@ -343,9 +328,9 @@ void				move_keyhook(mlx_key_data_t keydatam, void *param);
 // movement
 void				handle_player_movement(t_player *player, t_map *map,
 						t_move move);
-double				rotate_entity(double prev_angle, double next_angle,
+double				rotate_minimap_player(double prev_angle, double next_angle,
 						t_move move);
-t_point				move_entity(t_point pos, double angle, t_move move,
+t_point				move_minimap_player(t_point pos, double angle, t_move move,
 						double speed);
 
 // draw
@@ -361,7 +346,6 @@ void				draw_circle(mlx_image_t *img, t_line line,
 unsigned int		rgb_to_hex(int r, int g, int b, int a);
 void				draw_rect(mlx_image_t *img, t_line line,
 						unsigned int color);
-void				draw_minimap(t_game *game, t_map *map, t_dimension size);
 void				draw_v_line(int col, int start, int end, int *buffer,
 						mlx_image_t *img);
 
@@ -377,8 +361,6 @@ int					get_num_col_map(char **map);
 int					get_num_row_map(char **map);
 void				set_transparent(t_color *color, int a);
 unsigned int		get_hex_color(t_color *color, int r, int g, int b);
-void				cover_screen(t_screen *screen, t_dimension size,
-						unsigned int color);
 int					print_error(char *str);
 
 // render
@@ -389,19 +371,18 @@ int					print_error(char *str);
 void				render_background(t_game *game);
 void				render_scene(t_game *game);
 void				render_minimap(t_game *game);
-void				update_minimap(t_game *game);
-void				draw_screen(t_screen *screen, t_line line,
+void				draw_screen(mlx_image_t *img, t_line line,
 						unsigned int color, void (*func)(mlx_image_t *img,
 							t_line line, unsigned int color));
-void				update_player_origin(t_player *player);
+void				update_player_origin(t_minimap *minimap, t_player *player);
 t_line				get_line_grid_to_pix(t_point p, t_dimension size);
 void				set_player_positions(t_player *player, t_point p);
-void				update_player_minimap(t_screen *minimap);
-void				draw_player_minimap(t_screen *minimap, t_player *player);
-void				draw_minimap(t_game *game, t_map *map, t_dimension size);
-void				update_minimap(t_game *game);
+void				draw_player_minimap(t_minimap *minimap, t_player *player);
+void				draw_minimap(t_minimap *minimap, t_map *map,
+						t_dimension size);
 void				texture_pre_render(t_ray *ray, t_point player_pos,
 						int draw_start, int draw_end);
+void				clear_image(mlx_image_t *img, int height, int width);
 
 // math
 t_line				rotate_line(t_line line, double angle_radians);

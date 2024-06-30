@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 17:59:27 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/29 17:10:05 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/30 17:21:22 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,25 @@ static void	set_player_direction(t_player *player, char dir)
 {
 	if (dir == 'N')
 	{
-		player->angle = 0;
+		player->rad_angle = 0;
 		player->dir.x = 0;
 		player->dir.y = -1;
 	}
 	else if (dir == 'S')
 	{
-		player->angle = 180;
+		player->rad_angle = M_PI;
 		player->dir.x = 0;
 		player->dir.y = 1;
 	}
 	else if (dir == 'W')
 	{
-		player->angle = 270;
+		player->rad_angle = M_PI * 3 / 2;
 		player->dir.x = -1;
 		player->dir.y = 0;
 	}
 	else if (dir == 'E')
 	{
-		player->angle = 90;
+		player->rad_angle = M_PI / 2;
 		player->dir.x = 1;
 		player->dir.y = 0;
 	}

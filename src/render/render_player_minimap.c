@@ -6,21 +6,20 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:00:55 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/30 16:56:29 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/30 18:11:21 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
 void draw_dir_line(t_minimap *minimap, t_player *player) {
-
-  minimap->dir_line.start.x =  minimap->player_pos.x;
-  minimap->dir_line.start.y =  minimap->player_pos.y;
-  minimap->dir_line.end.x = minimap->player_pos.x;
-  minimap->dir_line.end.y = minimap->player_pos.y - 7;
-  printf("Angle: %f\n", player->angle);
-  minimap->dir_line = rotate_line(minimap->dir_line, player->angle);
-  draw_screen(minimap->img, minimap->dir_line, minimap->dir_line_color.hex, draw_line);
+  t_line line;
+  line.start.x =  minimap->player_pos.x;
+  line.start.y =  minimap->player_pos.y;
+  line.end.x  =  line.start.x;
+  line.end.y  =  line.start.y - 6;
+  line = rotate_line(line, player->rad_angle);
+  draw_screen(minimap->img, line, minimap->dir_line_color.hex, draw_line);
 }
 
 void draw_player_minimap(t_minimap *minimap, t_player *player) {

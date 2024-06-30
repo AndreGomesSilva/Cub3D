@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/30 16:44:33 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/30 18:06:13 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # define WIN_WIDTH 860
 # define WIN_HEIGHT 640
 # define FOV M_PI / 3
-# define TILE_SIZE 30
 # define MOVEMENT_SPEED 0.4
 # define ROTATION_SPEED 0.05
 
@@ -39,12 +38,6 @@
 # define BLACK 0x00000066
 # define YELLOW 0xFEE020FF
 # define PURPLE 0x674EA7FF
-
-// texture paths for the sprites
-# define WALL_PATH "./assets/textures/wall/tile118.png"
-# define FLOOR ""
-# define CEILING ""
-# define PLAYER_PATH "./assets/textures/door/door0.png"
 
 /*                            COMPONENTS                          */
 
@@ -77,28 +70,20 @@ typedef enum e_move
 	R_RIGHT
 }					t_move;
 
-typedef enum e_wall
+/** component wall
+ * enum that represents the wall
+ * @param NORTH -> north
+ * @param SOUTH -> south
+ * @param WEST -> west
+ * @param EAST -> east
+ */
+typedef enum e_cardinal
 {
 	NORTH,
 	SOUTH,
 	WEST,
 	EAST
-}					t_wall;
-
-/** component type
- * enum that represents the type
- * @param T_PLAYER -> player
- * @param T_WALL -> wall
- * @param T_FLOOR -> floor
- * @param T_CEILING -> ceiling
- */
-typedef enum e_type
-{
-	T_FLOOR = 0,
-	T_WALL = 1,
-	T_PLAYER = 2,
-	T_CEILING = 3
-}					t_type;
+}					t_cardinal;
 
 /** component point
  * struct with reference to x and y
@@ -115,8 +100,8 @@ typedef struct s_point
 /** component dimension
  * struct with reference to width and height
  *
- * @param w -> width
- * @param h -> height
+ * @param w -> (int) width
+ * @param h -> (int) height
  */
 typedef struct s_dimension
 {
@@ -182,7 +167,7 @@ typedef struct s_ray
 	t_point			step;
 	double			perp_wall_dist;
 	int				line_height;
-	t_wall			side_wall;
+	t_cardinal		side_wall;
 	t_texture		tex;
 	unsigned int	color;
 	double			camera_x;
@@ -207,30 +192,15 @@ typedef struct s_line
 
 /*                            ENTITYS                           */
 
-/** entity fov
- * struct that holds the fov
- *
- * @param angle -> angle of the fov
- * @param l_line -> line of the fov
- * @param r_line -> line of the fov
- */
-typedef struct s_fov
-{
-	t_line			l_line;
-	t_line			r_line;
-}					t_fov;
-
 /** entity player
- * struct that represents the player
+ * struct that represents the player_pos
+ *
  * @param grid_pos -> grid position of the player
- * @param pix_pos -> pixel position of the player (oh the map file)
- * @param origin -> origin of the player (inside the grid block)
- * @param size -> size of the player
+ * @param plane -> plane of the player
  * @param dir -> direction of the player
- * @param dir_line -> line of the player
- * @param plane -> camera plane of the player
- * @param fov -> field of view of the player
- * @param color -> color of the player
+ * @param ray -> ray of the player
+ * @param angle -> angle of the player
+ * @param has_moved -> has the player moved
  */
 typedef struct s_player
 {
@@ -238,7 +208,7 @@ typedef struct s_player
 	t_point			plane;
 	t_point			dir;
 	t_ray			ray;
-	double			angle;
+	double			rad_angle;
 	t_bool			has_moved;
 }					t_player;
 
@@ -258,7 +228,6 @@ typedef struct s_window
  * struct that holds the map
  *
  * @param mtx -> matrix of the map
- * @param path -> path of the map
  * @param size -> size of the map
  */
 typedef struct s_map
@@ -272,12 +241,21 @@ typedef struct s_map
  *
  * @param minimap_img -> pointer to the minimap image
  * @param wall -> pointer to the wall
+ * @param floor -> pointer to the floor
+ * @param player -> pointer to the player
+ * @param size -> size of the minimap
+ * @param player_pos -> position of the player
+ * @param dir_line -> line of the player
+ * @param wall_color -> color of the wall
+ * @param floor_color -> color of the floor
+ * @param player_color -> color of the player
+ * @param dir_line_color -> color of the line of the player
  */
 typedef struct s_minimap
 {
 	mlx_image_t		*img;
+  int         dir_line;
 	t_point			player_pos;
-	t_line			dir_line;
 	t_color			wall_color;
 	t_color			floor_color;
 	t_color			player_color;
@@ -285,15 +263,18 @@ typedef struct s_minimap
 	t_dimension		entity_size;
 	t_dimension		size;
 }					t_minimap;
+
 /** system game
  * struct that holds the game main data
  *
- * @param map -> pointer to map
+ * @param map -> pointer to struct t_map
  * @param win -> pointer to window
  * @param player -> pointer to player
  * @param walls -> pointer to walls
- * @param error -> hold the error value if 0 then no error
- *
+ * @param minimap -> pointer to minimap
+ * @param main_img -> pointer to main image
+ * @param background_img -> pointer to background image
+ * @param wall_texture -> pointer to wall
  */
 typedef struct s_game
 {
@@ -304,7 +285,6 @@ typedef struct s_game
 	mlx_image_t		*main_img;
 	mlx_image_t		*background_img;
 	mlx_texture_t	*wall_texture[4];
-	t_err			error;
 }					t_game;
 
 /* --------------------------------------------------------------*/
@@ -326,8 +306,6 @@ void				handle_player_movement(t_player *player, t_map *map,
 						t_move move);
 double				rotate_minimap_player(double prev_angle, double next_angle,
 						t_move move);
-t_point				move_minimap_player(t_point pos, double angle, t_move move,
-						double speed);
 
 // draw
 
@@ -340,6 +318,8 @@ void				draw_line(mlx_image_t *img, t_line line,
 void				draw_circle(mlx_image_t *img, t_line line,
 						unsigned int color);
 unsigned int		rgb_to_hex(int r, int g, int b, int a);
+unsigned int		get_hex_color(t_color *color, int r, int g, int b);
+void				set_transparent(t_color *color, int a);
 void				draw_rect(mlx_image_t *img, t_line line,
 						unsigned int color);
 void				draw_v_line(int col, int start, int end, int *buffer,
@@ -355,8 +335,6 @@ int					check_number_of_players(char **map_matrix);
 char				**get_map(char *str);
 int					get_num_col_map(char **map);
 int					get_num_row_map(char **map);
-void				set_transparent(t_color *color, int a);
-unsigned int		get_hex_color(t_color *color, int r, int g, int b);
 int					print_error(char *str);
 
 // render
@@ -370,9 +348,6 @@ void				render_minimap(t_game *game);
 void				draw_screen(mlx_image_t *img, t_line line,
 						unsigned int color, void (*func)(mlx_image_t *img,
 							t_line line, unsigned int color));
-void				update_player_origin(t_minimap *minimap, t_player *player);
-t_line				get_line_grid_to_pix(t_point p, t_dimension size);
-void				set_player_positions(t_player *player, t_point p);
 void				draw_player_minimap(t_minimap *minimap, t_player *player);
 void				draw_minimap(t_minimap *minimap, t_map *map,
 						t_dimension size);

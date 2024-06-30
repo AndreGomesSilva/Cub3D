@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:56:46 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/29 18:04:13 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/30 17:21:10 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	handle_player_movement(t_player *player, t_map *map, t_move move)
 	else if (move == R_RIGHT || move == R_LEFT)
 	{
 		rotate_player(player, move);
-		player->angle = rotate_minimap_player(player->angle, ROTATION_SPEED,
+		player->rad_angle = rotate_minimap_player(player->rad_angle, ROTATION_SPEED,
 				move);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:11:22 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/29 18:30:50 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/30 16:14:22 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ void	draw_minimap(t_minimap *minimap, t_map *map, t_dimension size)
 		{
 			if (map->mtx[row][col] == '1')
 				draw_screen(minimap->img, get_position_to_draw(row, col,
-						minimap->wall_size),
+						minimap->entity_size),
 					minimap->wall_color.hex, draw_rect);
 			else if (ft_strchr("0NSWE", map->mtx[row][col]) != NULL)
 				draw_screen(minimap->img, get_position_to_draw(row, col,
-						minimap->floor_size),
+						minimap->entity_size),
 					minimap->floor_color.hex, draw_rect);
 			col++;
 		}

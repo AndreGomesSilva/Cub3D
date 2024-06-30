@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/29 18:18:11 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/30 16:44:33 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 
 # define WIN_WIDTH 860
 # define WIN_HEIGHT 640
-# define MIN_WIDTH 240
-# define MIN_HEIGHT 160
 # define FOV M_PI / 3
 # define TILE_SIZE 30
 # define MOVEMENT_SPEED 0.4
@@ -34,11 +32,11 @@
 // Some colors
 # define CEILING_COLOR 0x2986ccFF
 # define FLOOR_COLOR 0x999999FF
-# define WHITE 0xFFFFFF
+# define WHITE 0xFFFFFFAA
 # define RED 0xFF0000FF
 # define GREEN 0x00FF00FF
 # define BLUE 0x0000FFFF
-# define BLACK 0x000000FF
+# define BLACK 0x00000066
 # define YELLOW 0xFEE020FF
 # define PURPLE 0x674EA7FF
 
@@ -284,9 +282,7 @@ typedef struct s_minimap
 	t_color			floor_color;
 	t_color			player_color;
 	t_color			dir_line_color;
-	t_dimension		player_size;
-	t_dimension		floor_size;
-	t_dimension		wall_size;
+	t_dimension		entity_size;
 	t_dimension		size;
 }					t_minimap;
 /** system game

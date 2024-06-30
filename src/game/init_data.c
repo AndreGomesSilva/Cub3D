@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/29 16:58:34 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/30 16:37:05 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_window	*create_window(void)
 	win->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cub3D", true);
 	if (!win->mlx)
 		return (NULL);
+	win->size.h = WIN_HEIGHT;
+	win->size.w = WIN_WIDTH;
 	return (win);
 }
 
@@ -51,25 +53,22 @@ static t_minimap	*create_minimap(t_window *win, t_map *map)
 	minimap = ft_calloc(1, sizeof(t_minimap));
 	if (!minimap)
 		return (NULL);
-	minimap->img = mlx_new_image(win->mlx, MIN_WIDTH, MIN_HEIGHT);
+	minimap->size.h = win->size.h * 0.21;
+	minimap->size.w = win->size.w * 0.21;
+	if (minimap->size.h < 10 || minimap->size.w < 20)
+	{
+		minimap->size.h = 10;
+		minimap->size.w = 20;
+	}
+	minimap->img = mlx_new_image(win->mlx, minimap->size.w, minimap->size.h);
 	if (!minimap->img)
 		return (NULL);
-	minimap->size.h = MIN_HEIGHT;
-	minimap->size.w = MIN_WIDTH;
-	minimap->wall_size.w = MIN_WIDTH / map->size.w;
-	minimap->wall_size.h = MIN_HEIGHT / map->size.h;
-	minimap->floor_size.w = MIN_WIDTH / map->size.w;
-	minimap->floor_size.h = MIN_HEIGHT / map->size.h;
-	minimap->player_size.w = MIN_WIDTH / map->size.w;
-	minimap->player_size.h = MIN_HEIGHT / map->size.h;
-	minimap->floor_color.hex = get_hex_color(&minimap->floor_color, 233, 234,
-			153);
-	minimap->wall_color.hex = get_hex_color(&minimap->wall_color, 255, 255,
-			255);
-	minimap->dir_line_color.hex = get_hex_color(&minimap->dir_line_color, 20,
-			160, 180);
-	minimap->player_color.hex = get_hex_color(&minimap->player_color, 255, 255,
-			173);
+	minimap->entity_size.h = minimap->size.h / map->size.h;
+	minimap->entity_size.w = minimap->size.w / map->size.w;
+	minimap->floor_color.hex = WHITE;
+	minimap->wall_color.hex = BLACK;
+	minimap->dir_line_color.hex = BLUE;
+	minimap->player_color.hex = RED;
 	return (minimap);
 }
 

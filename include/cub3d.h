@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/30 18:06:13 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/02 16:50:43 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,7 +254,7 @@ typedef struct s_map
 typedef struct s_minimap
 {
 	mlx_image_t		*img;
-  int         dir_line;
+	int				dir_line;
 	t_point			player_pos;
 	t_color			wall_color;
 	t_color			floor_color;
@@ -284,6 +284,9 @@ typedef struct s_game
 	t_minimap		*minimap;
 	mlx_image_t		*main_img;
 	mlx_image_t		*background_img;
+	char			*wall_texture_path[4];
+	t_color			floor;
+	t_color			ceiling;
 	mlx_texture_t	*wall_texture[4];
 }					t_game;
 
@@ -329,7 +332,7 @@ void				draw_v_line(int col, int start, int end, int *buffer,
 t_player			*create_player(t_map *map);
 
 // map
-int					validate_file(char *file_name);
+int					validate_file(t_game *game, char *file_name);
 int					check_for_invalid_character(char **map_matrix);
 int					check_number_of_players(char **map_matrix);
 char				**get_map(char *str);

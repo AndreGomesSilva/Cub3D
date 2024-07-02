@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/30 18:09:48 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/02 16:51:04 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	load_textures(mlx_texture_t **wall_texture)
 
 int	init_data(t_game *game, char *str)
 {
-	if (validate_file(str) != E_OK)
+	if (validate_file(game, str) != E_OK)
 		return (E_FAIL);
 	game->map = create_map(str);
 	if (!game->map)

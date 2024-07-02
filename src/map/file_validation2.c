@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start_game.c                                       :+:      :+:    :+:   */
+/*   file_validation2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 16:56:46 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/02 16:42:09 by angomes-         ###   ########.fr       */
+/*   Created: 2024/07/02 16:18:26 by angomes-          #+#    #+#             */
+/*   Updated: 2024/07/02 16:53:07 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
-#include <strings.h>
+#include "cub3d.h"
 
-int	start_game(char *str)
+// static store_if_valid_line(t_game *game, char *line)
+// {
+//     
+// }
+
+int check_elements(t_game *game, char *file_name)
 {
-  t_game game;
-  
-  ft_bzero(&game, sizeof(t_game));
-	printf("Start game\n");
-  if (init_data(&game, str) != E_OK)
-    return (E_FAIL);
-	if (game_loop(&game) != E_OK)
+  int fd;
+  char *line;
+
+  fd = open(file_name, O_RDONLY);
+  if (fd == - 1)
+    return (print_error("Could not open map file\n"));
+  while(TRUE)
   {
-    printf("Fail game loop\n");
-    return (E_FAIL);
-  }
-	end_game(&game);
-  printf("End game\n");
-	return (E_OK);
+    line = get_next_line(fd);
+    if (!line)
+      break;
+    // store_if_valid_line(game, line); 
+  } 
+  return (E_OK);
 }

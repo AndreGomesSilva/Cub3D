@@ -6,21 +6,18 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:24:08 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/15 21:14:41 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/29 13:40:42 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "cub3d.h"
 
 void	drawHorizontalLine(mlx_image_t *img, int x1, int x2, int y,
 		unsigned int color)
 {
-  int x;
-
-  x = 0;
   while (x1 <= x2)
   {
-    mlx_put_pixel(img, x, y, color);
+    mlx_put_pixel(img, x1, y, color);
     x1++;
   }
 }

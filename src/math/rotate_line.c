@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 20:37:39 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/12 20:34:24 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/30 16:55:47 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,13 @@ t_point	rotate_point(t_point p, double angle_radians)
 	return (result);
 }
 
-t_line	rotate_line(t_line line, double angle_degrees)
+t_line	rotate_line(t_line line, double angle_radians)
 {
 	t_line	result;
 	t_point	translated_end_p;
 	t_point	rotated_end_p;
-	double	angle_radians;
 
 	result.start = line.start;
-	angle_radians = degrees_to_radians(angle_degrees);
 	translated_end_p.x = line.end.x - line.start.x;
 	translated_end_p.y = line.end.y - line.start.y;
 	rotated_end_p = rotate_point(translated_end_p, angle_radians);

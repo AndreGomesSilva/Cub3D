@@ -6,53 +6,53 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:11:22 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/17 19:08:55 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/06/30 17:47:22 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "cub3d.h"
 
-void	draw_screen(t_screen *screen, t_line line, unsigned int color,
-		void (*func)(mlx_image_t *img, t_line line, unsigned int color))
+t_line	get_position_to_draw(int row, int col, t_dimension size)
 {
-	func(screen->img, line, color);
+	t_line	line;
+
+	line.start.x = col * size.w;
+	line.start.y = row * size.h;
+	line.end.x = line.start.x + size.w;
+	line.end.y = line.start.y + size.h;
+	return (line);
 }
 
-void	draw_minimap(t_game *game, t_map *map, t_dimension size)
+void	draw_minimap(t_minimap *minimap, t_map *map, t_dimension size)
 {
-	t_point	p;
+  int row;
+  int col;
 
-	p.y = 0;
-	while (p.y < size.h)
+	row = 0;
+	while (row < size.h)
 	{
-		p.x = 0;
-		while (p.x < size.w)
+		col = 0;
+		while (col < size.w)
 		{
-			if (map->mtx[(int)p.y][(int)p.x] == '1')
-				draw_screen(game->minimap,
-							get_line_grid_to_pix(p, game->minimap->walls.size),
-							game->minimap->walls.color.hex,
-							draw_rect);
-			else
-				draw_screen(game->minimap,
-							get_line_grid_to_pix(p, game->minimap->walls.size),
-							0xFFEEBBFF,
-							draw_rect); //chao amarelado no minimapa
-			// if (game->minimap->player.grid_pos.x == 0 &&
-			// 	game->minimap->player.grid_pos.y == 0)
-			// {
-			// 	if (map->mtx[(int)p.y][(int)p.x] == 'P')
-			// 		set_player_position(&game->minimap->player, p);
-			// }
-			p.x++;
+			if (map->mtx[row][col] == '1')
+				draw_screen(minimap->img, get_position_to_draw(row, col,
+						minimap->entity_size),
+					minimap->wall_color.hex, draw_rect);
+			else if (ft_strchr("0NSWE", map->mtx[row][col]) != NULL)
+				draw_screen(minimap->img, get_position_to_draw(row, col,
+						minimap->entity_size),
+					minimap->floor_color.hex, draw_rect);
+			col++;
 		}
-		p.y++;
+		row++;
 	}
 }
 
 void	render_minimap(t_game *game)
 {
-	draw_minimap(game, game->map, game->map->size);
+	clear_image(game->minimap->img, game->minimap->size.h,
+		game->minimap->size.w);
+	draw_minimap(game->minimap, game->map, game->map->size);
 	draw_player_minimap(game->minimap, game->player);
 	mlx_image_to_window(game->win->mlx, game->minimap->img, 0, 0);
 }

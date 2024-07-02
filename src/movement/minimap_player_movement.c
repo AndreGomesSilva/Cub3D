@@ -1,25 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_utils.c                                     :+:      :+:    :+:   */
+/*   minimap_player_movement.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/11 15:05:30 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/29 18:32:51 by angomes-         ###   ########.fr       */
+/*   Created: 2024/06/14 11:11:50 by angomes-          #+#    #+#             */
+/*   Updated: 2024/06/30 17:27:40 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_screen(mlx_image_t *img, t_line line, unsigned int color,
-		void (*func)(mlx_image_t *img, t_line line, unsigned int color))
+double	rotate_minimap_player(double prev_angle, double next_angle, t_move move)
 {
-	func(img, line, color);
-}
+	double	new_angle;
 
-void clear_image(mlx_image_t *img, int height, int width)
-{
-  ft_memset(img->pixels, 0, height * width * 4);
+	new_angle = prev_angle;
+	if (move == R_LEFT)
+	{
+		if (prev_angle <= 0)
+			new_angle = M_PI * 2;
+		else
+			new_angle = prev_angle - next_angle;
+	}
+	else if (move == R_RIGHT)
+	{
+		if (prev_angle >= M_PI * 2)
+			new_angle = 0;
+		else
+			new_angle = prev_angle + next_angle;
+	}
+	return (new_angle);
 }
-

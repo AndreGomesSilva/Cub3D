@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/17 20:20:36 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/26 17:11:06 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/06/30 16:16:34 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	put_line_screen(mlx_image_t *img, t_line *line, int step_x, int step_y)
 	delta.x = abs_double(round(line->end.x - line->start.x));
 	delta.y = abs_double(round(line->end.y - line->start.y));
 	err = delta.x - delta.y;
-	while ((int)line->start.x < MIN_WIDTH && (int)line->start.y < MIN_HEIGHT &&
+	while (line->start.x < img->width && line->start.y < img->height &&
 			(line->start.x != line->end.x || line->start.y != line->end.y))
 	{
 		mlx_put_pixel(img, (int)line->start.x, (int)line->start.y,

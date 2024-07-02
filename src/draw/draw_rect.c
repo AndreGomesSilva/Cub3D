@@ -18,10 +18,10 @@ void	draw_rect(mlx_image_t *img, t_line line,
 	t_point	p;
 
 	p.y = line.start.y;
-	while (p.y < (line.end.y) - 1.0)
+	while (p.y < (line.end.y))
 	{
 		p.x = line.start.x;
-		while (p.x < (line.end.x) - 1.0)
+		while (p.x < (line.end.x))
 		{
 			mlx_put_pixel(img, (int)p.x, (int)p.y, color);
 			p.x++;

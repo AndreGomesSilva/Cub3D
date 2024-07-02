@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 16:27:34 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/02 16:30:22 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/02 17:24:39 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	validate_file(t_game *game, char *file_name)
 {
 	if (check_extension(file_name) != E_OK)
 		return (print_error("Invalid extension\n"));
-  // if (check_elements(file_name) != E_OK)
-    // return (E_FAIL);
+    if (check_elements(game, file_name) != E_OK)
+		return (E_FAIL);
 	return (E_OK);
 }

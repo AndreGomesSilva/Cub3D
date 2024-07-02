@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/02 16:50:43 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/02 17:25:05 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -334,6 +334,7 @@ t_player			*create_player(t_map *map);
 // map
 int					validate_file(t_game *game, char *file_name);
 int					check_for_invalid_character(char **map_matrix);
+int					check_elements(t_game *game, char *file_name);
 int					check_number_of_players(char **map_matrix);
 char				**get_map(char *str);
 int					get_num_col_map(char **map);
@@ -366,5 +367,6 @@ double				abs_double(double number);
 
 // free
 void				handle_free(t_game *game);
+void				free_matrix(char **matrix);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:18:26 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/03 15:49:37 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/03 16:07:00 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,20 @@ static int	handle_elements(t_game *game, char *line)
 	return (E_OK);
 }
 
+static int	file_contents_is_set(char** file_contents)
+{
+	int i;
+
+	i = 0;
+	while (i < 6)
+	{
+		if (file_contents[i] == NULL)
+			return (E_FAIL);
+		i++;
+	}
+	return (E_OK);
+}
+
 int	check_elements(t_game *game, char *file_name)
 {
 	char	*line;
@@ -135,7 +149,7 @@ int	check_elements(t_game *game, char *file_name)
 	{
 		line = gnl_wo_nl(game->fd);
 		if (!line)
-			break ;
+			return (print_error("Not all elements were found in file.\n"));
 		if (handle_elements(game, line) == E_FAIL)
     {
       free(line);
@@ -143,6 +157,8 @@ int	check_elements(t_game *game, char *file_name)
 			return (E_FAIL);
     }
     free(line);
+	if (file_contents_is_set(game->file_content) == E_OK)
+		return (E_OK);
 	}
 	return (E_OK);
 }

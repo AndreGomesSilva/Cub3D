@@ -6,13 +6,13 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:55:53 by iusantos          #+#    #+#             */
-/*   Updated: 2024/06/13 17:23:45 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/03 19:16:47 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	draw_floor(mlx_image_t *img)
+static void	draw_floor(mlx_image_t *img, t_color *floor)
 {
 	int i;
 	int j;
@@ -23,14 +23,14 @@ static void	draw_floor(mlx_image_t *img)
 		i = 0;
 		while (i < WIN_WIDTH)
 		{
-			mlx_put_pixel(img, i, j, FLOOR_COLOR); 
+			mlx_put_pixel(img, i, j, floor->hex); 
 			i++;
 		}
 		j++;
 	}
 }
 
-static void draw_ceiling(mlx_image_t *img)
+static void draw_ceiling(mlx_image_t *img, t_color *ceiling)
 {
 	int i;
 	int j;
@@ -41,7 +41,7 @@ static void draw_ceiling(mlx_image_t *img)
 		i = 0;
 		while (i < WIN_WIDTH)
 		{
-			mlx_put_pixel(img, i, j, CEILING_COLOR); 
+			mlx_put_pixel(img, i, j, ceiling->hex); 
 			i++;
 		}
 		j++;
@@ -49,8 +49,8 @@ static void draw_ceiling(mlx_image_t *img)
 
 }
 
-void	draw_background(mlx_image_t *img)
+void	draw_background(t_game *game)
 {
-	draw_floor(img);
-	draw_ceiling(img);
+	draw_floor(game->background_img, &game->floor);
+	draw_ceiling(game->background_img, &game->ceiling);
 }

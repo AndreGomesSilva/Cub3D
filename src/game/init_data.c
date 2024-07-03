@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/03 17:59:57 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/03 18:50:20 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ t_window	*create_window(void)
 	return (win);
 }
 
-t_map	*create_map(char *str)
+static t_map	*create_map(int fd)
 {
 	t_map	*map;
 
 	map = ft_calloc(1, sizeof(t_map));
 	if (!map)
 		return (NULL);
-	map->mtx = get_map(str);
+	map->mtx = get_map(fd);
 	if (!map->mtx)
 		return (NULL);
 	if (check_for_invalid_character(map->mtx) != E_OK)
@@ -92,7 +92,7 @@ int	init_data(t_game *game, char *str)
 		return (E_FAIL);
 	if (set_bg_colors(game) != E_OK)
 		return (E_FAIL);
-	game->map = create_map(str);
+	game->map = create_map(game->fd);
 	if (!game->map)
 		return (E_FAIL);
 	game->win = create_window();

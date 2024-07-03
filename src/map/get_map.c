@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:04:01 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/28 17:11:50 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/03 18:49:32 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,12 @@ static void	print_map(char **map)
 	}
 }
 
-char	**get_map(char *str)
+char	**get_map(int fd)
 {
 	char	*line;
-	int		fd;
 	char	*all_lines;
 	char	**map;
 
-	fd = open(str, O_RDONLY);
-	if (fd == -1)
-	{
-		print_error("Could not open map file\n");
-		return (NULL);
-	}
 	all_lines = (char *)ft_calloc(1, sizeof(char));
 	while (TRUE)
 	{

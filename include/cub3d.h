@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/03 14:54:51 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/03 18:00:35 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -360,6 +360,7 @@ char				**get_map(char *str);
 int					get_num_col_map(char **map);
 int					get_num_row_map(char **map);
 int					print_error(char *str);
+int					set_bg_colors(t_game *game);
 
 // render
 

@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/02 17:25:05 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/03 14:54:51 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,25 @@ typedef enum e_cardinal
 	WEST,
 	EAST
 }					t_cardinal;
+
+/** component elements
+ * enum that represents the elements
+ * @param NO -> north
+ * @param SO -> south
+ * @param WE -> west
+ * @param EA -> east
+ * @param F -> floor
+ * @param C -> ceiling
+ */
+typedef enum e_elements
+{
+	NO,
+	SO,
+	WE,
+	EA,
+	F,
+	C
+}					t_elements;
 
 /** component point
  * struct with reference to x and y
@@ -284,7 +303,8 @@ typedef struct s_game
 	t_minimap		*minimap;
 	mlx_image_t		*main_img;
 	mlx_image_t		*background_img;
-	char			*wall_texture_path[4];
+	int				fd;
+	char			*file_content[6];
 	t_color			floor;
 	t_color			ceiling;
 	mlx_texture_t	*wall_texture[4];

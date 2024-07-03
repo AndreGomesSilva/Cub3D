@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/02 16:51:04 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/03 17:12:11 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,15 @@ static t_minimap	*create_minimap(t_window *win, t_map *map)
 	return (minimap);
 }
 
-int	load_textures(mlx_texture_t **wall_texture)
+int	load_textures(mlx_texture_t **wall_texture, char **file_content)
 {
-	wall_texture[NORTH] = mlx_load_png("./assets/textures/wall_textures/tile066.png");
-	wall_texture[SOUTH] = mlx_load_png("./assets/textures/wall_textures/tile106.png");
-	wall_texture[EAST] = mlx_load_png("./assets/textures/wall_textures/tile118.png");
-	wall_texture[WEST] = mlx_load_png("./assets/textures/wall_textures/tile120.png");
+	wall_texture[NORTH] = mlx_load_png(file_content[NO]);
+	wall_texture[SOUTH] = mlx_load_png(file_content[SO]);
+	wall_texture[EAST] = mlx_load_png(file_content[EA]);
+	wall_texture[WEST] = mlx_load_png(file_content[WE]);
 	if (!wall_texture[NORTH] || !wall_texture[SOUTH] || !wall_texture[EAST]
 		|| !wall_texture[WEST])
-		return (E_FAIL);
+		return (print_error("Could not load texture from provided path\n"));
 	return (E_OK);
 }
 
@@ -88,13 +88,13 @@ int	init_data(t_game *game, char *str)
 {
 	if (validate_file(game, str) != E_OK)
 		return (E_FAIL);
+	if (load_textures(game->wall_texture, game->file_content) == E_FAIL)
+		return (E_FAIL);
 	game->map = create_map(str);
 	if (!game->map)
 		return (E_FAIL);
 	game->win = create_window();
 	game->player = create_player(game->map);
-	if (load_textures(game->wall_texture) == E_FAIL)
-		return (E_FAIL);
 	game->player->ray.tex.texture = game->wall_texture;
 	game->background_img = mlx_new_image(game->win->mlx, WIN_WIDTH, WIN_HEIGHT);
 	game->main_img = mlx_new_image(game->win->mlx, WIN_WIDTH, WIN_HEIGHT);

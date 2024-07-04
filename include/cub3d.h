@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/03 19:08:18 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/04 17:22:38 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -347,7 +347,7 @@ void				draw_v_line(int col, int start, int end, int *buffer,
 						mlx_image_t *img);
 
 // player
-t_player			*create_player(t_map *map);
+int					create_player(t_game *game);
 
 // map
 int					validate_file(t_game *game, char *file_name);

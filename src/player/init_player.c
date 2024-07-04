@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 17:59:27 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/30 17:21:22 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/04 17:27:22 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ static void	init_player_plane(t_player *player)
 
 static void	init_player(t_player *player, t_map *map)
 {
-	int col;
-  int row;
+	int		col;
+	int		row;
 	char	dir;
 
 	row = 0;
@@ -85,7 +85,7 @@ static void	init_player(t_player *player, t_map *map)
 				player->grid_pos.y = row + 0.5;
 				dir = map->mtx[row][col];
 				set_player_direction(player, dir);
-        return ;
+				return ;
 			}
 			col++;
 		}
@@ -93,14 +93,14 @@ static void	init_player(t_player *player, t_map *map)
 	}
 }
 
-t_player	*create_player(t_map *map)
+int	create_player(t_game *game)
 {
-	t_player	*player;
-
-	player = ft_calloc(1, sizeof(t_player));
-	init_player(player, map);
-	init_player_plane(player);
-	return (player);
+	game->player = ft_calloc(1, sizeof(t_player));
+	if (game->player == NULL)
+		return (print_error("Could not alocate player\n"));
+	init_player(game->player, game->map);
+	init_player_plane(game->player);
+	return (E_OK);
 }
 
 

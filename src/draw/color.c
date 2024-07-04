@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 21:46:48 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/30 17:15:20 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/03 19:18:09 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ unsigned int	rgb_to_hex(int r, int g, int b, int a)
 		a = 0;
 	else if (a > 255)
 		a = 255;
-	hex_color = (a << 24) | (r << 16) | (g << 8) | b;
+	hex_color = (r << 24) | (g << 16) | (b << 8) | a;
 	return (hex_color);
 }
 

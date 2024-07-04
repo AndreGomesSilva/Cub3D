@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/03 18:48:55 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/04 17:22:38 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@
 # define ROTATION_SPEED 0.05
 
 // Some colors
-# define CEILING_COLOR 0x2986ccFF
-# define FLOOR_COLOR 0x999999FF
 # define WHITE 0xFFFFFFAA
 # define RED 0xFF0000FF
 # define GREEN 0x00FF00FF
@@ -335,7 +333,7 @@ double				rotate_minimap_player(double prev_angle, double next_angle,
 /**
  * Draws background (floor and ceiling) on img
  */
-void				draw_background(mlx_image_t *img);
+void				draw_background(t_game *game);
 void				draw_line(mlx_image_t *img, t_line line,
 						unsigned int color);
 void				draw_circle(mlx_image_t *img, t_line line,
@@ -349,7 +347,7 @@ void				draw_v_line(int col, int start, int end, int *buffer,
 						mlx_image_t *img);
 
 // player
-t_player			*create_player(t_map *map);
+int					create_player(t_game *game);
 
 // map
 int					validate_file(t_game *game, char *file_name);

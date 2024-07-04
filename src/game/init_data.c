@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/04 17:29:49 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/04 17:38:11 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,21 @@ t_window	*create_window(void)
 	return (win);
 }
 
-static t_map	*create_map(int fd)
+int	create_map(t_game *game)
 {
-	t_map	*map;
-
-	map = ft_calloc(1, sizeof(t_map));
-	if (!map)
-		return (NULL);
-	map->mtx = get_map(fd);
-	if (!map->mtx)
-		return (NULL);
-	if (check_for_invalid_character(map->mtx) != E_OK)
-		return (NULL);
-	if (check_number_of_players(map->mtx) != E_OK)
-		return (NULL);
-	map->size.w = get_num_col_map(map->mtx);
-	map->size.h = get_num_row_map(map->mtx);
-	return (map);
+	game->map = ft_calloc(1, sizeof(t_map));
+	if (game->map == NULL)
+		return (print_error("Could not allocate map\n"));
+	game->map->mtx = get_map(game->fd);
+	if (game->map->mtx == NULL)
+		return (print_error("Problem creating map matrix\n"));
+	if (check_for_invalid_character(game->map->mtx) != E_OK)
+		return (E_FAIL);
+	if (check_number_of_players(game->map->mtx) != E_OK)
+		return (E_FAIL);
+	game->map->size.w = get_num_col_map(game->map->mtx);
+	game->map->size.h = get_num_row_map(game->map->mtx);
+	return (E_OK);
 }
 
 static t_minimap	*create_minimap(t_window *win, t_map *map)
@@ -92,8 +90,7 @@ int	init_data(t_game *game, char *str)
 		return (E_FAIL);
 	if (set_bg_colors(game) != E_OK)
 		return (E_FAIL);
-	game->map = create_map(game->fd);
-	if (!game->map)
+	if (create_map(game) != E_OK)
 		return (E_FAIL);
 	game->win = create_window();
 	if (create_player(game) != E_OK)

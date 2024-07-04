@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:18:26 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/03 17:31:47 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/04 19:25:16 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static int	handle_elements(t_game *game, char *line)
 	char	**words;
 
 	words = ft_split(line, ' ');
-	if (words != NULL && words[1] != NULL && words[2] != NULL)
+	if (words != NULL  && words[0] != NULL && words[1] != NULL && words[2] != NULL)
 	{
 		free_matrix(words);
 		return (print_error("Badly formatted element line\n"));

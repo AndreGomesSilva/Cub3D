@@ -6,7 +6,7 @@ DEV_FLAGS = -g3
 RM = rm -rf
 
 # Valgrind with suppressions for MLX42_lib and send the output to leaks.sup file.
-LEAKS = valgrind --leak-check=full --show-leak-kinds=all --gen-suppressions=all --track-origins=yes --log-file=leaks.sup --suppressions=./suppress.sup
+LEAKS = valgrind --leak-check=full --show-leak-kinds=all  --suppressions=./suppress.sup #--log-file=leaks.sup
 
 # Directorys
 LIBMLX_DIR = ./lib/MLX42

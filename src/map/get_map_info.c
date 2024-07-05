@@ -6,11 +6,11 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 18:26:27 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/19 17:32:16 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/05 16:04:10 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "cub3d.h"
 
 int get_num_row_map(char **map)
 {
@@ -36,4 +36,26 @@ int get_num_col_map(char **map)
     i++;
   }
   return (j);
+}
+
+int get_max_col(char **mtx)
+{
+	int i;
+	int j;
+	int max_cols;
+
+	max_cols = 0;
+	i = 0;
+	while (mtx[i] != NULL)
+	{
+		j = 0;
+		while (mtx[i][j])
+		{
+			if (j > max_cols)
+				max_cols = j;
+			j++;
+		}
+		i++;
+	}
+	return (max_cols + 1);
 }

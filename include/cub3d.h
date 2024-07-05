@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/04 17:22:38 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/05 15:33:09 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,6 +251,7 @@ typedef struct s_map
 {
 	char			**mtx;
 	t_dimension		size;
+	int				max_cols;
 }					t_map;
 
 /** entity minimap
@@ -357,8 +358,10 @@ int					check_number_of_players(char **map_matrix);
 char				**get_map(int fd);
 int					get_num_col_map(char **map);
 int					get_num_row_map(char **map);
+int					get_max_col(char **mtx);
 int					print_error(char *str);
 int					set_bg_colors(t_game *game);
+int					check_map_border(t_game *game);
 
 // render
 

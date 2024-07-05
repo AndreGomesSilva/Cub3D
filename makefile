@@ -46,6 +46,7 @@ FILE = \
 			 $(RENDER_DIR)render_scene $(RENDER_DIR)render_texture \
 			 $(MATH_DIR)rotate_line $(MATH_DIR)math_utils \
 			 $(MAP_DIR)get_map $(MAP_DIR)get_map_info $(MAP_DIR)file_validation $(MAP_DIR)print_error $(MAP_DIR)file_validation2 $(MAP_DIR)bg_validation \
+			 $(MAP_DIR)border_validation \
 			 $(FREE_DIR)handle_free \
 
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILE)))

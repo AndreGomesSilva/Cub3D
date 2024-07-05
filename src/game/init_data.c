@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/04 17:38:11 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/05 15:32:25 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ int	create_map(t_game *game)
 		return (E_FAIL);
 	game->map->size.w = get_num_col_map(game->map->mtx);
 	game->map->size.h = get_num_row_map(game->map->mtx);
+	game->map->max_cols = get_max_col(game->map->mtx);
+	//check border
+	if(check_map_border(game) != E_OK)
+		return (E_FAIL);
 	return (E_OK);
 }
 

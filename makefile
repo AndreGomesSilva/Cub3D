@@ -32,7 +32,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 LIBMLX = $(LIBMLX_DIR)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
 # Path to the game map
-MAP = maps/map_OK.cub
+MAP = maps/map_leaky_not_rectangular.cub
 
 # Files to compile
 FILE = \
@@ -46,6 +46,7 @@ FILE = \
 			 $(RENDER_DIR)render_scene $(RENDER_DIR)render_texture \
 			 $(MATH_DIR)rotate_line $(MATH_DIR)math_utils \
 			 $(MAP_DIR)get_map $(MAP_DIR)get_map_info $(MAP_DIR)file_validation $(MAP_DIR)print_error $(MAP_DIR)file_validation2 $(MAP_DIR)bg_validation \
+			 $(MAP_DIR)border_validation \
 			 $(FREE_DIR)handle_free \
 
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILE)))
@@ -108,4 +109,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re libft mlx

@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/04 17:38:11 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/05 18:38:16 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	create_map(t_game *game)
 		return (E_FAIL);
 	game->map->size.w = get_num_col_map(game->map->mtx);
 	game->map->size.h = get_num_row_map(game->map->mtx);
+	game->map->max_cols = get_max_col(game->map->mtx);
+	//check border
 	return (E_OK);
 }
 
@@ -92,9 +94,11 @@ int	init_data(t_game *game, char *str)
 		return (E_FAIL);
 	if (create_map(game) != E_OK)
 		return (E_FAIL);
-	game->win = create_window();
 	if (create_player(game) != E_OK)
 		return (E_FAIL);
+	if (check_map_border(game) != E_OK)
+		return (E_FAIL);
+	game->win = create_window();
 	game->player->ray.tex.texture = game->wall_texture;
 	game->background_img = mlx_new_image(game->win->mlx, WIN_WIDTH, WIN_HEIGHT);
 	game->main_img = mlx_new_image(game->win->mlx, WIN_WIDTH, WIN_HEIGHT);

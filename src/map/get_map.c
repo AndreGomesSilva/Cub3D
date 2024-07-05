@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:04:01 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/03 18:49:32 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/05 14:19:56 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ char	**get_map(int fd)
 {
 	char	*line;
 	char	*all_lines;
-	char	**map;
+	char	**mtx;
 
 	all_lines = (char *)ft_calloc(1, sizeof(char));
 	while (TRUE)
@@ -73,8 +73,8 @@ char	**get_map(int fd)
 		all_lines = ft_join(all_lines, line);
 	}
 	close(fd);
-	map = ft_split(all_lines, '\n');
-	print_map(map);
+	mtx = ft_split(all_lines, '\n');
+	print_map(mtx);
 	free(all_lines);
-	return (map);
+	return (mtx);
 }

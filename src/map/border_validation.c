@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:22:05 by iusantos          #+#    #+#             */
-/*   Updated: 2024/07/05 17:59:42 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/05 18:49:15 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,35 @@ static int	flood_fill(t_map *map, char **mtx, int y, int x)
 	return (E_OK);
 }
 
+static int check_leak_borders(t_map *map, char** mtx)
+{
+	int row;
+	int col;
+
+	row = 0;
+	col = 0;
+	while (mtx[row][col] != '\0')
+	{
+		if (mtx[row][col] == '#')
+			return (E_FAIL);
+		col++;
+	}
+	row = map->size.h - 1;
+	col = -1;
+	while (mtx[row][++col] != '\0')
+	{
+		if (mtx[row][col] == '#')
+			return (E_FAIL);
+	}
+	row = 0;
+	while (++row < map->size.h)
+	{
+		if (mtx[row][0] == '#' || mtx[row][map->max_cols - 1] == '#')
+			return (E_FAIL);
+	}
+	return (E_OK);
+}
+
 int	check_map_border(t_game *game)
 {
 	char	**rec_mtx;
@@ -104,6 +133,11 @@ int	check_map_border(t_game *game)
 			(int)game->player->grid_pos.x);
 	printf("\n");
 	print_map(rec_mtx);
-	//check_folld_fill;
+	if (check_leak_borders(game->map, rec_mtx) != E_OK)
+	{
+		free_matrix(rec_mtx);
+		return (print_error("Leaky borders on map\n"));
+	}
+	free_matrix(rec_mtx);
 	return (E_OK);
 }

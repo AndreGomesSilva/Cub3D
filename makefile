@@ -32,7 +32,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 LIBMLX = $(LIBMLX_DIR)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
 # Path to the game map
-MAP = maps/map_OK_not_rectangular.cub
+MAP = maps/map_leaky_not_rectangular.cub
 
 # Files to compile
 FILE = \

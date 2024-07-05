@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:22:05 by iusantos          #+#    #+#             */
-/*   Updated: 2024/07/05 17:27:40 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/05 17:59:42 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@ static void	print_map(char **map)
 	}
 }
 
-static char **init_rectangular_mtx(t_map *map)
+static char	**init_rectangular_mtx(t_map *map)
 {
-	char **rectangular_mtx;
-	int i;
-	int j;
+	char	**rectangular_mtx;
+	int		i;
+	int		j;
 
-	rectangular_mtx = ft_calloc(map->size.h + 1, sizeof(char*));
+	rectangular_mtx = ft_calloc(map->size.h + 1, sizeof(char *));
 	i = 0;
-	while(i < map->size.h)
+	while (i < map->size.h)
 	{
 		rectangular_mtx[i] = ft_calloc(map->max_cols + 1, sizeof(char));
 		i++;
@@ -59,37 +59,51 @@ static char **init_rectangular_mtx(t_map *map)
 	return (rectangular_mtx);
 }
 
-static void embed_matrix(char **small_mtx, char **big_mtx)
+static void	embed_matrix(char **small_mtx, char **big_mtx)
 {
-  int row;
-  int col;
+	int	row;
+	int	col;
 
-  row = 0;
-  while (small_mtx[row] != NULL)
-  {
-    col = 0;
-    while (small_mtx[row][col] != '\0')
-    {
-      big_mtx[row][col] = small_mtx[row][col];
-      col++;
-    }
-    row++;
-  }
+	row = 0;
+	while (small_mtx[row] != NULL)
+	{
+		col = 0;
+		while (small_mtx[row][col] != '\0')
+		{
+			big_mtx[row][col] = small_mtx[row][col];
+			col++;
+		}
+		row++;
+	}
 }
 
-int check_map_border(t_game *game)
+static int	flood_fill(t_map *map, char **mtx, int y, int x)
 {
-	char **rec_mtx;
+	if (y < 0 || y >= map->size.h || x < 0 || x >= map->max_cols
+		|| mtx[y][x] == '1' || mtx[y][x] == '#')
+		return (E_FAIL);
+	mtx[y][x] = '#';
+	flood_fill(map, mtx, y - 1, x);
+	flood_fill(map, mtx, y + 1, x);
+	flood_fill(map, mtx, y, x - 1);
+	flood_fill(map, mtx, y, x + 1);
+	return (E_OK);
+}
+
+int	check_map_border(t_game *game)
+{
+	char	**rec_mtx;
 
 	rec_mtx = init_rectangular_mtx(game->map);
 	printf("\n");
 	print_map(rec_mtx);
-  embed_matrix(game->map->mtx, rec_mtx);
+	embed_matrix(game->map->mtx, rec_mtx);
 	printf("\n");
 	print_map(rec_mtx);
-	//copy map->mtx to rec_mtx;
-	//run flood_fill;
+	flood_fill(game->map, rec_mtx, (int)game->player->grid_pos.y,
+			(int)game->player->grid_pos.x);
+	printf("\n");
+	print_map(rec_mtx);
 	//check_folld_fill;
-	
-	return 1;
+	return (E_OK);
 }

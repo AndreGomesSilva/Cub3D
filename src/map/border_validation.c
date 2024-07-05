@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:22:05 by iusantos          #+#    #+#             */
-/*   Updated: 2024/07/05 16:11:18 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/05 17:27:40 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,32 @@ static char **init_rectangular_mtx(t_map *map)
 	return (rectangular_mtx);
 }
 
+static void embed_matrix(char **small_mtx, char **big_mtx)
+{
+  int row;
+  int col;
+
+  row = 0;
+  while (small_mtx[row] != NULL)
+  {
+    col = 0;
+    while (small_mtx[row][col] != '\0')
+    {
+      big_mtx[row][col] = small_mtx[row][col];
+      col++;
+    }
+    row++;
+  }
+}
+
 int check_map_border(t_game *game)
 {
 	char **rec_mtx;
 
 	rec_mtx = init_rectangular_mtx(game->map);
+	printf("\n");
+	print_map(rec_mtx);
+  embed_matrix(game->map->mtx, rec_mtx);
 	printf("\n");
 	print_map(rec_mtx);
 	//copy map->mtx to rec_mtx;

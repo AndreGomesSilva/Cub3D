@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 16:56:46 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/06 09:52:14 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/06 17:02:51 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,10 @@ int	start_game(char *str)
 	if (init_data(&game, str) != E_OK)
 	{
 		handle_free(&game);
-		return (E_FAIL);
+		return (print_error("Could not initializing data structure\n"));
 	}
 	if (game_loop(&game) != E_OK)
-	{
-		printf("Fail game loop\n");
-		return (E_FAIL);
-	}
+		return (print_error("Could not start game loop\n"));
 	end_game(&game);
 	printf("End game\n");
 	return (E_OK);

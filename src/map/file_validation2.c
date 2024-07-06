@@ -6,38 +6,11 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:18:26 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/06 10:55:47 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/06 15:00:44 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-char	*gnl_wo_nl(int fd)
-{
-	char	*line;
-	char	*s;
-
-	line = get_next_line(fd);
-	if (line)
-	{
-		s = ft_strtrim(line, "\n");
-		free(line);
-		return (s);
-	}
-	return (NULL);
-}
-
-static int	ft_strcmp(const char *s1, const char *s2)
-{
-	while (*s1 != '\0' && *s2 != '\0')
-	{
-		if (*s1 != *s2)
-			return (*s1 - *s2);
-		s1++;
-		s2++;
-	}
-	return (*s1 - *s2);
-}
 
 static int	store_elements(t_game *game, char **words)
 {

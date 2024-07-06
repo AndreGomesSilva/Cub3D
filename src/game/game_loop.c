@@ -6,13 +6,13 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 21:04:11 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/05 21:00:28 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/06 17:03:02 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_loop(void *param)
+static void	init_loop(void *param)
 {
 	t_game	*game;
 
@@ -31,7 +31,8 @@ int	game_loop(t_game *game)
 	render_background(game);
 	render_scene(game);
 	render_minimap(game);
-	mlx_loop_hook(game->win->mlx, &init_loop, game);
+	if (mlx_loop_hook(game->win->mlx, &init_loop, game) == FALSE)
+		return (print_error("Could not set loop hook\n"));
 	mlx_key_hook(game->win->mlx, &move_keyhook, game);
 	mlx_close_hook(game->win->mlx, &hook_close_window, (t_game *)game->win);
 	mlx_loop(game->win->mlx);

@@ -6,23 +6,24 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 18:51:43 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/24 17:24:48 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/06 09:51:30 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void hook_close_window(void *param) {
-  t_window *win;
+void	hook_close_window(void *param)
+{
+	t_window	*win;
 
-  win = (t_window *)param;
-  (void)win;
-  printf("Close window\n");
+	win = (t_window *)param;
+	(void)win;
+	printf("Close window\n");
 }
 
-void move_keyhook(mlx_key_data_t keydatam, void *param)
+void	move_keyhook(mlx_key_data_t keydatam, void *param)
 {
-	t_game *game;
+	t_game	*game;
 
 	game = (t_game *)param;
 	if (keydatam.key == MLX_KEY_ESCAPE)

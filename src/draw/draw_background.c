@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:55:53 by iusantos          #+#    #+#             */
-/*   Updated: 2024/07/03 19:16:47 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/06 09:53:37 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	draw_floor(mlx_image_t *img, t_color *floor)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	j = WIN_HEIGHT / 2;
 	while (j < WIN_HEIGHT)
@@ -23,17 +23,17 @@ static void	draw_floor(mlx_image_t *img, t_color *floor)
 		i = 0;
 		while (i < WIN_WIDTH)
 		{
-			mlx_put_pixel(img, i, j, floor->hex); 
+			mlx_put_pixel(img, i, j, floor->hex);
 			i++;
 		}
 		j++;
 	}
 }
 
-static void draw_ceiling(mlx_image_t *img, t_color *ceiling)
+static void	draw_ceiling(mlx_image_t *img, t_color *ceiling)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	j = 0;
 	while (j < WIN_HEIGHT / 2)
@@ -41,12 +41,11 @@ static void draw_ceiling(mlx_image_t *img, t_color *ceiling)
 		i = 0;
 		while (i < WIN_WIDTH)
 		{
-			mlx_put_pixel(img, i, j, ceiling->hex); 
+			mlx_put_pixel(img, i, j, ceiling->hex);
 			i++;
 		}
 		j++;
 	}
-
 }
 
 void	draw_background(t_game *game)

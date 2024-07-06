@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:18:26 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/04 19:25:16 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/06 10:55:47 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static int	ft_strcmp(const char *s1, const char *s2)
 	}
 	return (*s1 - *s2);
 }
+
 static int	store_elements(t_game *game, char **words)
 {
 	if (ft_strcmp(words[0], "NO") == 0 && game->file_content[NO] == NULL)
@@ -62,7 +63,8 @@ static int	handle_elements(t_game *game, char *line)
 	char	**words;
 
 	words = ft_split(line, ' ');
-	if (words != NULL  && words[0] != NULL && words[1] != NULL && words[2] != NULL)
+	if (words != NULL && words[0] != NULL && words[1] != NULL
+		&& words[2] != NULL)
 	{
 		free_matrix(words);
 		return (print_error("Badly formatted element line\n"));
@@ -79,9 +81,9 @@ static int	handle_elements(t_game *game, char *line)
 	return (E_OK);
 }
 
-static int	file_contents_is_set(char** file_contents)
+static int	file_contents_is_set(char **file_contents)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 6)
@@ -106,14 +108,14 @@ int	check_elements(t_game *game, char *file_name)
 		if (!line)
 			return (print_error("Not all elements were found in file.\n"));
 		if (handle_elements(game, line) == E_FAIL)
-    {
-      free(line);
-      close(game->fd);
+		{
+			free(line);
+			close(game->fd);
 			return (E_FAIL);
-    }
-    free(line);
-	if (file_contents_is_set(game->file_content) == E_OK)
-		return (E_OK);
+		}
+		free(line);
+		if (file_contents_is_set(game->file_content) == E_OK)
+			return (E_OK);
 	}
 	return (E_OK);
 }

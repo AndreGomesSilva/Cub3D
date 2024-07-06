@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:22:05 by iusantos          #+#    #+#             */
-/*   Updated: 2024/07/05 18:49:15 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/06 09:50:37 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,10 @@ static int	flood_fill(t_map *map, char **mtx, int y, int x)
 	return (E_OK);
 }
 
-static int check_leak_borders(t_map *map, char** mtx)
+static int	check_leak_borders(t_map *map, char **mtx)
 {
-	int row;
-	int col;
+	int	row;
+	int	col;
 
 	row = 0;
 	col = 0;
@@ -130,7 +130,7 @@ int	check_map_border(t_game *game)
 	printf("\n");
 	print_map(rec_mtx);
 	flood_fill(game->map, rec_mtx, (int)game->player->grid_pos.y,
-			(int)game->player->grid_pos.x);
+		(int)game->player->grid_pos.x);
 	printf("\n");
 	print_map(rec_mtx);
 	if (check_leak_borders(game->map, rec_mtx) != E_OK)

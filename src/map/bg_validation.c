@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 17:31:03 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/03 19:19:43 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/06 09:51:05 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,39 +49,39 @@ static int	parse_colors(t_color *bg_element, char **rgb)
 	return (E_OK);
 }
 
-static int has_two_commas(char *line)
+static int	has_two_commas(char *line)
 {
-  int i;
-  int number_of_commas;
+	int	i;
+	int	number_of_commas;
 
-  i = 0;
-  number_of_commas = 0;
-  while (line[i])
-  {
-    if (line[i] == ',')
-      number_of_commas++;
-    if (number_of_commas > 2)
-      return (print_error("badly formatted background colors\n"));
-    i++;
-  }
-  return (E_OK);
+	i = 0;
+	number_of_commas = 0;
+	while (line[i])
+	{
+		if (line[i] == ',')
+			number_of_commas++;
+		if (number_of_commas > 2)
+			return (print_error("badly formatted background colors\n"));
+		i++;
+	}
+	return (E_OK);
 }
 
 static int	set_floor_color(char *floor_content, t_color *floor)
 {
 	char	**rgb;
 
-  if (has_two_commas(floor_content) != E_OK)
-    return (E_FAIL);
+	if (has_two_commas(floor_content) != E_OK)
+		return (E_FAIL);
 	rgb = ft_split(floor_content, ',');
 	if (rgb[0] != NULL && rgb[1] != NULL && rgb[2] != NULL && rgb[3] == NULL)
-  {
+	{
 		if (parse_colors(floor, rgb) != E_OK)
-    {
-      free_matrix(rgb);
-      return (E_FAIL);
-    }
-  }
+		{
+			free_matrix(rgb);
+			return (E_FAIL);
+		}
+	}
 	else
 	{
 		free_matrix(rgb);
@@ -95,15 +95,15 @@ static int	set_ceiling_color(char *ceiling_content, t_color *ceiling)
 {
 	char	**rgb;
 
-  if (has_two_commas(ceiling_content) != E_OK)
-    return (E_FAIL);
+	if (has_two_commas(ceiling_content) != E_OK)
+		return (E_FAIL);
 	rgb = ft_split(ceiling_content, ',');
 	if (rgb[0] != NULL && rgb[1] != NULL && rgb[2] != NULL && rgb[3] == NULL)
 	{
 		if (parse_colors(ceiling, rgb) != E_OK)
 		{
-      free_matrix(rgb);
-      return (E_FAIL);
+			free_matrix(rgb);
+			return (E_FAIL);
 		}
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 17:59:27 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/04 17:27:22 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/06 09:28:08 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,3 @@ int	create_player(t_game *game)
 	init_player_plane(game->player);
 	return (E_OK);
 }
-
-
-

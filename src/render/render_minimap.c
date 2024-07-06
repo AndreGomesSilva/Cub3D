@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:11:22 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/30 17:47:22 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/06 09:29:18 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ t_line	get_position_to_draw(int row, int col, t_dimension size)
 
 void	draw_minimap(t_minimap *minimap, t_map *map, t_dimension size)
 {
-  int row;
-  int col;
+	int	row;
+	int	col;
 
 	row = 0;
 	while (row < size.h)
@@ -36,12 +36,12 @@ void	draw_minimap(t_minimap *minimap, t_map *map, t_dimension size)
 		{
 			if (map->mtx[row][col] == '1')
 				draw_screen(minimap->img, get_position_to_draw(row, col,
-						minimap->entity_size),
-					minimap->wall_color.hex, draw_rect);
+						minimap->entity_size), minimap->wall_color.hex,
+					draw_rect);
 			else if (ft_strchr("0NSWE", map->mtx[row][col]) != NULL)
 				draw_screen(minimap->img, get_position_to_draw(row, col,
-						minimap->entity_size),
-					minimap->floor_color.hex, draw_rect);
+						minimap->entity_size), minimap->floor_color.hex,
+					draw_rect);
 			col++;
 		}
 		row++;

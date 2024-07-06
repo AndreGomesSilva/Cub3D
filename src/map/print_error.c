@@ -6,15 +6,15 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 16:18:22 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/28 16:21:30 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/06 09:52:00 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int print_error(char *str)
+int	print_error(char *str)
 {
-  write(2, "Error\n", 6);
-  ft_putstr_fd(str, 2);
-  return (E_FAIL);
+	write(2, "Error\n", 6);
+	ft_putstr_fd(str, 2);
+	return (E_FAIL);
 }

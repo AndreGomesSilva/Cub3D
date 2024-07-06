@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   math_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/06 09:28:46 by angomes-          #+#    #+#             */
+/*   Updated: 2024/07/06 09:28:56 by angomes-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "cub3d.h"
 
 double	degrees_to_radians(double degrees)
 {
@@ -17,10 +28,10 @@ double	radiants_to_degrees(double radians)
 	return (result);
 }
 
-double abs_double(double number)
+double	abs_double(double number)
 {
-    if (number < 0)
-        return (-number);
-    else
-    return (number);
+	if (number < 0)
+		return (-number);
+	else
+		return (number);
 }

@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 16:27:34 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/02 17:24:39 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/06 09:50:09 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	check_number_of_players(char **map_matrix)
 		}
 		row++;
 	}
-  if (player_count == 0)
-    return (print_error("No player found on map\n"));
+	if (player_count == 0)
+		return (print_error("No player found on map\n"));
 	return (E_OK);
 }
 
@@ -80,7 +80,7 @@ int	validate_file(t_game *game, char *file_name)
 {
 	if (check_extension(file_name) != E_OK)
 		return (print_error("Invalid extension\n"));
-    if (check_elements(game, file_name) != E_OK)
+	if (check_elements(game, file_name) != E_OK)
 		return (E_FAIL);
 	return (E_OK);
 }

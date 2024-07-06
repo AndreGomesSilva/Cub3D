@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:36:35 by iusantos          #+#    #+#             */
-/*   Updated: 2024/06/27 16:25:59 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/06 11:39:46 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,90 +27,32 @@ static void	set_raydir_camera_deltadist(t_player *player, int x)
 		player->ray.delta_dist.y = abs_double(1 / player->ray.dir.y);
 }
 
-static void	set_raydir_step_sidedist_map(t_player *player)
+static void	set_raydir_step_sidedist_map(t_ray *ray, t_point player_pos)
 {
-	player->ray.map.x = (int)player->grid_pos.x;
-	player->ray.map.y = (int)player->grid_pos.y;
-	if (player->ray.dir.x < 0)
+	ray->map.x = (int)player_pos.x;
+	ray->map.y = (int)player_pos.y;
+	if (ray->dir.x < 0)
 	{
-		player->ray.step.x = -1;
-		player->ray.side_dist.x = (player->grid_pos.x - player->ray.map.x)
-			* player->ray.delta_dist.x;
+		ray->step.x = -1;
+		ray->side_dist.x = (player_pos.x - ray->map.x) * ray->delta_dist.x;
 	}
 	else
 	{
-		player->ray.step.x = 1;
-		player->ray.side_dist.x = (player->ray.map.x + 1.0 - player->grid_pos.x)
-			* player->ray.delta_dist.x;
+		ray->step.x = 1;
+		ray->side_dist.x = (ray->map.x + 1.0 - player_pos.x)
+			* ray->delta_dist.x;
 	}
-	if (player->ray.dir.y < 0)
+	if (ray->dir.y < 0)
 	{
-		player->ray.step.y = -1;
-		player->ray.side_dist.y = (player->grid_pos.y - player->ray.map.y)
-			* player->ray.delta_dist.y;
+		ray->step.y = -1;
+		ray->side_dist.y = (player_pos.y - ray->map.y) * ray->delta_dist.y;
 	}
 	else
 	{
-		player->ray.step.y = 1;
-		player->ray.side_dist.y = (player->ray.map.y + 1.0 - player->grid_pos.y)
-			* player->ray.delta_dist.y;
+		ray->step.y = 1;
+		ray->side_dist.y = (ray->map.y + 1.0 - player_pos.y)
+			* ray->delta_dist.y;
 	}
-}
-
-static void	dda_loop(t_ray *ray, t_map *map)
-{
-	int	hit;
-
-	hit = 0;
-	while (hit == 0)
-	{
-		if (ray->side_dist.x < ray->side_dist.y)
-		{
-			ray->side_dist.x += ray->delta_dist.x;
-			ray->map.x += ray->step.x;
-			if (ray->dir.x < 0)
-				ray->side_wall = WEST;
-			else
-				ray->side_wall = EAST;
-		}
-		else
-		{
-			ray->side_dist.y += ray->delta_dist.y;
-			ray->map.y += ray->step.y;
-			if (ray->dir.y < 0)
-				ray->side_wall = NORTH;
-			else
-				ray->side_wall = SOUTH;
-		}
-		if (map->mtx[(int)ray->map.y][(int)ray->map.x] == '1')
-			hit = 1;
-	}
-}
-
-static void	calculate_perp_wall_dist(t_ray *ray)
-{
-	if (ray->side_wall == WEST || ray->side_wall == EAST)
-		ray->perp_wall_dist = ray->side_dist.x - ray->delta_dist.x;
-	else
-		ray->perp_wall_dist = ray->side_dist.y - ray->delta_dist.y;
-}
-
-static void	create_vertical_line(t_ray *ray, int col, t_point player_pos,
-		mlx_image_t *img)
-{
-	int	draw_start;
-	int	draw_end;
-
-	ray->line_height = (int)(WIN_HEIGHT / ray->perp_wall_dist);
-	draw_start = WIN_HEIGHT / 2 - ray->line_height / 2;
-	if (draw_start < 0)
-		draw_start = 0;
-	draw_end = WIN_HEIGHT / 2 + ray->line_height / 2;
-	if (draw_end >= WIN_HEIGHT)
-		draw_end = WIN_HEIGHT - 1;
-	texture_pre_render(ray, player_pos, draw_start, draw_end);
-	draw_v_line(col, draw_start, draw_end, ray->tex.buffer, img);
-	ft_bzero(ray->tex.buffer, WIN_HEIGHT);
 }
 
 void	render_scene(t_game *game)
@@ -121,11 +63,10 @@ void	render_scene(t_game *game)
 	while (x < WIN_WIDTH)
 	{
 		set_raydir_camera_deltadist(game->player, x);
-		set_raydir_step_sidedist_map(game->player);
+		set_raydir_step_sidedist_map(&game->player->ray,
+			game->player->grid_pos);
 		dda_loop(&game->player->ray, game->map);
-		calculate_perp_wall_dist(&game->player->ray);
-		create_vertical_line(&game->player->ray, x, game->player->grid_pos,
-				game->main_img);
+		create_vertical_line(game, x);
 		x++;
 	}
 	mlx_image_to_window(game->win->mlx, game->main_img, 0, 0);

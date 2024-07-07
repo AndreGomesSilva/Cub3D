@@ -6,43 +6,43 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 18:26:27 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/05 16:04:10 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/06 09:49:09 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int get_num_row_map(char **map)
+int	get_num_row_map(char **map)
 {
-  int i;
+	int	i;
 
-  i = 0;
-  while (map[i])
-    i++;
-  return (i);
+	i = 0;
+	while (map[i])
+		i++;
+	return (i);
 }
 
-int get_num_col_map(char **map)
+int	get_num_col_map(char **map)
 {
-  int i;
-  int j;
+	int	i;
+	int	j;
 
-  i = 0;
-  while (map[i])
-  {
-    j = 0;
-    while (map[i][j])
-      j++;
-    i++;
-  }
-  return (j);
+	i = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+			j++;
+		i++;
+	}
+	return (j);
 }
 
-int get_max_col(char **mtx)
+int	get_max_col(char **mtx)
 {
-	int i;
-	int j;
-	int max_cols;
+	int	i;
+	int	j;
+	int	max_cols;
 
 	max_cols = 0;
 	i = 0;

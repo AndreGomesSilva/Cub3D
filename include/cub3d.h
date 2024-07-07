@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/05 15:33:09 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/06 17:01:07 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 # define WIN_WIDTH 860
 # define WIN_HEIGHT 640
-# define FOV M_PI / 3
+# define FOV 1.0471975512
 # define MOVEMENT_SPEED 0.4
 # define ROTATION_SPEED 0.05
 
@@ -344,8 +344,7 @@ unsigned int		get_hex_color(t_color *color, int r, int g, int b);
 void				set_transparent(t_color *color, int a);
 void				draw_rect(mlx_image_t *img, t_line line,
 						unsigned int color);
-void				draw_v_line(int col, int start, int end, int *buffer,
-						mlx_image_t *img);
+void				draw_v_line(t_game *game, int col, int start, int end);
 
 // player
 int					create_player(t_game *game);
@@ -362,9 +361,12 @@ int					get_max_col(char **mtx);
 int					print_error(char *str);
 int					set_bg_colors(t_game *game);
 int					check_map_border(t_game *game);
+int					parse_colors(t_color *bg_element, char **rgb);
+int					ft_strcmp(const char *s1, const char *s2);
+char				*gnl_wo_nl(int fd);
+int					flood_fill(t_map *map, char **mtx, int y, int x);
 
 // render
-
 /**
  * Render background to game window (aka draws & put to window)
  */
@@ -380,6 +382,8 @@ void				draw_minimap(t_minimap *minimap, t_map *map,
 void				texture_pre_render(t_ray *ray, t_point player_pos,
 						int draw_start, int draw_end);
 void				clear_image(mlx_image_t *img, int height, int width);
+void				dda_loop(t_ray *ray, t_map *map);
+void				create_vertical_line(t_game *game, int col);
 
 // math
 t_line				rotate_line(t_line line, double angle_radians);

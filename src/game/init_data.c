@@ -6,25 +6,23 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/05 18:38:16 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/06 09:27:44 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_window	*create_window(void)
+static int	create_window(t_game *game)
 {
-	t_window	*win;
-
-	win = ft_calloc(1, sizeof(t_window));
-	if (!win)
-		return (NULL);
-	win->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cub3D", true);
-	if (!win->mlx)
-		return (NULL);
-	win->size.h = WIN_HEIGHT;
-	win->size.w = WIN_WIDTH;
-	return (win);
+	game->win = ft_calloc(1, sizeof(t_window));
+	if (game->win == NULL)
+		return (E_FAIL);
+	game->win->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cub3D", true);
+	if (game->win->mlx == NULL)
+		return (print_error("Could not create window\n"));
+	game->win->size.h = WIN_HEIGHT;
+	game->win->size.w = WIN_WIDTH;
+	return (E_OK);
 }
 
 int	create_map(t_game *game)
@@ -42,34 +40,32 @@ int	create_map(t_game *game)
 	game->map->size.w = get_num_col_map(game->map->mtx);
 	game->map->size.h = get_num_row_map(game->map->mtx);
 	game->map->max_cols = get_max_col(game->map->mtx);
-	//check border
 	return (E_OK);
 }
 
-static t_minimap	*create_minimap(t_window *win, t_map *map)
+static int	create_minimap(t_game *game)
 {
-	t_minimap	*minimap;
-
-	minimap = ft_calloc(1, sizeof(t_minimap));
-	if (!minimap)
-		return (NULL);
-	minimap->size.h = win->size.h * 0.21;
-	minimap->size.w = win->size.w * 0.21;
-	if (minimap->size.h < 10 || minimap->size.w < 20)
+	game->minimap = ft_calloc(1, sizeof(t_minimap));
+	if (game->minimap == NULL)
+		return (E_FAIL);
+	game->minimap->size.h = game->win->size.h * 0.21;
+	game->minimap->size.w = game->win->size.w * 0.21;
+	if (game->minimap->size.h < 10 || game->minimap->size.w < 20)
 	{
-		minimap->size.h = 10;
-		minimap->size.w = 20;
+		game->minimap->size.h = 10;
+		game->minimap->size.w = 20;
 	}
-	minimap->img = mlx_new_image(win->mlx, minimap->size.w, minimap->size.h);
-	if (!minimap->img)
-		return (NULL);
-	minimap->entity_size.h = minimap->size.h / map->size.h;
-	minimap->entity_size.w = minimap->size.w / map->size.w;
-	minimap->floor_color.hex = WHITE;
-	minimap->wall_color.hex = BLACK;
-	minimap->dir_line_color.hex = BLUE;
-	minimap->player_color.hex = RED;
-	return (minimap);
+	game->minimap->img = mlx_new_image(game->win->mlx, game->minimap->size.w,
+			game->minimap->size.h);
+	if (game->minimap->img == NULL)
+		return (print_error("Could not create minimap image\n"));
+	game->minimap->entity_size.h = game->minimap->size.h / game->map->size.h;
+	game->minimap->entity_size.w = game->minimap->size.w / game->map->size.w;
+	game->minimap->floor_color.hex = WHITE;
+	game->minimap->wall_color.hex = BLACK;
+	game->minimap->dir_line_color.hex = BLUE;
+	game->minimap->player_color.hex = RED;
+	return (E_OK);
 }
 
 int	load_textures(mlx_texture_t **wall_texture, char **file_content)
@@ -98,12 +94,12 @@ int	init_data(t_game *game, char *str)
 		return (E_FAIL);
 	if (check_map_border(game) != E_OK)
 		return (E_FAIL);
-	game->win = create_window();
+	if (create_window(game) != E_OK)
+		return (E_FAIL);
 	game->player->ray.tex.texture = game->wall_texture;
 	game->background_img = mlx_new_image(game->win->mlx, WIN_WIDTH, WIN_HEIGHT);
 	game->main_img = mlx_new_image(game->win->mlx, WIN_WIDTH, WIN_HEIGHT);
-	game->minimap = create_minimap(game->win, game->map);
-	if (!game || !game->map || !game->win || !game->minimap || !game->player)
+	if (create_minimap(game) != E_OK)
 		return (E_FAIL);
 	return (E_OK);
 }

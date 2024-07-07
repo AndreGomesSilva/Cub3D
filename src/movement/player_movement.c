@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:56:46 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/30 17:21:10 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/06 11:09:38 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,31 +68,22 @@ void	rotate_player(t_player *player, t_move move)
 {
 	double	old_dir_x;
 	double	old_plane_x;
+	double	rotation_angle;
 
 	old_dir_x = player->dir.x;
 	old_plane_x = player->plane.x;
 	if (move == R_LEFT)
-	{
-		player->dir.x = player->dir.x * cos(-ROTATION_SPEED) - player->dir.y
-			* sin(-ROTATION_SPEED);
-		player->dir.y = old_dir_x * sin(-ROTATION_SPEED) + player->dir.y
-			* cos(-ROTATION_SPEED);
-		player->plane.x = player->plane.x * cos(-ROTATION_SPEED)
-			- player->plane.y * sin(-ROTATION_SPEED);
-		player->plane.y = old_plane_x * sin(-ROTATION_SPEED) + player->plane.y
-			* cos(-ROTATION_SPEED);
-	}
+		rotation_angle = -ROTATION_SPEED;
 	else
-	{
-		player->dir.x = player->dir.x * cos(ROTATION_SPEED) - player->dir.y
-			* sin(ROTATION_SPEED);
-		player->dir.y = old_dir_x * sin(ROTATION_SPEED) + player->dir.y
-			* cos(ROTATION_SPEED);
-		player->plane.x = player->plane.x * cos(ROTATION_SPEED)
-			- player->plane.y * sin(ROTATION_SPEED);
-		player->plane.y = old_plane_x * sin(ROTATION_SPEED) + player->plane.y
-			* cos(ROTATION_SPEED);
-	}
+		rotation_angle = ROTATION_SPEED;
+	player->dir.x = player->dir.x * cos(rotation_angle) - player->dir.y
+		* sin(rotation_angle);
+	player->dir.y = old_dir_x * sin(rotation_angle) + player->dir.y
+		* cos(rotation_angle);
+	player->plane.x = player->plane.x * cos(rotation_angle) - player->plane.y
+		* sin(rotation_angle);
+	player->plane.y = old_plane_x * sin(rotation_angle) + player->plane.y
+		* cos(rotation_angle);
 	player->has_moved = TRUE;
 }
 
@@ -105,7 +96,7 @@ void	handle_player_movement(t_player *player, t_map *map, t_move move)
 	else if (move == R_RIGHT || move == R_LEFT)
 	{
 		rotate_player(player, move);
-		player->rad_angle = rotate_minimap_player(player->rad_angle, ROTATION_SPEED,
-				move);
+		player->rad_angle = rotate_minimap_player(player->rad_angle,
+				ROTATION_SPEED, move);
 	}
 }

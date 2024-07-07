@@ -32,7 +32,7 @@ LIBFT = $(LIBFT_DIR)/libft.a
 LIBMLX = $(LIBMLX_DIR)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
 # Path to the game map
-MAP = maps/map_leaky_not_rectangular.cub
+MAP = maps/map_OK.cub
 
 # Files to compile
 FILE = \
@@ -40,13 +40,13 @@ FILE = \
 			 $(GAME_DIR)start_game $(GAME_DIR)init_data $(GAME_DIR)game_loop $(GAME_DIR)end_game \
 			 $(INPUT_DIR)handle_keymaps \
 			 $(PLAYER_DIR)init_player \
-			 $(MOVEMENT_DIR)player_movement $(MOVEMENT_DIR)minimap_player_movement \
+			 $(MOVEMENT_DIR)player_movement $(MOVEMENT_DIR)minimap_player_movement_bonus \
 			 $(DRAW_DIR)draw_rect $(DRAW_DIR)draw_circle $(DRAW_DIR)draw_line $(DRAW_DIR)color $(DRAW_DIR)draw_background \
-			 $(RENDER_DIR)render_minimap $(RENDER_DIR)render_player_minimap $(RENDER_DIR)render_utils $(RENDER_DIR)render_background  \
-			 $(RENDER_DIR)render_scene $(RENDER_DIR)render_texture \
+			 $(RENDER_DIR)render_minimap_bonus $(RENDER_DIR)render_player_minimap_bonus $(RENDER_DIR)render_utils $(RENDER_DIR)render_background  \
+			 $(RENDER_DIR)render_scene $(RENDER_DIR)render_texture $(RENDER_DIR)dda_loop $(RENDER_DIR)vertical_line \
 			 $(MATH_DIR)rotate_line $(MATH_DIR)math_utils \
-			 $(MAP_DIR)get_map $(MAP_DIR)get_map_info $(MAP_DIR)file_validation $(MAP_DIR)print_error $(MAP_DIR)file_validation2 $(MAP_DIR)bg_validation \
-			 $(MAP_DIR)border_validation \
+			 $(MAP_DIR)get_map $(MAP_DIR)get_map_info $(MAP_DIR)file_validation $(MAP_DIR)print_error $(MAP_DIR)file_validation2 \
+			 $(MAP_DIR)bg_validation  $(MAP_DIR)bg_validation_utils $(MAP_DIR)file_validation_utils $(MAP_DIR)border_validation \
 			 $(FREE_DIR)handle_free \
 
 OBJS = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(FILE)))

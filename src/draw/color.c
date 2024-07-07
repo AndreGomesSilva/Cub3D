@@ -6,11 +6,11 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 21:46:48 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/03 19:18:09 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/06 14:40:54 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "cub3d.h"
 
 unsigned int	rgb_to_hex(int r, int g, int b, int a)
 {

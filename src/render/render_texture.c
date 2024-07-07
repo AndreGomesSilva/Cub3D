@@ -6,11 +6,25 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 18:46:51 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/27 16:18:01 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/06 11:25:13 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static unsigned int	rearrange_color(unsigned int argb)
+{
+	unsigned int	blue;
+	unsigned int	green;
+	unsigned int	red;
+	unsigned int	alpha;
+
+	blue = (argb & 0xFF) << 24;
+	green = (argb & 0xFF00) << 8;
+	red = (argb & 0xFF0000) >> 8;
+	alpha = (argb & 0xFF000000) >> 24;
+	return (blue | green | red | alpha);
+}
 
 static void	fill_buffer(t_ray *ray, int draw_start, int draw_end)
 {
@@ -29,10 +43,7 @@ static void	fill_buffer(t_ray *ray, int draw_start, int draw_end)
 		ray->tex.rgb = *((unsigned int *)tex_surface->pixels
 				+ (unsigned int)(ray->tex.tex_row * tex_surface->width
 					+ ray->tex.tex_col));
-		ray->tex.color.hex = ((ray->tex.rgb & 0xFF) << 24 |
-								(ray->tex.rgb & 0xFF00) << 8 |
-								(ray->tex.rgb & 0xFF0000) >> 8 |
-								(ray->tex.rgb & 0xFF000000) >> 24);
+		ray->tex.color.hex = rearrange_color(ray->tex.rgb);
 		ray->tex.buffer[row] = ray->tex.color.hex;
 		row++;
 	}

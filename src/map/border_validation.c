@@ -6,30 +6,11 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:22:05 by iusantos          #+#    #+#             */
-/*   Updated: 2024/07/05 18:49:15 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/06 15:03:28 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	print_map(char **map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			printf("%c ", map[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
-}
 
 static char	**init_rectangular_mtx(t_map *map)
 {
@@ -77,23 +58,10 @@ static void	embed_matrix(char **small_mtx, char **big_mtx)
 	}
 }
 
-static int	flood_fill(t_map *map, char **mtx, int y, int x)
+static int	check_leak_borders(t_map *map, char **mtx)
 {
-	if (y < 0 || y >= map->size.h || x < 0 || x >= map->max_cols
-		|| mtx[y][x] == '1' || mtx[y][x] == '#')
-		return (E_FAIL);
-	mtx[y][x] = '#';
-	flood_fill(map, mtx, y - 1, x);
-	flood_fill(map, mtx, y + 1, x);
-	flood_fill(map, mtx, y, x - 1);
-	flood_fill(map, mtx, y, x + 1);
-	return (E_OK);
-}
-
-static int check_leak_borders(t_map *map, char** mtx)
-{
-	int row;
-	int col;
+	int	row;
+	int	col;
 
 	row = 0;
 	col = 0;
@@ -124,15 +92,9 @@ int	check_map_border(t_game *game)
 	char	**rec_mtx;
 
 	rec_mtx = init_rectangular_mtx(game->map);
-	printf("\n");
-	print_map(rec_mtx);
 	embed_matrix(game->map->mtx, rec_mtx);
-	printf("\n");
-	print_map(rec_mtx);
 	flood_fill(game->map, rec_mtx, (int)game->player->grid_pos.y,
-			(int)game->player->grid_pos.x);
-	printf("\n");
-	print_map(rec_mtx);
+		(int)game->player->grid_pos.x);
 	if (check_leak_borders(game->map, rec_mtx) != E_OK)
 	{
 		free_matrix(rec_mtx);

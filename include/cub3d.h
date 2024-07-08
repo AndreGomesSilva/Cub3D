@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/06 17:01:07 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/08 15:53:13 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@
 # define WIN_WIDTH 860
 # define WIN_HEIGHT 640
 # define FOV 1.0471975512
-# define MOVEMENT_SPEED 0.4
+# define MOVEMENT_SPEED 0.2
 # define ROTATION_SPEED 0.05
+# define MOUSE_ROTATION_SPEED 0.01
 
 // Some colors
 # define WHITE 0xFFFFFFAA
@@ -53,10 +54,14 @@ typedef enum e_err
 
 /** component move
  * enum that represents the move in some cardinal direction
- * @param UP -> up
- * @param LEFT -> left
- * @param DOWN -> down
- * @param RIGHT -> right
+ * @param UP -> up (move with W)
+ * @param LEFT -> left (move with A)
+ * @param DOWN -> down (move with S)
+ * @param RIGHT -> right (move with D)
+ * @param A_LEFT -> arrow left
+ * @param A_RIGHT -> arrow right
+ * @param M_LEFT -> mouse left move
+ * @param M_RIGHT -> mouse right move
  */
 typedef enum e_move
 {
@@ -64,8 +69,10 @@ typedef enum e_move
 	LEFT,
 	BACKWARD,
 	RIGHT,
-	R_LEFT,
-	R_RIGHT
+	A_LEFT,
+	A_RIGHT,
+	M_LEFT,
+	M_RIGHT
 }					t_move;
 
 /** component wall
@@ -144,6 +151,19 @@ typedef struct s_color
 	unsigned int	hex;
 }					t_color;
 
+/** component texture
+ * struct with reference to texture
+ *
+ * @param buffer -> pointer to buffer with texture column
+ * @param step
+ * @param pos
+ * @param tex_col -> position of texture column
+ * @param tex_row -> position of texture row
+ * @param wall_x -> position of wall in the x axis
+ * @param rgb -> color of the texture in rgb
+ * @param color -> color of the texture converted to hexadecimal
+ * @param texture  -> pointer of pointer to texture
+ */
 typedef struct s_texture
 {
 	int				buffer[WIN_HEIGHT];
@@ -246,6 +266,7 @@ typedef struct s_window
  *
  * @param mtx -> matrix of the map
  * @param size -> size of the map
+ * @param max_cols -> maximum number of columns
  */
 typedef struct s_map
 {
@@ -257,17 +278,15 @@ typedef struct s_map
 /** entity minimap
  * struct that holds the minimap
  *
- * @param minimap_img -> pointer to the minimap image
- * @param wall -> pointer to the wall
- * @param floor -> pointer to the floor
- * @param player -> pointer to the player
- * @param size -> size of the minimap
- * @param player_pos -> position of the player
- * @param dir_line -> line of the player
+ * @param img -> pointer to image
+ * @param dir_line -> player direction line
+ * @param player_pos -> position of the player in pixels
  * @param wall_color -> color of the wall
  * @param floor_color -> color of the floor
  * @param player_color -> color of the player
- * @param dir_line_color -> color of the line of the player
+ * @param dir_line_color -> color of the direction line of the player
+ * @param entity_size -> size of the entity
+ * @param size -> size of the minimap (width and height)
  */
 typedef struct s_minimap
 {
@@ -293,12 +312,21 @@ typedef struct s_minimap
  * @param main_img -> pointer to main image
  * @param background_img -> pointer to background image
  * @param wall_texture -> pointer to wall
+ * @param fd -> file descriptor
+ * @param file_content
+	-> array of string with texture and color ceiling and floor get from file input
+ * @param floor -> floor color (already parsed)
+ * @param ceiling -> ceiling color (already parsed)
+ * @param mouse_x -> mouse x position
+ * @param mouse_y -> mouse y position
  */
 typedef struct s_game
 {
 	t_map			*map;
 	t_window		*win;
 	t_player		*player;
+	int				mouse_x;
+	int				mouse_y;
 	t_minimap		*minimap;
 	mlx_image_t		*main_img;
 	mlx_image_t		*background_img;
@@ -322,6 +350,7 @@ int					game_loop(t_game *game);
 // hook
 void				hook_close_window(void *param);
 void				move_keyhook(mlx_key_data_t keydatam, void *param);
+void				handle_cursor(double x, double y, void *param);
 
 // movement
 void				handle_player_movement(t_player *player, t_map *map,

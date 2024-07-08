@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:56:46 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/06 11:09:38 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/08 15:23:09 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,14 @@ void	rotate_player(t_player *player, t_move move)
 
 	old_dir_x = player->dir.x;
 	old_plane_x = player->plane.x;
-	if (move == R_LEFT)
+	if (move == A_LEFT)
 		rotation_angle = -ROTATION_SPEED;
-	else
+	else if (move == A_RIGHT)
 		rotation_angle = ROTATION_SPEED;
+	else if (move == M_LEFT)
+		rotation_angle = -MOUSE_ROTATION_SPEED;
+	else
+		rotation_angle = MOUSE_ROTATION_SPEED;
 	player->dir.x = player->dir.x * cos(rotation_angle) - player->dir.y
 		* sin(rotation_angle);
 	player->dir.y = old_dir_x * sin(rotation_angle) + player->dir.y
@@ -93,10 +97,15 @@ void	handle_player_movement(t_player *player, t_map *map, t_move move)
 		move_player_left_right(player, map, move);
 	else if (move == FORWARD || move == BACKWARD)
 		move_player_forward_backward(player, map, move);
-	else if (move == R_RIGHT || move == R_LEFT)
+	else if (move == A_RIGHT || move == A_LEFT || move == M_RIGHT
+		|| move == M_LEFT)
 	{
 		rotate_player(player, move);
-		player->rad_angle = rotate_minimap_player(player->rad_angle,
-				ROTATION_SPEED, move);
+		if (move == A_LEFT || move == A_RIGHT)
+			player->rad_angle = rotate_minimap_player(player->rad_angle,
+					ROTATION_SPEED, move);
+		else
+			player->rad_angle = rotate_minimap_player(player->rad_angle,
+					MOUSE_ROTATION_SPEED, move);
 	}
 }

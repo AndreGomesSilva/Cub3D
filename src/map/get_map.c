@@ -38,26 +38,6 @@ static char	*ft_join(char *s1, char *s2)
 	return (str);
 }
 
-// Debug function
-static void	print_map(char **map)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (map[i])
-	{
-		j = 0;
-		while (map[i][j])
-		{
-			printf("%c ", map[i][j]);
-			j++;
-		}
-		printf("\n");
-		i++;
-	}
-}
-
 char	**get_map(int fd)
 {
 	char	*line;
@@ -74,7 +54,6 @@ char	**get_map(int fd)
 	}
 	close(fd);
 	mtx = ft_split(all_lines, '\n');
-	print_map(mtx);
 	free(all_lines);
 	return (mtx);
 }

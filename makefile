@@ -40,7 +40,7 @@ FILE = \
 			 $(GAME_DIR)start_game $(GAME_DIR)init_data $(GAME_DIR)game_loop $(GAME_DIR)end_game \
 			 $(INPUT_DIR)handle_keymaps \
 			 $(PLAYER_DIR)init_player \
-			 $(MOVEMENT_DIR)player_movement $(MOVEMENT_DIR)minimap_player_movement_bonus \
+			 $(MOVEMENT_DIR)player_movement $(MOVEMENT_DIR)minimap_player_movement_bonus $(MOVEMENT_DIR)rotate_mouse_bonus \
 			 $(DRAW_DIR)draw_rect $(DRAW_DIR)draw_circle $(DRAW_DIR)draw_line $(DRAW_DIR)color $(DRAW_DIR)draw_background \
 			 $(RENDER_DIR)render_minimap_bonus $(RENDER_DIR)render_player_minimap_bonus $(RENDER_DIR)render_utils $(RENDER_DIR)render_background  \
 			 $(RENDER_DIR)render_scene $(RENDER_DIR)render_texture $(RENDER_DIR)dda_loop $(RENDER_DIR)vertical_line \

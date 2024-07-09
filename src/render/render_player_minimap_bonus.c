@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_player_minimap.c                            :+:      :+:    :+:   */
+/*   render_player_minimap_bonus.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:00:55 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/06 10:01:12 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/09 19:14:20 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	draw_dir_line(t_minimap *minimap, t_player *player)
 	line.start.x = minimap->player_pos.x;
 	line.start.y = minimap->player_pos.y;
 	line.end.x = line.start.x;
-	line.end.y = line.start.y - 6;
+	line.end.y = line.start.y - 8;
 	line = rotate_line(line, player->rad_angle);
 	draw_screen(minimap->img, line, minimap->dir_line_color.hex, draw_line);
 }

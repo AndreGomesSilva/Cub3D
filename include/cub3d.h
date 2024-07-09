@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/08 15:53:13 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/09 19:03:23 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,18 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define WIN_WIDTH 860
-# define WIN_HEIGHT 640
+# define WIN_WIDTH 1920
+# define WIN_HEIGHT 1080
 # define FOV 1.0471975512
 # define MOVEMENT_SPEED 0.2
 # define ROTATION_SPEED 0.05
 # define MOUSE_ROTATION_SPEED 0.01
 
 // Some colors
-# define WHITE 0xFFFFFFAA
-# define RED 0xFF0000FF
-# define GREEN 0x00FF00FF
-# define BLUE 0x0000FFFF
-# define BLACK 0x00000066
-# define YELLOW 0xFEE020FF
-# define PURPLE 0x674EA7FF
+# define MIN_FLOOR_COLOR 0x9CA9B199
+# define MIN_WALL_COLOR 0x25252599
+# define MIN_PLAYER_COLOR 0x81573DFF
+# define MIN_DIR_LINE_COLOR 0xF44E40FF
 
 /*                            COMPONENTS                          */
 

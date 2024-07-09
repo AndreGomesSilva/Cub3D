@@ -6,14 +6,13 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 23:48:57 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/07 18:38:36 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/09 19:47:42 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-void	draw_rect(mlx_image_t *img, t_line line,
-		unsigned int color)
+void	draw_rect(mlx_image_t *img, t_line line, unsigned int color)
 {
 	t_point	p;
 

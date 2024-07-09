@@ -1,17 +1,11 @@
-F                                       153,153,102                  
 
+NO ./assets/textures/wall_textures/tile02.png
+WE ./assets/textures/wall_textures/tile01.png
+SO ./assets/textures/wall_textures/tile03.png 
+EA ./assets/textures/wall_textures/tile04.png
 
-WE               ./assets/textures/wall_textures/tile118.png
-
-C 51,51,153
-
-
-NO ./assets/textures/wall_textures/tile066.png
-SO               ./assets/textures/wall_textures/tile106.png 
-        EA       ./assets/textures/wall_textures/tile120.png
-
-
-
+F 75,75,75                
+C 47,55,66
 
 1111111111111111111111111
 1000000000110000000000001
@@ -28,6 +22,3 @@ SO               ./assets/textures/wall_textures/tile106.png
 1000000000110000000000001
 1000000000000000000000001
 1111111111111111111111111
-
-
-

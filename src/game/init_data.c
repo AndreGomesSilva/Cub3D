@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/06 09:27:44 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/09 20:23:46 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,23 +48,24 @@ static int	create_minimap(t_game *game)
 	game->minimap = ft_calloc(1, sizeof(t_minimap));
 	if (game->minimap == NULL)
 		return (E_FAIL);
-	game->minimap->size.h = game->win->size.h * 0.21;
-	game->minimap->size.w = game->win->size.w * 0.21;
-	if (game->minimap->size.h < 10 || game->minimap->size.w < 20)
+	game->minimap->size.h = game->win->size.h * 0.09;
+	game->minimap->size.w = game->win->size.w * 0.18;
+	if (game->minimap->size.h < 20 || game->minimap->size.w < 20)
 	{
-		game->minimap->size.h = 10;
+		game->minimap->size.h = 20;
 		game->minimap->size.w = 20;
 	}
 	game->minimap->img = mlx_new_image(game->win->mlx, game->minimap->size.w,
 			game->minimap->size.h);
 	if (game->minimap->img == NULL)
 		return (print_error("Could not create minimap image\n"));
-	game->minimap->entity_size.h = game->minimap->size.h / game->map->size.h;
-	game->minimap->entity_size.w = game->minimap->size.w / game->map->size.w;
-	game->minimap->floor_color.hex = WHITE;
-	game->minimap->wall_color.hex = BLACK;
-	game->minimap->dir_line_color.hex = BLUE;
-	game->minimap->player_color.hex = RED;
+	game->minimap->entity_size.h = (game->minimap->size.h / game->map->size.h);
+	game->minimap->entity_size.w = (game->minimap->size.w
+			/ game->map->max_cols);
+	game->minimap->floor_color.hex = MIN_FLOOR_COLOR;
+	game->minimap->wall_color.hex = MIN_WALL_COLOR;
+	game->minimap->dir_line_color.hex = MIN_DIR_LINE_COLOR;
+	game->minimap->player_color.hex = MIN_PLAYER_COLOR;
 	return (E_OK);
 }
 

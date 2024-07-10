@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/09 19:03:23 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/10 11:21:53 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -397,8 +397,10 @@ int					flood_fill(t_map *map, char **mtx, int y, int x);
  * Render background to game window (aka draws & put to window)
  */
 void				render_background(t_game *game);
-void				render_scene(t_game *game);
-void				render_minimap(t_game *game);
+void				first_render_scene(t_game *game);
+void				re_render_scene(t_game *game);
+void				first_render_minimap(t_game *game);
+void				re_render_minimap(t_game *game);
 void				draw_screen(mlx_image_t *img, t_line line,
 						unsigned int color, void (*func)(mlx_image_t *img,
 							t_line line, unsigned int color));

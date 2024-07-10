@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 21:04:11 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/08 15:42:41 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/10 11:21:14 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ static void	init_loop(void *param)
 	game = (t_game *)param;
 	if (game->player->has_moved)
 	{
-		clear_image(game->main_img, WIN_HEIGHT, WIN_WIDTH);
-		render_scene(game);
-		render_minimap(game);
+		re_render_scene(game);
+		re_render_minimap(game);
 		game->player->has_moved = FALSE;
 	}
 }
@@ -29,8 +28,8 @@ static void	init_loop(void *param)
 int	game_loop(t_game *game)
 {
 	render_background(game);
-	render_scene(game);
-	render_minimap(game);
+	first_render_scene(game);
+	first_render_minimap(game);
 	mlx_loop_hook(game->win->mlx, &init_loop, game);
 	mlx_key_hook(game->win->mlx, &move_keyhook, game);
 	mlx_get_mouse_pos(game->win->mlx, &game->mouse_x, &game->mouse_y);

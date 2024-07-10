@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/10 11:21:53 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/10 12:01:04 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -332,6 +332,7 @@ typedef struct s_game
 	t_color			floor;
 	t_color			ceiling;
 	mlx_texture_t	*wall_texture[4];
+	mlx_texture_t	*gun_texture[5];
 }					t_game;
 
 /* --------------------------------------------------------------*/
@@ -374,6 +375,9 @@ void				draw_v_line(t_game *game, int col, int start, int end);
 
 // player
 int					create_player(t_game *game);
+
+//gun sprite animation
+int					load_gun_textures(mlx_texture_t **gun_texture);
 
 // map
 int					validate_file(t_game *game, char *file_name);

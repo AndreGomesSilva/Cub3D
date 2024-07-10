@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/09 20:23:46 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/10 12:05:07 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int	init_data(t_game *game, char *str)
 	if (validate_file(game, str) != E_OK)
 		return (E_FAIL);
 	if (load_textures(game->wall_texture, game->file_content) != E_OK)
+		return (E_FAIL);
+	if (load_gun_textures(game->gun_texture) != E_OK)
 		return (E_FAIL);
 	if (set_bg_colors(game) != E_OK)
 		return (E_FAIL);

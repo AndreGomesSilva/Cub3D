@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/10 12:05:07 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/10 15:13:12 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,6 @@ int	init_data(t_game *game, char *str)
 		return (E_FAIL);
 	if (load_textures(game->wall_texture, game->file_content) != E_OK)
 		return (E_FAIL);
-	if (load_gun_textures(game->gun_texture) != E_OK)
-		return (E_FAIL);
 	if (set_bg_colors(game) != E_OK)
 		return (E_FAIL);
 	if (create_map(game) != E_OK)
@@ -102,6 +100,8 @@ int	init_data(t_game *game, char *str)
 	game->player->ray.tex.texture = game->wall_texture;
 	game->background_img = mlx_new_image(game->win->mlx, WIN_WIDTH, WIN_HEIGHT);
 	game->main_img = mlx_new_image(game->win->mlx, WIN_WIDTH, WIN_HEIGHT);
+	if (create_gun(game) != E_OK)
+		return (E_FAIL);
 	if (create_minimap(game) != E_OK)
 		return (E_FAIL);
 	return (E_OK);

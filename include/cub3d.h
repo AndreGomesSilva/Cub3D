@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/10 12:01:04 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/10 16:41:48 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define WIN_WIDTH 1920
-# define WIN_HEIGHT 1080
+# define WIN_WIDTH 1024
+# define WIN_HEIGHT 768
 # define FOV 1.0471975512
 # define MOVEMENT_SPEED 0.2
 # define ROTATION_SPEED 0.05
@@ -333,6 +333,7 @@ typedef struct s_game
 	t_color			ceiling;
 	mlx_texture_t	*wall_texture[4];
 	mlx_texture_t	*gun_texture[5];
+	mlx_image_t		*gun_img[5];
 }					t_game;
 
 /* --------------------------------------------------------------*/
@@ -377,7 +378,7 @@ void				draw_v_line(t_game *game, int col, int start, int end);
 int					create_player(t_game *game);
 
 //gun sprite animation
-int					load_gun_textures(mlx_texture_t **gun_texture);
+int					create_gun(t_game *game);
 
 // map
 int					validate_file(t_game *game, char *file_name);
@@ -405,6 +406,7 @@ void				first_render_scene(t_game *game);
 void				re_render_scene(t_game *game);
 void				first_render_minimap(t_game *game);
 void				re_render_minimap(t_game *game);
+void				first_render_gun(t_game *game);
 void				draw_screen(mlx_image_t *img, t_line line,
 						unsigned int color, void (*func)(mlx_image_t *img,
 							t_line line, unsigned int color));

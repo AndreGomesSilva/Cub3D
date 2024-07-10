@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 18:46:51 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/10 16:55:54 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/10 17:53:51 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static void	fill_buffer(t_ray *ray, int draw_start, int draw_end)
 		ray->tex.buffer[row] = ray->tex.color.hex;
 		row++;
 	}
-  printf("wall_x: %f, tex_col: %d, tex_row: %d, pos: %f\n", ray->tex.wall_x, ray->tex.tex_col, ray->tex.tex_row, ray->tex.pos);
 }
 
 static void	select_texture_col(t_ray *ray, t_point player_pos)

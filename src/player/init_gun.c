@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:55:10 by iusantos          #+#    #+#             */
-/*   Updated: 2024/07/10 16:39:17 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/11 11:57:39 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,31 @@ void	first_render_gun(t_game *game)
 		if (i != 0)
 			game->gun_img[i]->enabled = false;
 		i++;
+	}
+}
+
+void	shoot(t_game *game, long long *i, long long *click_frame)
+{
+	if (*i == 5)
+	{
+		game->gun_img[1]->enabled = false;
+		game->gun_img[2]->enabled = true;
+	}
+	if (*i == 10)
+	{
+		game->gun_img[2]->enabled = false;
+		game->gun_img[3]->enabled = true;
+	}
+	if (*i == 15)
+	{
+		game->gun_img[3]->enabled = false;
+		game->gun_img[4]->enabled = true;
+	}
+	if (*i == 20)
+	{
+		game->gun_img[4]->enabled = false;
+		game->gun_img[0]->enabled = true;
+		*i = -1;
+		*click_frame = -1;
 	}
 }

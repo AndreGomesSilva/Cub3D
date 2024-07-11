@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/10 16:41:48 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/11 11:56:30 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,6 +244,7 @@ typedef struct s_player
 	t_ray			ray;
 	double			rad_angle;
 	t_bool			has_moved;
+	t_bool			has_shot;
 }					t_player;
 
 /** entity window
@@ -349,6 +350,8 @@ int					game_loop(t_game *game);
 // hook
 void				hook_close_window(void *param);
 void				move_keyhook(mlx_key_data_t keydatam, void *param);
+void				mouse_keyhook(mouse_key_t button, action_t action,
+					  modifier_key_t mods, void *param);
 void				handle_cursor(double x, double y, void *param);
 
 // movement
@@ -379,6 +382,7 @@ int					create_player(t_game *game);
 
 //gun sprite animation
 int					create_gun(t_game *game);
+void				shoot(t_game *game, long long *i, long long *click_frame);
 
 // map
 int					validate_file(t_game *game, char *file_name);

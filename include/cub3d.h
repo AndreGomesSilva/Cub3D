@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/11 11:56:30 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/11 14:35:58 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define FOV 1.0471975512
 # define MOVEMENT_SPEED 0.2
 # define ROTATION_SPEED 0.05
-# define MOUSE_ROTATION_SPEED 0.01
+# define MOUSE_ROTATION_SPEED 0.037
 
 // Some colors
 # define MIN_FLOOR_COLOR 0x9CA9B199

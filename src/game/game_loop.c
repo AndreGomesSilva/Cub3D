@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 21:04:11 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/11 11:57:14 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/11 12:04:44 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static void	init_loop(void *param)
 {
-	t_game	*game;
-	static long long frame;
-	static long long click_frame = -1;
-	static long long i = -1;
+	t_game				*game;
+	static long long	frame;
+	static long long	click_frame = -1;
+	static long long	i = -1;
 
 	game = (t_game *)param;
 	if (game->player->has_moved)

@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:55:10 by iusantos          #+#    #+#             */
-/*   Updated: 2024/07/11 11:57:39 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/11 12:03:41 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	load_gun_textures(mlx_texture_t **gun_texture)
 
 static int	init_gun_img(t_game *game, mlx_texture_t **gun_texture)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 5)
@@ -61,13 +61,13 @@ int	create_gun(t_game *game)
 
 void	first_render_gun(t_game *game)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 5)
 	{
 		mlx_image_to_window(game->win->mlx, game->gun_img[i], WIN_WIDTH / 2,
-		WIN_HEIGHT - 180);
+			WIN_HEIGHT - 180);
 		if (i != 0)
 			game->gun_img[i]->enabled = false;
 		i++;

@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:55:10 by iusantos          #+#    #+#             */
-/*   Updated: 2024/07/11 12:03:41 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/11 12:35:13 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 static int	load_gun_textures(mlx_texture_t **gun_texture)
 {
 	gun_texture[0]
-		= mlx_load_png("./assets/textures/gun_textures/shotgun1.png");
+		= mlx_load_png("./assets/textures/gun_textures/shotgun1-2.png");
 	gun_texture[1]
-		= mlx_load_png("./assets/textures/gun_textures/shotgun2.png");
+		= mlx_load_png("./assets/textures/gun_textures/shotgun2-2.png");
 	gun_texture[2]
-		= mlx_load_png("./assets/textures/gun_textures/shotgun3.png");
+		= mlx_load_png("./assets/textures/gun_textures/shotgun3-2.png");
 	gun_texture[3]
-		= mlx_load_png("./assets/textures/gun_textures/shotgun4.png");
+		= mlx_load_png("./assets/textures/gun_textures/shotgun4-2.png");
 	gun_texture[4]
-		= mlx_load_png("./assets/textures/gun_textures/shotgun5.png");
+		= mlx_load_png("./assets/textures/gun_textures/shotgun5-2.png");
 	if (!gun_texture[0] || !gun_texture[0] || !gun_texture[0]
 		||!gun_texture[0] ||!gun_texture[0])
 		return (print_error("Could not load gun textures\n"));
@@ -66,8 +66,8 @@ void	first_render_gun(t_game *game)
 	i = 0;
 	while (i < 5)
 	{
-		mlx_image_to_window(game->win->mlx, game->gun_img[i], WIN_WIDTH / 2,
-			WIN_HEIGHT - 180);
+		mlx_image_to_window(game->win->mlx, game->gun_img[i],
+			WIN_WIDTH / 2 - 100, WIN_HEIGHT - 360);
 		if (i != 0)
 			game->gun_img[i]->enabled = false;
 		i++;

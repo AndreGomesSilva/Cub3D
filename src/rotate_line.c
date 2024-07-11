@@ -6,11 +6,11 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/04 20:37:39 by angomes-          #+#    #+#             */
-/*   Updated: 2024/06/30 16:55:47 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/11 18:31:28 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "cub3d.h"
 
 t_point	rotate_point(t_point p, double angle_radians)
 {

@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start_game.c                                       :+:      :+:    :+:   */
+/*   end_game.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/03 16:56:46 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/08 15:33:32 by angomes-         ###   ########.fr       */
+/*   Created: 2024/05/03 21:04:49 by angomes-          #+#    #+#             */
+/*   Updated: 2024/07/11 18:30:38 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "cub3d.h"
 
-int	start_game(char *str)
+void	end_game(t_game *game)
 {
-	t_game	game;
-
-	ft_bzero(&game, sizeof(t_game));
-	printf("Start game\n");
-	if (init_data(&game, str) != E_OK)
-	{
-		handle_free(&game);
-		return (print_error("Could not initializing data structure\n"));
-	}
-	game_loop(&game);
-	end_game(&game);
-	printf("End game\n");
-	return (E_OK);
+	mlx_terminate(game->win->mlx);
+	handle_free(game);
 }

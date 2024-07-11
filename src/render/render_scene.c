@@ -6,7 +6,7 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 17:36:35 by iusantos          #+#    #+#             */
-/*   Updated: 2024/07/06 11:39:46 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/10 11:16:23 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	set_raydir_step_sidedist_map(t_ray *ray, t_point player_pos)
 	}
 }
 
-void	render_scene(t_game *game)
+void	first_render_scene(t_game *game)
 {
 	int	x;
 
@@ -70,4 +70,23 @@ void	render_scene(t_game *game)
 		x++;
 	}
 	mlx_image_to_window(game->win->mlx, game->main_img, 0, 0);
+}
+
+void	re_render_scene(t_game *game)
+{	
+	int	x;
+
+	game->main_img->enabled = false;
+	clear_image(game->main_img, WIN_HEIGHT, WIN_WIDTH);
+	x = 0;
+	while (x < WIN_WIDTH)
+	{
+		set_raydir_camera_deltadist(game->player, x);
+		set_raydir_step_sidedist_map(&game->player->ray,
+			game->player->grid_pos);
+		dda_loop(&game->player->ray, game->map);
+		create_vertical_line(game, x);
+		x++;
+	}
+	game->main_img->enabled = true;
 }

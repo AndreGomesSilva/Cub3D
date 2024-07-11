@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:11:22 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/09 20:06:32 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/10 11:20:47 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,19 @@ void	draw_minimap(t_minimap *minimap, t_map *map, t_dimension size)
 	}
 }
 
-void	render_minimap(t_game *game)
+void	first_render_minimap(t_game *game)
 {
+	draw_minimap(game->minimap, game->map, game->map->size);
+	draw_player_minimap(game->minimap, game->player);
+	mlx_image_to_window(game->win->mlx, game->minimap->img, 0, 0);
+}
+
+void	re_render_minimap(t_game *game)
+{
+	game->minimap->img->enabled = false;
 	clear_image(game->minimap->img, game->minimap->size.h,
 		game->minimap->size.w);
 	draw_minimap(game->minimap, game->map, game->map->size);
 	draw_player_minimap(game->minimap, game->player);
-	mlx_image_to_window(game->win->mlx, game->minimap->img, 0, 0);
+	game->minimap->img->enabled = true;
 }

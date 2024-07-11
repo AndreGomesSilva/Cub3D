@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:25:39 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/06 09:52:46 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/11 12:16:46 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,19 @@ void	free_textures(mlx_texture_t **wall_texture)
 		mlx_delete_texture(wall_texture[WEST]);
 }
 
+static void	free_gun_textures(mlx_texture_t **gun_textures)
+{
+	int	i;
+
+	i = 0;
+	while (i < 5)
+	{
+		if (gun_textures[i] != NULL)
+			mlx_delete_texture(gun_textures[i]);
+		i++;
+	}
+}
+
 void	handle_free(t_game *game)
 {
 	if (game->win)
@@ -66,6 +79,7 @@ void	handle_free(t_game *game)
 	}
 	free_file_content(game->file_content);
 	free_textures(game->wall_texture);
+	free_gun_textures(game->gun_texture);
 	if (game->minimap)
 		free(game->minimap);
 	if (game->player)

@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:18:26 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/12 15:52:12 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/12 17:36:17 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,11 @@ int	check_elements(t_game *game, char *file_name)
 			return (print_error("Not all elements were found in file.\n"));
 		if (handle_elements(game, line) == E_FAIL)
 		{
-			free(line);
+			while (line)
+			{
+				free(line);
+				line = get_next_line(game->fd);
+			}
 			close(game->fd);
 			return (E_FAIL);
 		}

@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/12 15:29:09 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/12 19:14:54 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-# define WIN_WIDTH 1024
-# define WIN_HEIGHT 768
+# define WIN_WIDTH 1600
+# define WIN_HEIGHT 900
 # define FOV 1.0471975512
 # define MOVEMENT_SPEED 0.2
 # define ROTATION_SPEED 0.05
@@ -415,8 +415,6 @@ void				draw_screen(mlx_image_t *img, t_line line,
 						unsigned int color, void (*func)(mlx_image_t *img,
 							t_line line, unsigned int color));
 void				draw_player_minimap(t_minimap *minimap, t_player *player);
-void				draw_minimap(t_minimap *minimap, t_map *map,
-						t_dimension size);
 void				texture_pre_render(t_ray *ray, t_point player_pos,
 						int draw_start, int draw_end);
 void				clear_image(mlx_image_t *img, int height, int width);

@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:11:22 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/12 15:50:23 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/12 19:11:52 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ t_line	get_position_to_draw(int row, int col, t_dimension size)
 	return (line);
 }
 
-void	draw_minimap(t_minimap *minimap, t_map *map, t_dimension size)
+void	draw_minimap(t_minimap *minimap, t_map *map)
 {
 	int	row;
 	int	col;
 
 	row = 0;
-	while (row < size.h)
+	while (map->mtx[row] != NULL)
 	{
 		col = 0;
-		while (col < map->max_cols)
+		while (map->mtx[row][col] != '\0')
 		{
 			if (map->mtx[row][col] == '1')
 				draw_screen(minimap->img, get_position_to_draw(row, col,
@@ -50,7 +50,7 @@ void	draw_minimap(t_minimap *minimap, t_map *map, t_dimension size)
 
 void	first_render_minimap(t_game *game)
 {
-	draw_minimap(game->minimap, game->map, game->map->size);
+	draw_minimap(game->minimap, game->map);
 	draw_player_minimap(game->minimap, game->player);
 	mlx_image_to_window(game->win->mlx, game->minimap->img, 0, 0);
 }
@@ -60,7 +60,7 @@ void	re_render_minimap(t_game *game)
 	game->minimap->img->enabled = false;
 	clear_image(game->minimap->img, game->minimap->size.h,
 		game->minimap->size.w);
-	draw_minimap(game->minimap, game->map, game->map->size);
+	draw_minimap(game->minimap, game->map);
 	draw_player_minimap(game->minimap, game->player);
 	game->minimap->img->enabled = true;
 }

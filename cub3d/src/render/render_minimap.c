@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_minimap_bonus.c                             :+:      :+:    :+:   */
+/*   render_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:11:22 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/10 11:20:47 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/12 18:54:43 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,12 @@ void	draw_minimap(t_minimap *minimap, t_map *map, t_dimension size)
 	int	row;
 	int	col;
 
+	(void) size;
 	row = 0;
-	while (row < size.h)
+	while (map->mtx[row] != NULL)
 	{
 		col = 0;
-		while (col < map->max_cols)
+		while (map->mtx[row][col] != '\0')
 		{
 			if (map->mtx[row][col] == '1')
 				draw_screen(minimap->img, get_position_to_draw(row, col,

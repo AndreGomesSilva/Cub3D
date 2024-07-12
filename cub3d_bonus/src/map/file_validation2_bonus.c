@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:18:26 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/12 17:36:17 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/12 18:05:56 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	store_elements(t_game *game, char **words)
 	else if (ft_strcmp(words[0], "C") == 0 && game->file_content[C] == NULL)
 		game->file_content[C] = ft_strdup(words[1]);
 	else
-		return (print_error("Duplicated element type in file.\n"));
+		return (print_error("Badly formatted file.\n"));
 	return (E_OK);
 }
 
@@ -40,7 +40,7 @@ static int	handle_elements(t_game *game, char *line)
 		&& words[2] != NULL)
 	{
 		free_matrix(words);
-		return (print_error("Badly formatted element line\n"));
+		return (print_error("Badly formatted file.\n"));
 	}
 	if (words != NULL && words[0] != NULL && words[1] != NULL)
 	{

@@ -2,7 +2,7 @@
 NAME = cub3D
 BONUS = cub3D_bonus
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Ofast 
+CFLAGS = -Wall -Wextra -Werror -g3 
 DEPFLAGS = -MMD -MP
 DEV_FLAGS = -g3
 LEAKS = valgrind --leak-check=full --show-leak-kinds=all  --suppressions=./suppress.sup #--log-file=leaks.sup

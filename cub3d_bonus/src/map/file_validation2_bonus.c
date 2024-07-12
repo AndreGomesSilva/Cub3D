@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:18:26 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/12 15:52:12 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/12 18:05:56 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	store_elements(t_game *game, char **words)
 	else if (ft_strcmp(words[0], "C") == 0 && game->file_content[C] == NULL)
 		game->file_content[C] = ft_strdup(words[1]);
 	else
-		return (print_error("Duplicated element type in file.\n"));
+		return (print_error("Badly formatted file.\n"));
 	return (E_OK);
 }
 
@@ -40,7 +40,7 @@ static int	handle_elements(t_game *game, char *line)
 		&& words[2] != NULL)
 	{
 		free_matrix(words);
-		return (print_error("Badly formatted element line\n"));
+		return (print_error("Badly formatted file.\n"));
 	}
 	if (words != NULL && words[0] != NULL && words[1] != NULL)
 	{
@@ -82,7 +82,11 @@ int	check_elements(t_game *game, char *file_name)
 			return (print_error("Not all elements were found in file.\n"));
 		if (handle_elements(game, line) == E_FAIL)
 		{
-			free(line);
+			while (line)
+			{
+				free(line);
+				line = get_next_line(game->fd);
+			}
 			close(game->fd);
 			return (E_FAIL);
 		}

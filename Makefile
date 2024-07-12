@@ -1,5 +1,6 @@
 # Basic variables
 NAME = cub3D
+NAME_BONUS = cub3D_bonus
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -Ofast 
 DEPFLAGS = -MMD -MP
@@ -7,7 +8,9 @@ DEV_FLAGS = -g3
 LEAKS = valgrind --leak-check=full --show-leak-kinds=all  --suppressions=./suppress.sup #--log-file=leaks.sup
 
 #Libraries
-INC = -I ./include
+LIB_INC = -I ./lib/MLX42/include/MLX42/ -I./lib/libft/include/
+INC = -I ./cub3d/include/ $(LIB_INC)
+INC_BONUS = -I ./cub3d_bonus/include/ $(LIB_INC)
 LIBFT_DIR = ./lib/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 LIBMLX_DIR = ./lib/MLX42
@@ -17,33 +20,48 @@ LIBMLX_WITH_FLAGS = $(LIBMLX_DIR)/build/libmlx42.a -ldl -lglfw -pthread -lm
 #Map file
 MAP = ./maps/map.cub
 
-SRC = src/main.c \
+FILES = src/main.c \
 	  $(addprefix src/draw/, draw_background.c draw_circle.c draw_line.c draw_rect.c color.c) \
 	  $(addprefix src/free/, handle_free.c) \
 	  $(addprefix src/game/, end_game.c game_loop.c init_data.c start_game.c) \
 	  $(addprefix src/input/, handle_keymaps.c) \
 	  $(addprefix src/map/, bg_validation.c bg_validation_utils.c border_validation.c file_validation.c file_validation2.c file_validation_utils.c get_map.c get_map_info.c print_error.c) \
 	  $(addprefix src/math/, math_utils.c rotate_line.c) \
-	  $(addprefix src/movement/, minimap_player_movement_bonus.c player_movement.c rotate_mouse_bonus.c) \
+	  $(addprefix src/movement/, minimap_player_movement.c player_movement.c rotate_mouse.c) \
 	  $(addprefix src/player/, init_gun.c init_player.c) \
-	  $(addprefix src/render/, dda_loop.c render_background.c render_minimap_bonus.c render_player_minimap_bonus.c render_scene.c render_texture.c render_utils.c vertical_line.c)
+	  $(addprefix src/render/, dda_loop.c render_background.c render_minimap.c render_player_minimap.c render_scene.c render_texture.c render_utils.c vertical_line.c)
+
+
+SRC = $(addprefix cub3d/, $(addsuffix .c, $(basename $(FILES))))
+SRC_BONUS = $(addprefix(cub3d_bonus/, $(addsuffix _bonus.c, $(basename $(FILES)))))
 
 OBJ = $(addprefix obj/, $(addsuffix .o, $(basename $(SRC))))
+OBJ_BONUS = $(addprefix obj_bonus/, $(addsuffix _bonus.o, $(basename $(SRC_BONUS))))
 
 DEP = $(OBJ:.o=.d)
+DEP_BONUS = $(OBJ_BONUS:.o=.d) 
 
 OBJ_DIR = obj/
+OBJ_BONUS_DIR = obj_bonus/
 
 all: $(NAME)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
+$(OBJ_BONUS_DIR):
+	@mkdir -p $(OBJ_BONUS_DIR)
+
 $(OBJ_DIR)%.o:%.c | $(OBJ_DIR)
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(DEPFLAGS) $(INC) -c $< -o $@
 
+$(OBJ_BONUS_DIR)%.o:%.c | $(OBJ_BONUS_DIR)
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(DEPFLAGS) $(INC_BONUS) -c $< -o $@
+	
 -include $(DEP)
+-include $(DEP_BONUS)
 
 $(LIBMLX):
 	@if [ ! -f $(LIBMLX_DIR)/build/libmlx42.a ]; then \
@@ -64,6 +82,9 @@ $(LIBFT):
 $(NAME): $(OBJ) $(LIBFT) $(LIBMLX)
 		$(CC) $(CFLAGS) $(OBJ) $(INC) $(LIBFT) $(LIBMLX_WITH_FLAGS) -o $(NAME)
 
+bonus: $(OBJ_BONUS) $(LIBFT) $(LIBMLX)
+	$(CC) $(CFLAGS) $(OBJ_BONUS) $(INC_BONUS) $(LIBFT) $(LIBMLX_WITH_FLAGS) -o $(NAME_BONUS)
+
 play:
 	@make
 	./$(NAME) $(MAP)
@@ -74,13 +95,15 @@ val:
 
 clean:
 	rm -rf obj
+	rm -rf obj_bonus
 	@make -C $(LIBFT_DIR) clean
 
 fclean: clean
 	rm -rf $(NAME)
+	rm -rf $(NAME_BONUS)
 	@make -C $(LIBFT_DIR) fclean
 	rm -rf $(LIBMLX_DIR)/build
 
 re: fclean all
 
-.PHONY: all clean fclean re play val
+.PHONY: all clean fclean re play val bonus

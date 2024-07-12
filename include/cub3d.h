@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:37 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/11 14:35:58 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/11 20:42:00 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define ROTATION_SPEED 0.05
 # define MOUSE_ROTATION_SPEED 0.037
 
-// Some colors
+// Minimap colors
 # define MIN_FLOOR_COLOR 0x9CA9B199
 # define MIN_WALL_COLOR 0x25252599
 # define MIN_PLAYER_COLOR 0x81573DFF
@@ -351,7 +351,7 @@ int					game_loop(t_game *game);
 void				hook_close_window(void *param);
 void				move_keyhook(mlx_key_data_t keydatam, void *param);
 void				mouse_keyhook(mouse_key_t button, action_t action,
-					  modifier_key_t mods, void *param);
+						modifier_key_t mods, void *param);
 void				handle_cursor(double x, double y, void *param);
 
 // movement

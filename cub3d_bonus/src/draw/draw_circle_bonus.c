@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_circle.c                                      :+:      :+:    :+:   */
+/*   draw_circle_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 19:24:08 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/06 10:24:07 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:47:31 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static void	draw_horizontal_line(mlx_image_t *img, int x1, t_point pos,
 		unsigned int color)

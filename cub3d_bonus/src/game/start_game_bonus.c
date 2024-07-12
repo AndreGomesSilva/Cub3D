@@ -6,11 +6,11 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 16:56:46 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/12 13:15:11 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:48:19 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 int	start_game(char *str)
 {

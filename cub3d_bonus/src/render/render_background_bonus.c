@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_background.c                                :+:      :+:    :+:   */
+/*   render_background_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 16:31:48 by iusantos          #+#    #+#             */
-/*   Updated: 2024/07/03 19:04:02 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:50:18 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	render_background(t_game *game)
 {

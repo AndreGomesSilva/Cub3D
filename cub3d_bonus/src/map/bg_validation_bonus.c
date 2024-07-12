@@ -6,11 +6,11 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 17:31:03 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/12 13:15:29 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:48:38 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static int	has_two_commas(char *line)
 {

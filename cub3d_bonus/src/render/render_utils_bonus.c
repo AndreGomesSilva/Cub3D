@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_utils.c                                     :+:      :+:    :+:   */
+/*   render_utils_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:05:30 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/05 20:56:14 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:50:46 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	draw_screen(mlx_image_t *img, t_line line, unsigned int color,
 		void (*func)(mlx_image_t *img, t_line line, unsigned int color))

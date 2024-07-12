@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 		return (print_error("Wrong number of arguments\n"));
 	if (start_game(argv[1]) != E_OK)
 	{
-		printf("Could not start game\n");
+		printf("Could not start game ssd\n");
 		return (E_FAIL);
 	}
 	return (E_OK);

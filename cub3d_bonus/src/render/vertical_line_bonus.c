@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vertical_line.c                                    :+:      :+:    :+:   */
+/*   vertical_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 11:47:40 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/06 11:52:37 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:50:51 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static void	calculate_perp_wall_dist(t_ray *ray)
 {

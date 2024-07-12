@@ -6,11 +6,11 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 11:11:50 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/08 15:20:44 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:49:39 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 double	rotate_minimap_player(double prev_angle, double next_angle, t_move move)
 {

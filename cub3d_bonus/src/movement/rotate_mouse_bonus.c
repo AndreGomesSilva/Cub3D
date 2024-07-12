@@ -6,11 +6,11 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:54:58 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/08 15:20:22 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:49:52 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	handle_cursor(double x, double y, void *param)
 {

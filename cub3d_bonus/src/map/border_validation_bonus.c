@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   border_validation.c                                :+:      :+:    :+:   */
+/*   border_validation_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:22:05 by iusantos          #+#    #+#             */
-/*   Updated: 2024/07/06 15:03:28 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:48:49 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static char	**init_rectangular_mtx(t_map *map)
 {

@@ -6,11 +6,11 @@
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 11:55:10 by iusantos          #+#    #+#             */
-/*   Updated: 2024/07/12 13:17:54 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:49:59 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static int	load_gun_textures(mlx_texture_t **gun_texture)
 {

@@ -6,11 +6,11 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:00:55 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/09 19:14:20 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:50:28 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	draw_dir_line(t_minimap *minimap, t_player *player)
 {

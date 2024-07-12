@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_validation2.c                                 :+:      :+:    :+:   */
+/*   file_validation2_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 16:18:26 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/06 15:00:44 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:52:12 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static int	store_elements(t_game *game, char **words)
 {

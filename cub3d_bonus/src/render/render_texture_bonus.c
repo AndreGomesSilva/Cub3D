@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_texture.c                                   :+:      :+:    :+:   */
+/*   render_texture_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 18:46:51 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/10 17:53:51 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:50:40 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static unsigned int	rearrange_color(unsigned int argb)
 {

@@ -6,11 +6,11 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:25:39 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/12 13:14:20 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:47:50 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	free_matrix(char **matrix)
 {

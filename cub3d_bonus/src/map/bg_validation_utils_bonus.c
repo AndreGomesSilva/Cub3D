@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bg_validation_utils.c                              :+:      :+:    :+:   */
+/*   bg_validation_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/06 14:46:36 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/06 14:58:52 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:48:44 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static int	rgb_is_number(char **rgb)
 {

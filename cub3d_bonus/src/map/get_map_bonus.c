@@ -6,11 +6,11 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 14:04:01 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/12 13:16:50 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:49:11 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static char	*ft_join(char *s1, char *s2)
 {

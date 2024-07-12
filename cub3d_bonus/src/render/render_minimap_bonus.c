@@ -6,11 +6,11 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:11:22 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/10 11:20:47 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:50:23 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 t_line	get_position_to_draw(int row, int col, t_dimension size)
 {

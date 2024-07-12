@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_background.c                                  :+:      :+:    :+:   */
+/*   draw_background_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iusantos <iusantos@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 15:55:53 by iusantos          #+#    #+#             */
-/*   Updated: 2024/07/06 09:53:37 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:47:19 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static void	draw_floor(mlx_image_t *img, t_color *floor)
 {

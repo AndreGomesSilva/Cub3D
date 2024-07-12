@@ -6,11 +6,11 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 18:26:27 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/12 13:17:01 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:49:16 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 int	get_num_row_map(char **map)
 {

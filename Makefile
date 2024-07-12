@@ -1,6 +1,6 @@
 # Basic variables
 NAME = cub3D
-NAME_BONUS = cub3D_bonus
+BONUS = cub3D_bonus
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -Ofast 
 DEPFLAGS = -MMD -MP
@@ -8,9 +8,9 @@ DEV_FLAGS = -g3
 LEAKS = valgrind --leak-check=full --show-leak-kinds=all  --suppressions=./suppress.sup #--log-file=leaks.sup
 
 #Libraries
-LIB_INC = -I ./lib/MLX42/include/MLX42/ -I./lib/libft/include/
-INC = -I ./cub3d/include/ $(LIB_INC)
-INC_BONUS = -I ./cub3d_bonus/include/ $(LIB_INC)
+LIB_INC = -I./lib/MLX42/include/MLX42/ -I./lib/libft/include/
+INC = -I./cub3d/include/ $(LIB_INC)
+INC_BONUS = -I./cub3d_bonus/include/ $(LIB_INC)
 LIBFT_DIR = ./lib/libft
 LIBFT = $(LIBFT_DIR)/libft.a
 LIBMLX_DIR = ./lib/MLX42
@@ -33,10 +33,10 @@ FILES = src/main.c \
 
 
 SRC = $(addprefix cub3d/, $(addsuffix .c, $(basename $(FILES))))
-SRC_BONUS = $(addprefix(cub3d_bonus/, $(addsuffix _bonus.c, $(basename $(FILES)))))
+SRC_BONUS = $(addprefix cub3d_bonus/, $(addsuffix _bonus.c, $(basename $(FILES))))
 
 OBJ = $(addprefix obj/, $(addsuffix .o, $(basename $(SRC))))
-OBJ_BONUS = $(addprefix obj_bonus/, $(addsuffix _bonus.o, $(basename $(SRC_BONUS))))
+OBJ_BONUS = $(addprefix obj_bonus/, $(addsuffix .o, $(basename $(SRC_BONUS))))
 
 DEP = $(OBJ:.o=.d)
 DEP_BONUS = $(OBJ_BONUS:.o=.d) 
@@ -82,8 +82,10 @@ $(LIBFT):
 $(NAME): $(OBJ) $(LIBFT) $(LIBMLX)
 		$(CC) $(CFLAGS) $(OBJ) $(INC) $(LIBFT) $(LIBMLX_WITH_FLAGS) -o $(NAME)
 
-bonus: $(OBJ_BONUS) $(LIBFT) $(LIBMLX)
-	$(CC) $(CFLAGS) $(OBJ_BONUS) $(INC_BONUS) $(LIBFT) $(LIBMLX_WITH_FLAGS) -o $(NAME_BONUS)
+$(BONUS): $(OBJ_BONUS) $(LIBFT) $(LIBMLX)
+		$(CC) $(CFLAGS) $(OBJ_BONUS) $(INC_BONUS) $(LIBFT) $(LIBMLX_WITH_FLAGS) -o $(BONUS)
+
+bonus: $(BONUS)
 
 play:
 	@make
@@ -100,7 +102,7 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
-	rm -rf $(NAME_BONUS)
+	rm -rf $(BONUS)
 	@make -C $(LIBFT_DIR) fclean
 	rm -rf $(LIBMLX_DIR)/build
 

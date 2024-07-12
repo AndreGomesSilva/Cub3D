@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_validation.c                                  :+:      :+:    :+:   */
+/*   file_validation_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 16:27:34 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/06 09:50:09 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/12 15:48:59 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static int	check_extension(char *file_name)
 {

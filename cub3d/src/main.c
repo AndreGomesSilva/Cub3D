@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 14:37:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/12 13:06:30 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/12 16:19:56 by iusantos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv)
 		return (print_error("Wrong number of arguments\n"));
 	if (start_game(argv[1]) != E_OK)
 	{
-		printf("Could not start game ssd\n");
+		printf("Terminating...\n");
 		return (E_FAIL);
 	}
 	return (E_OK);

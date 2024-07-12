@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/29 18:26:27 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/12 15:49:16 by angomes-         ###   ########.fr       */
+/*   Updated: 2024/07/12 16:04:06 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	get_num_col_map(char **map)
 	int	j;
 
 	i = 0;
-  j = 0;
+	j = 0;
 	while (map[i])
 	{
 		j = 0;

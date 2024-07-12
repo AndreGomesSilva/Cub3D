@@ -6,7 +6,7 @@
 /*   By: angomes- <angomes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 17:50:21 by angomes-          #+#    #+#             */
-/*   Updated: 2024/07/10 15:13:12 by iusantos         ###   ########.fr       */
+/*   Updated: 2024/07/11 22:00:38 by angomes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	create_window(t_game *game)
 {
 	game->win = ft_calloc(1, sizeof(t_window));
 	if (game->win == NULL)
-		return (E_FAIL);
+		return (print_error("Could not allocate window\n"));
 	game->win->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cub3D", true);
 	if (game->win->mlx == NULL)
 		return (print_error("Could not create window\n"));

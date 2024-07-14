@@ -19,9 +19,9 @@ Cub3D is a project that demonstrates the basics of 3D rendering using raycasting
 - Basic movement and collision detection
 - Simple texture mapping
 
-*Note: The project is still in development, and additional features will be added over time.*
 
-[demo_cub_3d.webm](https://github.com/AndreGomesSilva/Cub3D/assets/59901704/61f917ec-d731-4785-a267-1907a1806388)
+https://github.com/user-attachments/assets/66a913ba-4585-4737-9041-3cdb217acaa9
+
 
 ## Installation
 
@@ -33,7 +33,7 @@ To install and run Cub3D, follow these steps:
     ```
 2. Navigate to the project directory:
     ```bash
-    cd cub3d
+    cd Cub3D
     ```
 3. Build the project using `make`:
     ```bash
@@ -42,9 +42,26 @@ To install and run Cub3D, follow these steps:
 
 *Note: Ensure you have the necessary development tools and libraries installed on your system.*
 
+## How to Play
+
+In Cub3D, you can control your movement using the following keys:
+
+- **W**: Move forward
+- **A**: Move left
+- **S**: Move backward
+- **D**: Move right
+- **ESC**: End game
+
+You can also use the mouse to rotate your view and look around with the mouse or arrows.
+
 ## Usage
 
 To run the Cub3D application, execute the following command in the project directory:
 
 ```bash
+make play
+```
+or this way for the map you want
+```bash
 ./cub3d maps/map.cub
+``` 

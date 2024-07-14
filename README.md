@@ -7,7 +7,8 @@ Cub3D is a 3D game engine project based on the principles of raycasting. This pr
 - [About](#about)
 - [Features](#features)
 - [Installation](#installation)
-- [Usage](#usage)
+- [How to Play](#how-to-play)
+- [Initialize](#initialize)
 
 ## About
 
@@ -54,7 +55,7 @@ In Cub3D, you can control your movement using the following keys:
 
 You can also use the mouse or arrows to rotate your view and look around.
 
-## Usage
+## Initialize
 
 To run the Cub3D application, execute the following command in the project directory:
 

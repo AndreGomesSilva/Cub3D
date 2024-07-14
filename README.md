@@ -52,7 +52,7 @@ In Cub3D, you can control your movement using the following keys:
 - **D**: Move right
 - **ESC**: End game
 
-You can also use the mouse to rotate your view and look around with the mouse or arrows.
+You can also use the mouse or arrows to rotate your view and look around.
 
 ## Usage
 

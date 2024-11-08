@@ -1,7 +1,5 @@
 # Cub3D
 
-Cub3D is a 3D game engine project based on the principles of raycasting. This project is currently a work in progress and aims to create a simple 3D game similar to Wolfenstein 3D.
-
 ## Table of Contents
 
 - [About](#about)
